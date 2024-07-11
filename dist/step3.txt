@@ -1,99 +1,484 @@
-Sequence	Latitude	Longitude	Framing	Pole Type
-2010	42.49451432	-123.37674990	EJ300 TAN	DIST-S-02.9-C1-50-0
-2020	42.49378777	-123.37676185	EJ300 TAN + EH131	DIST-S-02.9-C1-50-0
-2050	42.49327505	-123.37676442	115kV TF200 + EJ300 TAN	S-03.5-H1-85
-2060	42.49270716	-123.37676269	EJ300 TAN	DIST-S-02.9-C1-55-0
-2070	42.49160060	-123.37676906	EJ300 TAN	DIST-S-02.9-C1-50-0
-2080	42.49050607	-123.37674220	EJ300 TAN + (2) EH226	DIST-S-02.9-C1-50-0
-2120	42.49002213	-123.37676638	EJ300 TAN	DIST-S-02.9-C1-50-0
-2130	42.48954627	-123.37677197	EJ300 TAN + EH226	DIST-S-02.9-C1-50-0
-2200	42.48890060	-123.37676610	EJ300 TAN	DIST-S-02.9-C1-55-0
-2210	42.48830587	-123.37677439	EJ300 TAN + EH226	DIST-S-02.9-C1-50-0
-2240	42.48748373	-123.37676850	EJ300 TAN + EH226	DIST-S-02.9-C1-50-0
-2350	42.48649230	-123.37674106	EJ300 TAN + EH236 + EH201	DIST-S-02.9-C1-50-0
-2420	42.48550904	-123.37673996	EJ300 TAN + EH226	DIST-S-02.9-C1-50-0
-2460	42.48478533	-123.37674335	EJ300 TAN	DIST-S-02.9-C1-50-0
-2470	42.48403414	-123.37669610	EJ300 TAN + (2) EH226	DIST-S-02.9-C1-50-0
-2670	42.48340081	-123.37674558	EJ300 DDE + EH341 + EH226	DIST-S-02.9-C1-50-0
-2690	42.48251998	-123.37673879	EH101	DIST-S-02.9-C1-50-0
-2700	42.48177758	-123.37670755	EH101	DIST-S-02.9-C1-55-0
-2710	42.48147763	-123.37672613	EH101	DIST-S-02.9-C1-50-0
-2720	42.48086429	-123.37672339	EH101	DIST-S-02.9-C1-50-0
-2730	42.48044661	-123.37697685	EH101 + EH221	DIST-S-02.9-C1-50-0
-2760	42.48003848	-123.37672701	EH111 + EH221	DIST-S-02.9-C1-45-0
-2790	42.47938590	-123.37690204	EH106 + EH221	DIST-S-02.9-C1-50-0
-2830	42.47909513	-123.37652725	EH101	DIST-S-02.9-C1-50-0
-2840	42.47860472	-123.37626384	EH101 + EH221	DIST-S-02.9-C1-45-0
-2860	42.47787182	-123.37600484	EH101	DIST-S-02.9-C1-50-0
-2870	42.47722142	-123.37567391	EH106	DIST-S-02.9-C1-50-0
-2880	42.47665055	-123.37569625	EH121	DIST-S-02.9-C1-50-0
-2030	42.49361688	-123.37662024	EH121	DIST-S-02.9-C1-50-0
-2040	42.49382116	-123.37556088	EH131	DIST-S-02.9-C1-50-0
-2090	42.49094526	-123.37770798	EH131	DIST-S-02.9-C1-50-0
-2110	42.49056808	-123.37390436	EH131	DIST-S-02.9-C1-50-0
-2100	42.49054184	-123.37524286	EH101	DIST-S-02.9-C1-50-0
-2140	42.48953337	-123.37701801	EH201	DIST-S-02.9-C1-50-0
-2150	42.48952731	-123.37845135	EH201	DIST-S-02.9-C1-50-0
-2160	42.48953597	-123.37929218	EH101	DIST-S-02.9-C1-55-0
-2170	42.48953559	-123.38057607	EH121	DIST-S-02.9-C1-50-0
-2180	42.48951870	-123.38051853	EH111	DIST-S-02.9-C1-50-0
-2190	42.48865778	-123.38127057	EH131	DIST-S-02.9-C1-50-0
-2220	42.48816726	-123.37697966	EH111	DIST-S-02.9-C1-50-0
-2230	42.48814042	-123.37813641	EH131	DIST-S-02.9-C1-50-0
-2280	42.48780704	-123.37194283	EH121	DIST-S-02.9-C1-50-0
-2270	42.48773470	-123.37360457	EH101	DIST-S-02.9-C1-50-0
-2260	42.48773213	-123.37527445	EH101	DIST-S-02.9-C1-50-0
-2250	42.48773226	-123.37665644	EH121	DIST-S-02.9-C1-50-0
-2300	42.48871352	-123.37297586	EH131	DIST-S-02.9-C1-45-0
-2290	42.48873807	-123.37187690	EH121 + EH221	DIST-S-02.9-C1-45-0
-2285	42.48712854	-123.37193963	EG371	DIST-S-02.4 / C2-40-0
-2320	42.48882476	-123.37092771	EH101 + EH221	DIST-S-02.9-C1-50-0
-2310	42.48885669	-123.37185129	EH121	DIST-S-02.9-C1-45-0
-2410	42.48647144	-123.37952189	EH131	DIST-S-02.9-C1-50-0
-2400	42.48647714	-123.37828925	EH101	DIST-S-02.9-C1-50-0
-2390	42.48648264	-123.37706497	EH111 ST50.01	DIST-S-02.9-C1-50-0
-2360	42.48648092	-123.37641390	EH111	DIST-S-02.9-C1-50-0
-2370	42.48666772	-123.37492775	EH101	DIST-S-02.9-C1-50-0
-2380	42.48683811	-123.37351169	EH131	DIST-S-02.9-C1-50-0
-2430	42.48547811	-123.37652171	EH111	DIST-S-02.9-C1-50-0
-2440	42.48554991	-123.37525687	EH111	DIST-S-02.9-C1-50-0
-2450	42.48520979	-123.37434981	EH131	DIST-S-02.9-C1-50-0
-2530	42.48407669	-123.38244755	EH131	DIST-S-02.9-C1-50-0
-2520	42.48408081	-123.38175115	EH101	DIST-S-02.9-C1-60-0
-2510	42.48408730	-123.38051489	EH101	DIST-S-02.9-C1-55-0
-2490	42.48409540	-123.37932305	EH101 + EH221	DIST-S-02.9-C1-50-0
-2480	42.48410435	-123.37800556	EH101	DIST-S-02.9-C1-50-0
-2540	42.48403981	-123.37646812	EH201	DIST-S-02.9-C1-50-0
-2550	42.48403352	-123.37524252	EH101	DIST-S-02.9-C1-50-0
-2560	42.48402335	-123.37396092	EH101	DIST-S-02.9-C1-50-0
-2570	42.48401986	-123.37279838	EH101	DIST-S-02.9-C1-50-0
-2580	42.48401107	-123.37177430	EH101 + EH221	DIST-S-02.9-C1-60-0
-2610	42.48403443	-123.37065110	EH101	DIST-S-02.9-C1-50-0
-2630	42.48397585	-123.36946823	EH121	DIST-S-02.9-C1-50-0
-2640	42.48465008	-123.36936965	EH111 + EH221	DIST-S-02.9-C1-50-0
-2660	42.48509285	-123.36935943	EH131	DIST-S-02.9-C1-55-0
-2600	42.48325719	-123.37182572	EH131	DIST-S-02.9-C1-50-0
-2590	42.48388897	-123.37181959	EH111	DIST-S-02.9-C1-50-0
-2645	42.48470604	-123.36958169	EG371	DIST-S-02.4 / C2-40-0
-2650	42.48432221	-123.36811737	EH131	DIST-S-02.9-C1-50-0
-2500	42.48387443	-123.37902364	EH131	DIST-S-02.9-C1-45-0
-2680	42.48307638	-123.37717915	EH131	DIST-S-02.9-C1-45-0
-2765	42.48002067	-123.37691952	EG371	DIST-S-02.4 / C2-40-0
-2770	42.47989605	-123.37669392	EH121	DIST-S-02.9-C1-50-0
-2780	42.47973126	-123.37593457	EH131	DIST-S-02.9-C1-55-0
-2800	42.47942009	-123.37779447	EH101	DIST-S-02.9-C1-55-0
-2810	42.47940533	-123.37893695	EH121	DIST-S-02.9-C1-50-0
-2820	42.47996796	-123.37947963	EH131	DIST-S-02.9-C1-45-0
-2850	42.47846672	-123.37700770	EH131	DIST-S-02.9-C1-45-0
-2890	42.47685677	-123.37550823	EH111	DIST-S-02.9-C1-50-0
-2900	42.47685863	-123.37426810	EH101	DIST-S-02.9-C1-55-0
-2910	42.47685963	-123.37321059	EH101	DIST-S-02.9-C1-60-0
-2920	42.47685667	-123.37234090	EH101	DIST-S-02.9-C1-50-0
-2930	42.47685892	-123.37200662	EH121	DIST-S-02.9-C1-50-0
-2940	42.47689250	-123.37192477	EH121	DIST-S-02.9-C1-50-0
-2950	42.47760845	-123.37117604	EH101	DIST-S-02.9-C1-55-0
-2960	42.47832740	-123.37052751	EH131	DIST-S-02.9-C1-55-0
-2330	42.48950886	-123.37100237	EH131	DIST-S-02.9-C1-45-0
-2340	42.48825282	-123.37097024	EH131	DIST-S-02.9-C1-45-0
-2740	42.48044626	-123.37580977	EH101	DIST-S-02.9-C1-50-0
-2750	42.48044468	-123.37491230	EH131	DIST-S-02.9-C1-50-0
+Sequence                                                            Latitude     Longitude      Framing                    Anchor DirectionLead Length
+2010 C/L Hub to Left Ref Stake Structure Hub                        42.49451432  -123.37674990  EJ300 TAN                  E   30.00  
+2010 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.49451269  -123.37663864  EJ300 TAN                  W   60.00  
+2010 Right Ref Stake Structure Hub to Structure Hub                 42.49451595  -123.37686115  EJ300 TAN                  E   30.00  
+2010 Structure Hub to P1                                            42.49451432  -123.37674990  EJ300 TAN                  E   0.00   
+2020 C/L Hub to Left Ref Stake Structure Hub                        42.49378777  -123.37676185  EJ300 TAN + EH131          E   30.00  
+2020 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.49378712  -123.37665058  EJ300 TAN + EH131          W   60.00  
+2020 Right Ref Stake Structure Hub to Structure Hub                 42.49378843  -123.37687312  EJ300 TAN + EH131          E   30.00  
+2020 Structure Hub to P1                                            42.49378777  -123.37676185  EJ300 TAN + EH131          E   0.00   
+2050 C/L Hub to Left Ref Stake Structure Hub                        42.49327505  -123.37676442  115kV TF200 + EJ300 TAN    E   30.00  
+2050 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.49327499  -123.37665315  115kV TF200 + EJ300 TAN    W   60.00  
+2050 Right Ref Stake Structure Hub to Structure Hub                 42.49327511  -123.37687569  115kV TF200 + EJ300 TAN    E   30.00  
+2050 Structure Hub to P1                                            42.49327505  -123.37676442  115kV TF200 + EJ300 TAN    E   0.00   
+2060 C/L Hub to Left Ref Stake Structure Hub                        42.49270716  -123.37676269  EJ300 TAN                  E   30.00  
+2060 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.49270707  -123.37665142  EJ300 TAN                  W   60.00  
+2060 Right Ref Stake Structure Hub to Structure Hub                 42.49270724  -123.37687396  EJ300 TAN                  E   30.00  
+2060 Structure Hub to P1                                            42.49270716  -123.37676269  EJ300 TAN                  E   0.00   
+2070 C/L Hub to Left Ref Stake Structure Hub                        42.49160060  -123.37676906  EJ300 TAN                  E   30.00  
+2070 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.49160050  -123.37665779  EJ300 TAN                  W   60.00  
+2070 Right Ref Stake Structure Hub to Structure Hub                 42.49160069  -123.37688033  EJ300 TAN                  E   30.00  
+2070 Structure Hub to P1                                            42.49160060  -123.37676906  EJ300 TAN                  E   0.00   
+2080 C/L Hub to Left Ref Stake Structure Hub                        42.49051690  -123.37676621  EJ300 TAN + (2) EH226      E   30.00  
+2080 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.49051697  -123.37665494  EJ300 TAN + (2) EH226      W   60.00  
+2080 Right Ref Stake Structure Hub to Structure Hub                 42.49051683  -123.37687748  EJ300 TAN + (2) EH226      E   30.00  
+2080 Structure Hub to P1                                            42.49051690  -123.37676621  EJ300 TAN + (2) EH226      E   0.00   
+2080 P1 to P2                                                       42.49051690  -123.37676621  EJ300 TAN + (2) EH226      W   40.85  
+2080 P2 to PG21,CM22                                                42.49050946  -123.37691739  EJ300 TAN + (2) EH226      W   7.33   
+2080 PG21,CM22 to PG11,CM12                                         42.49050902  -123.37694458  EJ300 TAN + (2) EH226      E   54.57  
+2120 C/L Hub to Left Ref Stake Structure Hub                        42.49002213  -123.37676638  EJ300 TAN                  E   30.00  
+2120 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.49002176  -123.37665511  EJ300 TAN                  W   60.00  
+2120 Right Ref Stake Structure Hub to Structure Hub                 42.49002250  -123.37687764  EJ300 TAN                  E   30.00  
+2120 Structure Hub to P1                                            42.49002213  -123.37676638  EJ300 TAN                  E   0.00   
+2130 C/L Hub to Left Ref Stake Structure Hub                        42.48954627  -123.37677197  EJ300 TAN + EH226          E   30.00  
+2130 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48954619  -123.37666070  EJ300 TAN + EH226          W   60.00  
+2130 Right Ref Stake Structure Hub to Structure Hub                 42.48954635  -123.37688323  EJ300 TAN + EH226          E   30.00  
+2130 Structure Hub to P1                                            42.48954627  -123.37677197  EJ300 TAN + EH226          E   0.00   
+2200 C/L Hub to Left Ref Stake Structure Hub                        42.48890060  -123.37676610  EJ300 TAN                  E   30.00  
+2200 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48890046  -123.37665483  EJ300 TAN                  W   60.00  
+2200 Right Ref Stake Structure Hub to Structure Hub                 42.48890075  -123.37687736  EJ300 TAN                  E   30.00  
+2200 Structure Hub to P1                                            42.48890060  -123.37676610  EJ300 TAN                  E   0.00   
+2210 C/L Hub to Left Ref Stake Structure Hub                        42.48830587  -123.37677439  EJ300 TAN + EH226          E   30.00  
+2210 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48830566  -123.37666312  EJ300 TAN + EH226          W   60.00  
+2210 Right Ref Stake Structure Hub to Structure Hub                 42.48830607  -123.37688565  EJ300 TAN + EH226          E   30.00  
+2210 Structure Hub to P1                                            42.48830587  -123.37677439  EJ300 TAN + EH226          E   0.00   
+2240 C/L Hub to Left Ref Stake Structure Hub                        42.48748373  -123.37676850  EJ300 TAN + EH226          E   30.00  
+2240 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48748479  -123.37665724  EJ300 TAN + EH226          W   60.00  
+2240 Right Ref Stake Structure Hub to Structure Hub                 42.48748267  -123.37687975  EJ300 TAN + EH226          E   30.00  
+2240 Structure Hub to P1                                            42.48748373  -123.37676850  EJ300 TAN + EH226          E   0.00   
+2350 C/L Hub to Left Ref Stake Structure Hub                        42.48649230  -123.37674106  EJ300 TAN + EH236 + EH201  E   30.00  
+2350 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48649318  -123.37662981  EJ300 TAN + EH236 + EH201  W   60.00  
+2350 Right Ref Stake Structure Hub to Structure Hub                 42.48649143  -123.37685232  EJ300 TAN + EH236 + EH201  E   30.00  
+2350 Structure Hub to P1                                            42.48649230  -123.37674106  EJ300 TAN + EH236 + EH201  E   0.00   
+2420 C/L Hub to Left Ref Stake Structure Hub                        42.48550904  -123.37673996  EJ300 TAN + EH226          E   30.00  
+2420 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48550893  -123.37662870  EJ300 TAN + EH226          W   60.00  
+2420 Right Ref Stake Structure Hub to Structure Hub                 42.48550915  -123.37685122  EJ300 TAN + EH226          E   30.00  
+2420 Structure Hub to P1                                            42.48550904  -123.37673996  EJ300 TAN + EH226          E   0.00   
+2460 C/L Hub to Left Ref Stake Structure Hub                        42.48478533  -123.37674335  EJ300 TAN                  E   30.00  
+2460 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48478492  -123.37663209  EJ300 TAN                  W   60.00  
+2460 Right Ref Stake Structure Hub to Structure Hub                 42.48478575  -123.37685460  EJ300 TAN                  E   30.00  
+2460 Structure Hub to P1                                            42.48478533  -123.37674335  EJ300 TAN                  E   0.00   
+2470 C/L Hub to Left Ref Stake Structure Hub                        42.48403855  -123.37675001  EJ300 TAN + (2) EH226      E   30.00  
+2470 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48403849  -123.37663876  EJ300 TAN + (2) EH226      W   60.00  
+2470 Right Ref Stake Structure Hub to Structure Hub                 42.48403861  -123.37686127  EJ300 TAN + (2) EH226      E   30.00  
+2470 Structure Hub to P1                                            42.48403855  -123.37675001  EJ300 TAN + (2) EH226      E   0.00   
+2470 P1 to PG11,NG12                                                42.48403855  -123.37675001  EJ300 TAN + (2) EH226      E   22.46  
+2470 PG11,NG12 to CM21                                              42.48403178  -123.37666722  EJ300 TAN + (2) EH226      W   7.84   
+2670 C/L Hub to Left Ref Stake Structure Hub                        42.48335467  -123.37674522  EJ300 DDE + EH341 + EH226  E   30.00  
+2670 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48335512  -123.37663397  EJ300 DDE + EH341 + EH226  W   60.00  
+2670 Right Ref Stake Structure Hub to Structure Hub                 42.48335423  -123.37685648  EJ300 DDE + EH341 + EH226  E   30.00  
+2670 Structure Hub to P1                                            42.48335467  -123.37674522  EJ300 DDE + EH341 + EH226  E   0.00   
+2670 P1 to PG11,NG12                                                42.48335467  -123.37674522  EJ300 DDE + EH341 + EH226  NE  13.35  
+2670 PG11,NG12 to PG21,PG22                                         42.48337868  -123.37670780  EJ300 DDE + EH341 + EH226  S   36.23  
+2670 PG21,PG22 to PG31,PG32                                         42.48328307  -123.37674472  EJ300 DDE + EH341 + EH226  N   42.90  
+2690 C/L Hub to Left Ref Stake Structure Hub                        42.48251998  -123.37673879  EH101                      E   30.00  
+2690 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48252054  -123.37662754  EH101                      W   60.00  
+2690 Right Ref Stake Structure Hub to Structure Hub                 42.48251943  -123.37685005  EH101                      E   30.00  
+2690 Structure Hub to P1                                            42.48251998  -123.37673879  EH101                      E   0.00   
+2700 C/L Hub to Left Ref Stake Structure Hub                        42.48174738  -123.37673065  EH101                      E   30.00  
+2700 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48174821  -123.37661941  EH101                      W   60.00  
+2700 Right Ref Stake Structure Hub to Structure Hub                 42.48174654  -123.37684190  EH101                      E   30.00  
+2700 Structure Hub to P1                                            42.48174738  -123.37673065  EH101                      E   0.00   
+2700 P1 to SE11                                                     42.48174738  -123.37673065  EH101                      NE  12.65  
+2710 C/L Hub to Left Ref Stake Structure Hub                        42.48147763  -123.37672613  EH101                      E   30.00  
+2710 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48147828  -123.37661488  EH101                      W   60.00  
+2710 Right Ref Stake Structure Hub to Structure Hub                 42.48147698  -123.37683738  EH101                      E   30.00  
+2710 Structure Hub to P1                                            42.48147763  -123.37672613  EH101                      E   0.00   
+2720 C/L Hub to Left Ref Stake Structure Hub                        42.48086429  -123.37672339  EH101                      E   30.00  
+2720 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48086523  -123.37661214  EH101                      W   60.00  
+2720 Right Ref Stake Structure Hub to Structure Hub                 42.48086335  -123.37683463  EH101                      E   30.00  
+2720 Structure Hub to P1                                            42.48086429  -123.37672339  EH101                      E   0.00   
+2730 C/L Hub to Left Ref Stake Structure Hub                        42.48044780  -123.37671241  EH101 + EH221              E   30.00  
+2730 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48044752  -123.37660116  EH101 + EH221              W   60.00  
+2730 Right Ref Stake Structure Hub to Structure Hub                 42.48044808  -123.37682366  EH101 + EH221              E   30.00  
+2730 Structure Hub to P1                                            42.48044780  -123.37671241  EH101 + EH221              E   0.00   
+2730 P1 to P2                                                       42.48044780  -123.37671241  EH101 + EH221              W   51.74  
+2730 P2 to PG11,PG12,PG13                                           42.48044649  -123.37690426  EH101 + EH221              W   19.58  
+2760 C/L Hub to Left Ref Stake Structure Hub                        42.48003848  -123.37672701  EH111 + EH221              E   30.00  
+2760 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48004021  -123.37661579  EH111 + EH221              W   60.00  
+2760 Right Ref Stake Structure Hub to Structure Hub                 42.48003675  -123.37683824  EH111 + EH221              E   30.00  
+2760 Structure Hub to P1                                            42.48003848  -123.37672701  EH111 + EH221              E   0.00   
+2790 C/L Hub to Left Ref Stake Structure Hub                        42.47942554  -123.37667024  EH106 + EH221              E   30.00  
+2790 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.47944103  -123.37656097  EH106 + EH221              W   60.00  
+2790 Right Ref Stake Structure Hub to Structure Hub                 42.47941005  -123.37677950  EH106 + EH221              E   30.00  
+2790 Structure Hub to P1                                            42.47942554  -123.37667024  EH106 + EH221              E   0.00   
+2790 P1 to P2                                                       42.47942554  -123.37667024  EH106 + EH221              W   46.27  
+2790 P2 to PG11,NG12,CM13                                           42.47939695  -123.37683741  EH106 + EH221              E   60.72  
+2790 PG11,NG12,CM13 to PG21,PG22,CM23                               42.47942578  -123.37661562  EH106 + EH221              W   78.59  
+2830 C/L Hub to Left Ref Stake Structure Hub                        42.47909513  -123.37652725  EH101                      E   30.00  
+2830 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.47912018  -123.37642127  EH101                      W   60.00  
+2830 Right Ref Stake Structure Hub to Structure Hub                 42.47907009  -123.37663323  EH101                      E   30.00  
+2830 Structure Hub to P1                                            42.47909513  -123.37652725  EH101                      E   0.00   
+2840 C/L Hub to Left Ref Stake Structure Hub                        42.47859569  -123.37631253  EH101 + EH221              E   30.00  
+2840 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.47862053  -123.37620647  EH101 + EH221              W   60.00  
+2840 Right Ref Stake Structure Hub to Structure Hub                 42.47857085  -123.37641860  EH101 + EH221              E   30.00  
+2840 Structure Hub to P1                                            42.47859569  -123.37631253  EH101 + EH221              E   0.00   
+2840 P1 to PG11,NG12                                                42.47859569  -123.37631253  EH101 + EH221              E   13.54  
+2860 C/L Hub to Left Ref Stake Structure Hub                        42.47787182  -123.37600484  EH101                      E   30.00  
+2860 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.47789569  -123.37589837  EH101                      W   60.00  
+2860 Right Ref Stake Structure Hub to Structure Hub                 42.47784795  -123.37611132  EH101                      E   30.00  
+2860 Structure Hub to P1                                            42.47787182  -123.37600484  EH101                      E   0.00   
+2870 C/L Hub to Left Ref Stake Structure Hub                        42.47721199  -123.37574530  EH106                      E   30.00  
+2870 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.47722646  -123.37563578  EH106                      W   60.00  
+2870 Right Ref Stake Structure Hub to Structure Hub                 42.47719752  -123.37585481  EH106                      E   30.00  
+2870 Structure Hub to P1                                            42.47721199  -123.37574530  EH106                      E   0.00   
+2870 P1 to PG11,NG12                                                42.47721199  -123.37574530  EH106                      E   19.56  
+2880 C/L Hub to Left Ref Stake Structure Hub                        42.47689292  -123.37571515  EH121                      E   30.00  
+2880 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.47689817  -123.37560413  EH121                      W   60.00  
+2880 Right Ref Stake Structure Hub to Structure Hub                 42.47688768  -123.37582617  EH121                      E   30.00  
+2880 Structure Hub to P1                                            42.47689292  -123.37571515  EH121                      E   0.00   
+2880 P1 to P2                                                       42.47689292  -123.37571515  EH121                      S   72.94  
+2880 P2 to PG11,PG12                                                42.47669304  -123.37569956  EH121                      S   15.51  
+2030 C/L Hub to Left Ref Stake Structure Hub                        42.49362709  -123.37656731  EH121                      N   30.00  
+2030 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.49370594  -123.37653521  EH121                      S   60.00  
+2030 Right Ref Stake Structure Hub to Structure Hub                 42.49354824  -123.37659942  EH121                      N   30.00  
+2030 Structure Hub to P1                                            42.49362709  -123.37656731  EH121                      E   0.00   
+2030 P1 to PG11,NG12                                                42.49362709  -123.37656731  EH121                      W   14.75  
+2040 C/L Hub to Left Ref Stake Structure Hub                        42.49381237  -123.37560647  EH131                      N   30.00  
+2040 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.49389205  -123.37563453  EH131                      S   60.00  
+2040 Right Ref Stake Structure Hub to Structure Hub                 42.49373268  -123.37557842  EH131                      N   30.00  
+2040 Structure Hub to P1                                            42.49381237  -123.37560647  EH131                      E   0.00   
+2040 P1 to PG11,NG12                                                42.49381237  -123.37560647  EH131                      E   20.69  
+2040 PG11,NG12 to CM21                                              42.49382668  -123.37553222  EH131                      W   7.99   
+2090 C/L Hub to Left Ref Stake Structure Hub                        42.49093021  -123.37767490  EH131                      NE  30.00  
+2090 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.49100037  -123.37761664  EH131                      SW  60.00  
+2090 Right Ref Stake Structure Hub to Structure Hub                 42.49086006  -123.37773316  EH131                      NE  30.00  
+2090 Structure Hub to P1                                            42.49093021  -123.37767490  EH131                      E   0.00   
+2090 P1 to PG11,NG12                                                42.49093021  -123.37767490  EH131                      NW  16.14  
+2090 PG11,NG12 to CM21                                              42.49095341  -123.37772589  EH131                      SE  5.67   
+2110 C/L Hub to Left Ref Stake Structure Hub                        42.49056703  -123.37395769  EH131                      S   30.00  
+2110 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.49048471  -123.37395474  EH131                      N   60.00  
+2110 Right Ref Stake Structure Hub to Structure Hub                 42.49064935  -123.37396063  EH131                      S   30.00  
+2110 Structure Hub to P1                                            42.49056703  -123.37395769  EH131                      E   0.00   
+2110 P1 to PG11,NG12                                                42.49056703  -123.37395769  EH131                      E   19.42  
+2110 PG11,NG12 to CM21                                              42.49056845  -123.37388568  EH131                      W   5.04   
+2100 C/L Hub to Left Ref Stake Structure Hub                        42.49054184  -123.37524286  EH101                      S   30.00  
+2100 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.49045952  -123.37524016  EH101                      N   60.00  
+2100 Right Ref Stake Structure Hub to Structure Hub                 42.49062417  -123.37524556  EH101                      S   30.00  
+2100 Structure Hub to P1                                            42.49054184  -123.37524286  EH101                      E   0.00   
+2140 C/L Hub to Left Ref Stake Structure Hub                        42.48953302  -123.37710165  EH201                      S   30.00  
+2140 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48945071  -123.37709832  EH201                      N   60.00  
+2140 Right Ref Stake Structure Hub to Structure Hub                 42.48961533  -123.37710499  EH201                      S   30.00  
+2140 Structure Hub to P1                                            42.48953302  -123.37710165  EH201                      E   0.00   
+2140 P1 to PG11,PG12                                                42.48953302  -123.37710165  EH201                      E   27.50  
+2140 PG11,PG12 to CM21                                              42.48953345  -123.37699968  EH201                      W   4.94   
+2150 C/L Hub to Left Ref Stake Structure Hub                        42.48952731  -123.37845135  EH201                      S   30.00  
+2150 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48944496  -123.37845181  EH201                      N   60.00  
+2150 Right Ref Stake Structure Hub to Structure Hub                 42.48960966  -123.37845090  EH201                      S   30.00  
+2150 Structure Hub to P1                                            42.48952731  -123.37845135  EH201                      E   0.00   
+2160 C/L Hub to Left Ref Stake Structure Hub                        42.48953597  -123.37929218  EH101                      S   30.00  
+2160 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48945362  -123.37929314  EH101                      N   60.00  
+2160 Right Ref Stake Structure Hub to Structure Hub                 42.48961831  -123.37929122  EH101                      S   30.00  
+2160 Structure Hub to P1                                            42.48953597  -123.37929218  EH101                      E   0.00   
+2170 C/L Hub to Left Ref Stake Structure Hub                        42.48953898  -123.38049327  EH121                      SE  30.00  
+2170 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48946558  -123.38044282  EH121                      NW  60.00  
+2170 Right Ref Stake Structure Hub to Structure Hub                 42.48961237  -123.38054372  EH121                      SE  30.00  
+2170 Structure Hub to P1                                            42.48953898  -123.38049327  EH121                      E   0.00   
+2170 P1 to PG11,NG12                                                42.48953898  -123.38049327  EH121                      W   31.35  
+2170 PG11,NG12 to CM21                                              42.48953927  -123.38060956  EH121                      E   9.13   
+2180 C/L Hub to Left Ref Stake Structure Hub                        42.48946617  -123.38056442  EH111                      SE  30.00  
+2180 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48941967  -123.38047259  EH111                      NW  60.00  
+2180 Right Ref Stake Structure Hub to Structure Hub                 42.48951267  -123.38065625  EH111                      SE  30.00  
+2180 Structure Hub to P1                                            42.48946617  -123.38056442  EH111                      E   0.00   
+2180 P1 to PG11,NG12                                                42.48946617  -123.38056442  EH111                      NE  27.68  
+2180 PG11,NG12 to CM21                                              42.48952998  -123.38050868  EH111                      SW  4.89   
+2190 C/L Hub to Left Ref Stake Structure Hub                        42.48870689  -123.38122767  EH131                      SE  30.00  
+2190 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48866218  -123.38113423  EH131                      NW  60.00  
+2190 Right Ref Stake Structure Hub to Structure Hub                 42.48875160  -123.38132111  EH131                      SE  30.00  
+2190 Structure Hub to P1                                            42.48870689  -123.38122767  EH131                      E   0.00   
+2190 P1 to PG11,NG12                                                42.48870689  -123.38122767  EH131                      SW  29.85  
+2190 PG11,NG12 to CM21                                              42.48863808  -123.38128778  EH131                      NE  8.55   
+2220 C/L Hub to Left Ref Stake Structure Hub                        42.48816568  -123.37704832  EH111                      S   30.00  
+2220 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48808746  -123.37701352  EH111                      N   60.00  
+2220 Right Ref Stake Structure Hub to Structure Hub                 42.48824389  -123.37708312  EH111                      S   30.00  
+2220 Structure Hub to P1                                            42.48816568  -123.37704832  EH111                      E   0.00   
+2220 P1 to PG11,NG12                                                42.48816568  -123.37704832  EH111                      E   23.49  
+2220 PG11,NG12 to CM21                                              42.48816769  -123.37696123  EH111                      W   4.97   
+2230 C/L Hub to Left Ref Stake Structure Hub                        42.48814238  -123.37805571  EH131                      S   30.00  
+2230 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48806007  -123.37805224  EH131                      N   60.00  
+2230 Right Ref Stake Structure Hub to Structure Hub                 42.48822469  -123.37805919  EH131                      S   30.00  
+2230 Structure Hub to P1                                            42.48814238  -123.37805571  EH131                      E   0.00   
+2230 P1 to PG11,NG12                                                42.48814238  -123.37805571  EH131                      W   21.77  
+2280 C/L Hub to Left Ref Stake Structure Hub                        42.48773740  -123.37194251  EH121                      S   30.00  
+2280 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48765505  -123.37194226  EH121                      N   60.00  
+2280 Right Ref Stake Structure Hub to Structure Hub                 42.48781975  -123.37194275  EH121                      S   30.00  
+2280 Structure Hub to P1                                            42.48773740  -123.37194251  EH121                      E   0.00   
+2280 P1 to PG11,NG12                                                42.48773740  -123.37194251  EH121                      E   26.55  
+2280 PG11,NG12 to SE21                                              42.48773756  -123.37184404  EH121                      NW  36.75  
+2270 C/L Hub to Left Ref Stake Structure Hub                        42.48773470  -123.37360457  EH101                      S   30.00  
+2270 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48765235  -123.37360434  EH101                      N   60.00  
+2270 Right Ref Stake Structure Hub to Structure Hub                 42.48781705  -123.37360481  EH101                      S   30.00  
+2270 Structure Hub to P1                                            42.48773470  -123.37360457  EH101                      E   0.00   
+2260 C/L Hub to Left Ref Stake Structure Hub                        42.48773213  -123.37527445  EH101                      S   30.00  
+2260 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48764978  -123.37527434  EH101                      N   60.00  
+2260 Right Ref Stake Structure Hub to Structure Hub                 42.48781448  -123.37527456  EH101                      S   30.00  
+2260 Structure Hub to P1                                            42.48773213  -123.37527445  EH101                      E   0.00   
+2250 C/L Hub to Left Ref Stake Structure Hub                        42.48773225  -123.37656204  EH121                      SE  30.00  
+2250 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48766037  -123.37650775  EH121                      NW  60.00  
+2250 Right Ref Stake Structure Hub to Structure Hub                 42.48780414  -123.37661633  EH121                      SE  30.00  
+2250 Structure Hub to P1                                            42.48773225  -123.37656204  EH121                      E   0.00   
+2250 P1 to PG11,NG12                                                42.48773225  -123.37656204  EH121                      W   25.45  
+2300 C/L Hub to Left Ref Stake Structure Hub                        42.48871507  -123.37291058  EH131                      N   30.00  
+2300 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48879738  -123.37291392  EH131                      S   60.00  
+2300 Right Ref Stake Structure Hub to Structure Hub                 42.48863276  -123.37290723  EH131                      N   30.00  
+2300 Structure Hub to P1                                            42.48871507  -123.37291058  EH131                      E   0.00   
+2300 P1 to PG11,NG12                                                42.48871507  -123.37291058  EH131                      W   17.61  
+2290 C/L Hub to Left Ref Stake Structure Hub                        42.48873679  -123.37193417  EH121 + EH221              NE  30.00  
+2290 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48879571  -123.37185644  EH121 + EH221              SW  60.00  
+2290 Right Ref Stake Structure Hub to Structure Hub                 42.48867787  -123.37201190  EH121 + EH221              NE  30.00  
+2290 Structure Hub to P1                                            42.48873679  -123.37193417  EH121 + EH221              E   0.00   
+2290 P1 to PG11,NG12                                                42.48873679  -123.37193417  EH121 + EH221              N   31.66  
+2290 PG11,NG12 to PG21,NG22                                         42.48882371  -123.37193344  EH121 + EH221              SE  34.73  
+2285 C/L Hub to Left Ref Stake Structure Hub                        42.48719594  -123.37193995  EG371                      E   30.00  
+2285 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48719623  -123.37182869  EG371                      W   60.00  
+2285 Right Ref Stake Structure Hub to Structure Hub                 42.48719565  -123.37205121  EG371                      E   30.00  
+2285 Structure Hub to P1                                            42.48719594  -123.37193995  EG371                      E   0.00   
+2285 P1 to PG11,SE12                                                42.48719594  -123.37193995  EG371                      S   24.56  
+2320 C/L Hub to Left Ref Stake Structure Hub                        42.48882693  -123.37099057  EH101 + EH221              S   30.00  
+2320 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48874467  -123.37099576  EH101 + EH221              N   60.00  
+2320 Right Ref Stake Structure Hub to Structure Hub                 42.48890919  -123.37098537  EH101 + EH221              S   30.00  
+2320 Structure Hub to P1                                            42.48882693  -123.37099057  EH101 + EH221              E   0.00   
+2320 P1 to PG11,NG12                                                42.48882693  -123.37099057  EH101 + EH221              E   16.97  
+2310 C/L Hub to Left Ref Stake Structure Hub                        42.48885489  -123.37179919  EH121                      SE  30.00  
+2310 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48877940  -123.37175473  EH121                      NW  60.00  
+2310 Right Ref Stake Structure Hub to Structure Hub                 42.48893038  -123.37184364  EH121                      SE  30.00  
+2310 Structure Hub to P1                                            42.48885489  -123.37179919  EH121                      E   0.00   
+2310 P1 to PG11,NG12                                                42.48885489  -123.37179919  EH121                      W   14.06  
+2410 C/L Hub to Left Ref Stake Structure Hub                        42.48647171  -123.37946396  EH131                      N   30.00  
+2410 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48655406  -123.37946466  EH131                      S   60.00  
+2410 Right Ref Stake Structure Hub to Structure Hub                 42.48638937  -123.37946327  EH131                      N   30.00  
+2410 Structure Hub to P1                                            42.48647171  -123.37946396  EH131                      E   0.00   
+2410 P1 to PG11,NG12                                                42.48647171  -123.37946396  EH131                      W   23.71  
+2410 PG11,NG12 to CM21                                              42.48647131  -123.37955189  EH131                      E   8.09   
+2400 C/L Hub to Left Ref Stake Structure Hub                        42.48647714  -123.37828925  EH101                      N   30.00  
+2400 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48655948  -123.37828994  EH101                      S   60.00  
+2400 Right Ref Stake Structure Hub to Structure Hub                 42.48639479  -123.37828857  EH101                      N   30.00  
+2400 Structure Hub to P1                                            42.48647714  -123.37828925  EH101                      E   0.00   
+2390 C/L Hub to Left Ref Stake Structure Hub                        42.48648247  -123.37710515  EH111 ST50.01              N   30.00  
+2390 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48656480  -123.37710752  EH111 ST50.01              S   60.00  
+2390 Right Ref Stake Structure Hub to Structure Hub                 42.48640014  -123.37710278  EH111 ST50.01              N   30.00  
+2390 Structure Hub to P1                                            42.48648247  -123.37710515  EH111 ST50.01              E   0.00   
+2390 P1 to PG11,NG12                                                42.48648247  -123.37710515  EH111 ST50.01              E   18.74  
+2390 PG11,NG12 to CM21                                              42.48648278  -123.37703564  EH111 ST50.01              W   7.91   
+2360 C/L Hub to Left Ref Stake Structure Hub                        42.48648346  -123.37639367  EH111                      N   30.00  
+2360 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48656563  -123.37640111  EH111                      S   60.00  
+2360 Right Ref Stake Structure Hub to Structure Hub                 42.48640130  -123.37638623  EH111                      N   30.00  
+2360 Structure Hub to P1                                            42.48648346  -123.37639367  EH111                      E   0.00   
+2360 P1 to PG11,NG12                                                42.48648346  -123.37639367  EH111                      W   39.85  
+2360 PG11,NG12 to CM21                                              42.48646523  -123.37653938  EH111                      E   34.31  
+2370 C/L Hub to Left Ref Stake Structure Hub                        42.48665827  -123.37500291  EH101                      N   30.00  
+2370 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48673950  -123.37502117  EH101                      S   60.00  
+2370 Right Ref Stake Structure Hub to Structure Hub                 42.48657704  -123.37498465  EH101                      N   30.00  
+2370 Structure Hub to P1                                            42.48665827  -123.37500291  EH101                      E   0.00   
+2370 P1 to CM11                                                     42.48665827  -123.37500291  EH101                      E   20.56  
+2380 C/L Hub to Left Ref Stake Structure Hub                        42.48683183  -123.37356370  EH131                      N   30.00  
+2380 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48691311  -123.37358159  EH131                      S   60.00  
+2380 Right Ref Stake Structure Hub to Structure Hub                 42.48675056  -123.37354581  EH131                      N   30.00  
+2380 Structure Hub to P1                                            42.48683183  -123.37356370  EH131                      E   0.00   
+2380 P1 to PG11,NG12                                                42.48683183  -123.37356370  EH131                      E   14.21  
+2430 C/L Hub to Left Ref Stake Structure Hub                        42.48548283  -123.37643030  EH111                      N   30.00  
+2430 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48556516  -123.37642808  EH111                      S   60.00  
+2430 Right Ref Stake Structure Hub to Structure Hub                 42.48540049  -123.37643253  EH111                      N   30.00  
+2430 Structure Hub to P1                                            42.48548283  -123.37643030  EH111                      E   0.00   
+2430 P1 to PG11,NG12                                                42.48548283  -123.37643030  EH111                      W   33.88  
+2430 PG11,NG12 to CM21                                              42.48547596  -123.37655560  EH111                      E   9.17   
+2440 C/L Hub to Left Ref Stake Structure Hub                        42.48554208  -123.37534857  EH111                      N   30.00  
+2440 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48562319  -123.37532928  EH111                      S   60.00  
+2440 Right Ref Stake Structure Hub to Structure Hub                 42.48546098  -123.37536787  EH111                      N   30.00  
+2440 Structure Hub to P1                                            42.48554208  -123.37534857  EH111                      E   0.00   
+2440 P1 to PG11,NG12                                                42.48554208  -123.37534857  EH111                      NW  16.58  
+2440 PG11,NG12 to PG21,NG22                                         42.48556075  -123.37540466  EH111                      E   47.94  
+2440 PG21,NG22 to CM31                                              42.48554871  -123.37522760  EH111                      W   7.90   
+2450 C/L Hub to Left Ref Stake Structure Hub                        42.48522693  -123.37440132  EH131                      NE  30.00  
+2450 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48530204  -123.37435570  EH131                      SW  60.00  
+2450 Right Ref Stake Structure Hub to Structure Hub                 42.48515182  -123.37444693  EH131                      NE  30.00  
+2450 Structure Hub to P1                                            42.48522693  -123.37440132  EH131                      E   0.00   
+2450 P1 to PG11,NG12                                                42.48522693  -123.37440132  EH131                      SE  15.23  
+2530 C/L Hub to Left Ref Stake Structure Hub                        42.48407694  -123.38240541  EH131                      N   30.00  
+2530 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48415929  -123.38240629  EH131                      S   60.00  
+2530 Right Ref Stake Structure Hub to Structure Hub                 42.48399460  -123.38240452  EH131                      N   30.00  
+2530 Structure Hub to P1                                            42.48407694  -123.38240541  EH131                      E   0.00   
+2530 P1 to PG11,NG12                                                42.48407694  -123.38240541  EH131                      W   19.51  
+2530 PG11,NG12 to CM21                                              42.48407651  -123.38247774  EH131                      E   8.14   
+2520 C/L Hub to Left Ref Stake Structure Hub                        42.48408081  -123.38175115  EH101                      N   30.00  
+2520 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48416316  -123.38175199  EH101                      S   60.00  
+2520 Right Ref Stake Structure Hub to Structure Hub                 42.48399847  -123.38175031  EH101                      N   30.00  
+2520 Structure Hub to P1                                            42.48408081  -123.38175115  EH101                      E   0.00   
+2510 C/L Hub to Left Ref Stake Structure Hub                        42.48408730  -123.38051489  EH101                      N   30.00  
+2510 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48416965  -123.38051578  EH101                      S   60.00  
+2510 Right Ref Stake Structure Hub to Structure Hub                 42.48400496  -123.38051400  EH101                      N   30.00  
+2510 Structure Hub to P1                                            42.48408730  -123.38051489  EH101                      E   0.00   
+2490 C/L Hub to Left Ref Stake Structure Hub                        42.48409564  -123.37925566  EH101 + EH221              N   30.00  
+2490 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48417799  -123.37925668  EH101 + EH221              S   60.00  
+2490 Right Ref Stake Structure Hub to Structure Hub                 42.48401329  -123.37925464  EH101 + EH221              N   30.00  
+2490 Structure Hub to P1                                            42.48409564  -123.37925566  EH101 + EH221              E   0.00   
+2490 P1 to CM11                                                     42.48409564  -123.37925566  EH101 + EH221              W   18.17  
+2480 C/L Hub to Left Ref Stake Structure Hub                        42.48410435  -123.37800556  EH101                      N   30.00  
+2480 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48418666  -123.37800215  EH101                      S   60.00  
+2480 Right Ref Stake Structure Hub to Structure Hub                 42.48402204  -123.37800896  EH101                      N   30.00  
+2480 Structure Hub to P1                                            42.48410435  -123.37800556  EH101                      E   0.00   
+2540 C/L Hub to Left Ref Stake Structure Hub                        42.48403951  -123.37641083  EH201                      N   30.00  
+2540 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48412186  -123.37641065  EH201                      S   60.00  
+2540 Right Ref Stake Structure Hub to Structure Hub                 42.48395716  -123.37641100  EH201                      N   30.00  
+2540 Structure Hub to P1                                            42.48403951  -123.37641083  EH201                      E   0.00   
+2540 P1 to PG11,PG12                                                42.48403951  -123.37641083  EH201                      W   15.45  
+2550 C/L Hub to Left Ref Stake Structure Hub                        42.48403352  -123.37524252  EH101                      N   30.00  
+2550 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48411587  -123.37524154  EH101                      S   60.00  
+2550 Right Ref Stake Structure Hub to Structure Hub                 42.48395118  -123.37524350  EH101                      N   30.00  
+2550 Structure Hub to P1                                            42.48403352  -123.37524252  EH101                      E   0.00   
+2560 C/L Hub to Left Ref Stake Structure Hub                        42.48402335  -123.37396092  EH101                      N   30.00  
+2560 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48410569  -123.37396009  EH101                      S   60.00  
+2560 Right Ref Stake Structure Hub to Structure Hub                 42.48394100  -123.37396174  EH101                      N   30.00  
+2560 Structure Hub to P1                                            42.48402335  -123.37396092  EH101                      E   0.00   
+2570 C/L Hub to Left Ref Stake Structure Hub                        42.48401986  -123.37279838  EH101                      N   30.00  
+2570 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48410221  -123.37279751  EH101                      S   60.00  
+2570 Right Ref Stake Structure Hub to Structure Hub                 42.48393751  -123.37279925  EH101                      N   30.00  
+2570 Structure Hub to P1                                            42.48401986  -123.37279838  EH101                      E   0.00   
+2580 C/L Hub to Left Ref Stake Structure Hub                        42.48401107  -123.37177430  EH101 + EH221              N   30.00  
+2580 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48409342  -123.37177522  EH101 + EH221              S   60.00  
+2580 Right Ref Stake Structure Hub to Structure Hub                 42.48392872  -123.37177338  EH101 + EH221              N   30.00  
+2580 Structure Hub to P1                                            42.48401107  -123.37177430  EH101 + EH221              E   0.00   
+2610 C/L Hub to Left Ref Stake Structure Hub                        42.48403443  -123.37065110  EH101                      N   30.00  
+2610 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48411675  -123.37065389  EH101                      S   60.00  
+2610 Right Ref Stake Structure Hub to Structure Hub                 42.48395211  -123.37064832  EH101                      N   30.00  
+2610 Structure Hub to P1                                            42.48403443  -123.37065110  EH101                      E   0.00   
+2630 C/L Hub to Left Ref Stake Structure Hub                        42.48405384  -123.36945682  EH121                      NW  30.00  
+2630 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48411452  -123.36953205  EH121                      SE  60.00  
+2630 Right Ref Stake Structure Hub to Structure Hub                 42.48399317  -123.36938160  EH121                      NW  30.00  
+2630 Structure Hub to P1                                            42.48405384  -123.36945682  EH121                      E   0.00   
+2630 P1 to PG11,NG12                                                42.48405384  -123.36945682  EH121                      E   13.95  
+2630 PG11,NG12 to PG21,NG22                                         42.48405468  -123.36940512  EH121                      SW  33.38  
+2640 C/L Hub to Left Ref Stake Structure Hub                        42.48465008  -123.36936965  EH111 + EH221              W   30.00  
+2640 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48465522  -123.36948069  EH111 + EH221              E   60.00  
+2640 Right Ref Stake Structure Hub to Structure Hub                 42.48464494  -123.36925860  EH111 + EH221              W   30.00  
+2640 Structure Hub to P1                                            42.48465008  -123.36936965  EH111 + EH221              E   0.00   
+2660 C/L Hub to Left Ref Stake Structure Hub                        42.48505604  -123.36936028  EH131                      W   30.00  
+2660 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48505745  -123.36947153  EH131                      E   60.00  
+2660 Right Ref Stake Structure Hub to Structure Hub                 42.48505464  -123.36924904  EH131                      W   30.00  
+2660 Structure Hub to P1                                            42.48505604  -123.36936028  EH131                      E   0.00   
+2660 P1 to PG11,NG12                                                42.48505604  -123.36936028  EH131                      N   13.41  
+2600 C/L Hub to Left Ref Stake Structure Hub                        42.48331690  -123.37182514  EH131                      W   30.00  
+2600 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48331749  -123.37193639  EH131                      E   60.00  
+2600 Right Ref Stake Structure Hub to Structure Hub                 42.48331631  -123.37171388  EH131                      W   30.00  
+2600 Structure Hub to P1                                            42.48331690  -123.37182514  EH131                      E   0.00   
+2600 P1 to PG11,NG12                                                42.48331690  -123.37182514  EH131                      S   21.75  
+2590 C/L Hub to Left Ref Stake Structure Hub                        42.48381590  -123.37182030  EH111                      W   30.00  
+2590 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48382330  -123.37193111  EH111                      E   60.00  
+2590 Right Ref Stake Structure Hub to Structure Hub                 42.48380850  -123.37170949  EH111                      W   30.00  
+2590 Structure Hub to P1                                            42.48381590  -123.37182030  EH111                      E   0.00   
+2590 P1 to PG11,NG12                                                42.48381590  -123.37182030  EH111                      N   26.62  
+2645 C/L Hub to Left Ref Stake Structure Hub                        42.48469861  -123.36955353  EG371                      S   30.00  
+2645 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48462104  -123.36959090  EG371                      N   60.00  
+2645 Right Ref Stake Structure Hub to Structure Hub                 42.48477617  -123.36951617  EG371                      S   30.00  
+2645 Structure Hub to P1                                            42.48469861  -123.36955353  EG371                      E   0.00   
+2645 P1 to PG11,NG12                                                42.48469861  -123.36955353  EG371                      W   8.06   
+2650 C/L Hub to Left Ref Stake Structure Hub                        42.48433477  -123.36816532  EH131                      S   30.00  
+2650 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48425713  -123.36820242  EH131                      N   60.00  
+2650 Right Ref Stake Structure Hub to Structure Hub                 42.48441240  -123.36812821  EH131                      S   30.00  
+2650 Structure Hub to P1                                            42.48433477  -123.36816532  EH131                      E   0.00   
+2650 P1 to PG11,NG12                                                42.48433477  -123.36816532  EH131                      E   13.71  
+2500 C/L Hub to Left Ref Stake Structure Hub                        42.48387443  -123.37902364  EH131                      NE  30.00  
+2500 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48392493  -123.37893575  EH131                      SW  60.00  
+2500 Right Ref Stake Structure Hub to Structure Hub                 42.48382393  -123.37911152  EH131                      NE  30.00  
+2500 Structure Hub to P1                                            42.48387443  -123.37902364  EH131                      E   0.00   
+2680 C/L Hub to Left Ref Stake Structure Hub                        42.48310387  -123.37713629  EH131                      SE  30.00  
+2680 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48304163  -123.37706343  EH131                      NW  60.00  
+2680 Right Ref Stake Structure Hub to Structure Hub                 42.48316610  -123.37720915  EH131                      SE  30.00  
+2680 Structure Hub to P1                                            42.48310387  -123.37713629  EH131                      E   0.00   
+2680 P1 to PG11,NG12                                                42.48310387  -123.37713629  EH131                      SW  15.29  
+2765 C/L Hub to Left Ref Stake Structure Hub                        42.48002288  -123.37689566  EG371                      S   30.00  
+2765 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.47994116  -123.37688186  EG371                      N   60.00  
+2765 Right Ref Stake Structure Hub to Structure Hub                 42.48010459  -123.37690946  EG371                      S   30.00  
+2765 Structure Hub to P1                                            42.48002288  -123.37689566  EG371                      E   0.00   
+2765 P1 to PG11,NG12,CM13                                           42.48002288  -123.37689566  EG371                      W   6.48   
+2770 C/L Hub to Left Ref Stake Structure Hub                        42.47988788  -123.37665821  EH121                      NE  30.00  
+2770 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.47994731  -123.37658120  EH121                      SW  60.00  
+2770 Right Ref Stake Structure Hub to Structure Hub                 42.47982845  -123.37673522  EH121                      NE  30.00  
+2770 Structure Hub to P1                                            42.47988788  -123.37665821  EH121                      E   0.00   
+2770 P1 to PG11,CM13,NG12                                           42.47988788  -123.37665821  EH121                      W   10.08  
+2780 C/L Hub to Left Ref Stake Structure Hub                        42.47973671  -123.37595971  EH131                      N   30.00  
+2780 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.47981574  -123.37592849  EH131                      S   60.00  
+2780 Right Ref Stake Structure Hub to Structure Hub                 42.47965767  -123.37599094  EH131                      N   30.00  
+2780 Structure Hub to P1                                            42.47973671  -123.37595971  EH131                      E   0.00   
+2780 P1 to PG11,NG12                                                42.47973671  -123.37595971  EH131                      E   11.58  
+2780 PG11,NG12 to CM21                                              42.47972778  -123.37591849  EH131                      W   4.52   
+2800 C/L Hub to Left Ref Stake Structure Hub                        42.47942009  -123.37779447  EH101                      S   30.00  
+2800 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.47933774  -123.37779464  EH101                      N   60.00  
+2800 Right Ref Stake Structure Hub to Structure Hub                 42.47950244  -123.37779431  EH101                      S   30.00  
+2800 Structure Hub to P1                                            42.47942009  -123.37779447  EH101                      E   0.00   
+2810 C/L Hub to Left Ref Stake Structure Hub                        42.47942803  -123.37892162  EH121                      SW  30.00  
+2810 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.47935437  -123.37897137  EH121                      NE  60.00  
+2810 Right Ref Stake Structure Hub to Structure Hub                 42.47950168  -123.37887187  EH121                      SW  30.00  
+2810 Structure Hub to P1                                            42.47942803  -123.37892162  EH121                      E   0.00   
+2810 P1 to PG11,NG12                                                42.47942803  -123.37892162  EH121                      SW  9.24   
+2820 C/L Hub to Left Ref Stake Structure Hub                        42.47993359  -123.37944411  EH131                      SW  30.00  
+2820 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.47988356  -123.37953247  EH131                      NE  60.00  
+2820 Right Ref Stake Structure Hub to Structure Hub                 42.47998363  -123.37935575  EH131                      SW  30.00  
+2820 Structure Hub to P1                                            42.47993359  -123.37944411  EH131                      E   0.00   
+2820 P1 to PG11,NG12                                                42.47993359  -123.37944411  EH131                      NW  15.76  
+2850 C/L Hub to Left Ref Stake Structure Hub                        42.47847556  -123.37696004  EH131                      N   30.00  
+2850 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.47855544  -123.37698709  EH131                      S   60.00  
+2850 Right Ref Stake Structure Hub to Structure Hub                 42.47839568  -123.37693300  EH131                      N   30.00  
+2850 Structure Hub to P1                                            42.47847556  -123.37696004  EH131                      E   0.00   
+2850 P1 to PG11,NG12                                                42.47847556  -123.37696004  EH131                      W   13.25  
+2890 C/L Hub to Left Ref Stake Structure Hub                        42.47685668  -123.37542182  EH111                      N   30.00  
+2890 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.47693875  -123.37541255  EH111                      S   60.00  
+2890 Right Ref Stake Structure Hub to Structure Hub                 42.47677462  -123.37543108  EH111                      N   30.00  
+2890 Structure Hub to P1                                            42.47685668  -123.37542182  EH111                      E   0.00   
+2890 P1 to PG11,NG12                                                42.47685668  -123.37542182  EH111                      W   31.34  
+2890 PG11,NG12 to CM21                                              42.47685680  -123.37553802  EH111                      E   8.03   
+2900 C/L Hub to Left Ref Stake Structure Hub                        42.47685560  -123.37431466  EH101                      N   30.00  
+2900 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.47693795  -123.37431486  EH101                      S   60.00  
+2900 Right Ref Stake Structure Hub to Structure Hub                 42.47677325  -123.37431446  EH101                      N   30.00  
+2900 Structure Hub to P1                                            42.47685560  -123.37431466  EH101                      E   0.00   
+2900 P1 to CM11                                                     42.47685560  -123.37431466  EH101                      E   12.61  
+2910 C/L Hub to Left Ref Stake Structure Hub                        42.47685963  -123.37321059  EH101                      N   30.00  
+2910 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.47694197  -123.37321061  EH101                      S   60.00  
+2910 Right Ref Stake Structure Hub to Structure Hub                 42.47677728  -123.37321057  EH101                      N   30.00  
+2910 Structure Hub to P1                                            42.47685963  -123.37321059  EH101                      E   0.00   
+2920 C/L Hub to Left Ref Stake Structure Hub                        42.47685667  -123.37234090  EH101                      N   30.00  
+2920 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.47693902  -123.37234115  EH101                      S   60.00  
+2920 Right Ref Stake Structure Hub to Structure Hub                 42.47677433  -123.37234066  EH101                      N   30.00  
+2920 Structure Hub to P1                                            42.47685667  -123.37234090  EH101                      E   0.00   
+2930 C/L Hub to Left Ref Stake Structure Hub                        42.47685858  -123.37205687  EH121                      N   30.00  
+2930 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.47693788  -123.37208685  EH121                      S   60.00  
+2930 Right Ref Stake Structure Hub to Structure Hub                 42.47677927  -123.37202690  EH121                      N   30.00  
+2930 Structure Hub to P1                                            42.47685858  -123.37205687  EH121                      E   0.00   
+2930 P1 to PG11,NG12                                                42.47685858  -123.37205687  EH121                      E   21.71  
+2930 PG11,NG12 to CM21                                              42.47685913  -123.37197636  EH121                      W   8.16   
+2940 C/L Hub to Left Ref Stake Structure Hub                        42.47693741  -123.37187784  EH121                      NW  30.00  
+2940 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.47699908  -123.37195156  EH121                      SE  60.00  
+2940 Right Ref Stake Structure Hub to Structure Hub                 42.47687574  -123.37180413  EH121                      NW  30.00  
+2940 Structure Hub to P1                                            42.47693741  -123.37187784  EH121                      E   0.00   
+2940 P1 to PG11,NG12                                                42.47693741  -123.37187784  EH121                      SW  30.13  
+2940 PG11,NG12 to CM21                                              42.47687198  -123.37194621  EH121                      NE  9.45   
+2950 C/L Hub to Left Ref Stake Structure Hub                        42.47758601  -123.37119958  EH101                      NW  30.00  
+2950 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.47763419  -123.37128981  EH101                      SE  60.00  
+2950 Right Ref Stake Structure Hub to Structure Hub                 42.47753784  -123.37110936  EH101                      NW  30.00  
+2950 Structure Hub to P1                                            42.47758601  -123.37119958  EH101                      E   0.00   
+2950 P1 to CM11                                                     42.47758601  -123.37119958  EH101                      NE  10.35  
+2960 C/L Hub to Left Ref Stake Structure Hub                        42.47826381  -123.37058516  EH131                      NW  30.00  
+2960 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.47830969  -123.37067753  EH131                      SE  60.00  
+2960 Right Ref Stake Structure Hub to Structure Hub                 42.47821792  -123.37049278  EH131                      NW  30.00  
+2960 Structure Hub to P1                                            42.47826381  -123.37058516  EH131                      E   0.00   
+2960 P1 to PG11,NG12                                                42.47826381  -123.37058516  EH131                      NE  27.90  
+2330 C/L Hub to Left Ref Stake Structure Hub                        42.48944728  -123.37100130  EH131                      E   30.00  
+2330 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48944833  -123.37089005  EH131                      W   60.00  
+2330 Right Ref Stake Structure Hub to Structure Hub                 42.48944622  -123.37111256  EH131                      E   30.00  
+2330 Structure Hub to P1                                            42.48944728  -123.37100130  EH131                      E   0.00   
+2330 P1 to PG11,NG12                                                42.48944728  -123.37100130  EH131                      N   22.43  
+2340 C/L Hub to Left Ref Stake Structure Hub                        42.48829440  -123.37097171  EH131                      E   30.00  
+2340 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48829656  -123.37086049  EH131                      W   60.00  
+2340 Right Ref Stake Structure Hub to Structure Hub                 42.48829225  -123.37108294  EH131                      E   30.00  
+2340 Structure Hub to P1                                            42.48829440  -123.37097171  EH131                      E   0.00   
+2340 P1 to PG11,NG12                                                42.48829440  -123.37097171  EH131                      S   15.16  
+2740 C/L Hub to Left Ref Stake Structure Hub                        42.48044626  -123.37580977  EH101                      N   30.00  
+2740 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48052861  -123.37580956  EH101                      S   60.00  
+2740 Right Ref Stake Structure Hub to Structure Hub                 42.48036391  -123.37580998  EH101                      N   30.00  
+2740 Structure Hub to P1                                            42.48044626  -123.37580977  EH101                      E   0.00   
+2750 C/L Hub to Left Ref Stake Structure Hub                        42.48044535  -123.37499629  EH131                      N   30.00  
+2750 Left Ref Stake Structure Hub to Right Ref Stake Structure Hub  42.48052770  -123.37499612  EH131                      S   60.00  
+2750 Right Ref Stake Structure Hub to Structure Hub                 42.48036300  -123.37499646  EH131                      N   30.00  
+2750 Structure Hub to P1                                            42.48044535  -123.37499629  EH131                      E   0.00   
+2750 P1 to PG11,NG12                                                42.48044535  -123.37499629  EH131                      E   30.44  
+2750 PG11,NG12 to CM21                                              42.48044435  -123.37488343  EH131                      W   7.79   
