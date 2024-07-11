@@ -1,9 +1,12 @@
+# import tkinter as tk, filedialog, messagebox, ttk from tkinter, load_workbook from openpyxl, ET from xml.etree.ElementTree, re
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 from openpyxl import load_workbook
 import xml.etree.ElementTree as ET
 import re
 
+
+# class DataExtractionApp being defined.
 class DataExtractionApp:
     def __init__(self, root):
         self.root = root
@@ -14,9 +17,9 @@ class DataExtractionApp:
         self.columns = []
         self.selected_columns = []
         self.step = 1
-        
         self.setup_gui()
         
+    # create initial frame for the app with the appropriate buttons and labels.
     def setup_gui(self):
         self.intro_frame = tk.Frame(self.root, bg="white")
         self.intro_frame.pack(expand=True, fill="both")
@@ -51,10 +54,12 @@ class DataExtractionApp:
         self.paste_label.pack_forget()
         self.paste_text.pack_forget()
         
+    # function to start the analysis by hiding the intro frame and displaying the main frame.
     def start_analysis(self):
         self.intro_frame.pack_forget()
         self.main_frame.pack(expand=True, fill="both")
     
+    # function to upload a file and load the columns from the file.
     def upload_file(self):
         filetypes = [("Excel files", "*.xlsx *.xls")] if self.step == 1 else [("XML files", "*.xml"), ("Text files", "*.txt")]
         self.file_path = filedialog.askopenfilename(filetypes=filetypes)
@@ -67,6 +72,7 @@ class DataExtractionApp:
                 self.parse_step6_structure_usage()
             messagebox.showinfo("File Uploaded", "File uploaded successfully.")
     
+    # function to load the columns from the uploaded file.
     def load_columns_from_file(self):
         try:
             workbook = load_workbook(self.file_path)
@@ -78,21 +84,25 @@ class DataExtractionApp:
         except Exception as e:
             messagebox.showerror("Error", f"Failed to read file: {e}")
     
+    # function to parse the data from the uploaded file.
     def parse_data(self):
         if not self.file_path:
             messagebox.showerror("Error", "Please upload a file first!")
             return
         
+        # Get the selected columns
         self.selected_columns = [self.column_listbox.get(i) for i in self.column_listbox.curselection()]
         if not self.selected_columns:
             messagebox.showerror("Error", "Please select at least one column to keep!")
             return
         
+        # Parse the data based on the selected columns
         try:
             if self.step == 1:
                 workbook = load_workbook(self.file_path)
                 sheet = workbook.active
                 
+                # Write the selected columns to a new file by iterating over the rows and columns and then using the selected columns to write the data.
                 with open(f"step{self.step}.txt", "w") as file:
                     file.write("\t".join(self.selected_columns) + "\n")
                     for row in sheet.iter_rows(min_row=2, values_only=True):
@@ -105,6 +115,7 @@ class DataExtractionApp:
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse file: {e}")
     
+    # function to move to the next step in the process.
     def next_step(self):
         self.step += 1
         self.file_path = None
@@ -155,12 +166,14 @@ class DataExtractionApp:
         else:
             messagebox.showinfo("Completed", "All steps completed. Now you can merge and download the data.")
     
+    # function to parse the pasted data from the text box.
     def parse_pasted_data(self):
         pasted_data = self.paste_text.get("1.0", tk.END).strip()
         if not pasted_data:
             messagebox.showerror("Error", "Please paste data into the text box.")
             return
         
+        # Parse the pasted data and write it to a file by splitting the data into lines and then into fields. Write the data to a new file.
         try:
             lines = pasted_data.split("\n")
             header = lines[0].split("\t")
@@ -171,6 +184,7 @@ class DataExtractionApp:
                 existing = fields[2]  # Assuming existing value is the third field
                 data.append([sequence, existing])
             
+            # Write the parsed data to a new file
             with open(f"step{self.step}.txt", "w") as file:
                 file.write("Sequence\tExisting\n")
                 for row in data:
@@ -178,14 +192,18 @@ class DataExtractionApp:
             
             messagebox.showinfo("Success", f"Data from Step {self.step} saved successfully.")
         
+        
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse pasted data: {e}")
     
+    # function to parse the XML data from the uploaded file.
     def parse_step3_xml(self):
+        # Parse the XML data and write it to a file by iterating over the XML elements and extracting the required data.
         try:
             tree = ET.parse(self.file_path)
             root = tree.getroot()
             data = {}
+            # Extract the required data from the XML file
             for report in root.findall('.//construction_staking_report'):
                 sequence = report.find('structure_number').text or ''
                 framing = report.find('structure_name').text or ''
@@ -202,6 +220,7 @@ class DataExtractionApp:
                     framing = framing_parts[-1]
                     framing = " ".join(framing.split()[:-1])
                 
+                # Store the data in a dictionary
                 if sequence in data:
                     data[sequence]['framing'] = framing
                     data[sequence]['latitude'] = latitude
@@ -216,6 +235,7 @@ class DataExtractionApp:
                         'pole_type': pole_type
                     }
             
+            # Write the extracted data to a new file
             with open(f"step{self.step}.txt", "w") as file:
                 file.write("Sequence\tLatitude\tLongitude\tFraming\tPole Type\n")
                 for seq, values in data.items():
@@ -226,6 +246,7 @@ class DataExtractionApp:
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse XML file: {e}")
 
+    # function to parse the stringing chart data from the text box.
     def parse_stringing_chart_data(self):
         pasted_data = self.paste_text.get("1.0", tk.END).strip()
         if not pasted_data:
@@ -238,6 +259,7 @@ class DataExtractionApp:
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse stringing chart data: {e}")
     
+    # function to parse the primary conductor data from the text box.
     def parse_primary_conductor_data(self):
         pasted_data = self.paste_text.get("1.0", tk.END).strip()
         if not pasted_data:
@@ -250,45 +272,60 @@ class DataExtractionApp:
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse primary conductor data: {e}")
     
+    # function to process the stringing chart data by extracting the required information.
     def process_stringing_chart(self, data):
+        # we want to use regular expressions to extract the required information from the stringing chart data.
         sections = re.findall(r"Stringing Chart Report\n\nCircuit '(.*?)' Section #(.*?) from structure #(.*?) to structure #(.*?),.*?Span\n(.*?)\n\n", data, re.DOTALL)
         output_data = []
         
+        # Extract the required information from the sections and write it to a new file.
         for section in sections:
+            # Extract the section data
             circuit_type, section_num, start_seq, end_seq, spans_data = section
+            # Extract the span lengths and calculate the total span length
             spans = re.findall(r"\s+(\d+\.\d+)\s+", spans_data)
+            # Calculate the total span length
             total_span_length = sum(map(float, spans))
+            # Store the data in the output list
             sequences = f"{start_seq} - {end_seq}"
+            # Determine the circuit type based on the section number
             output_data.append((section_num, sequences, total_span_length, circuit_type))
         
+        # Write the extracted data to a new file
         with open(f"step{self.step}.txt", "w") as file:
             file.write("Section #\tSequence #s\tTotal Span Length\tCircuit Type\n")
             for row in output_data:
                 file.write(f"{row[0]}\t{row[1]}\t{row[2]}\t{row[3]}\n")
     
+    # function to parse the structure usage data from the uploaded file.
     def parse_step6_structure_usage(self):
         try:
             tree = ET.parse(self.file_path)
             root = tree.getroot()
             output_data = []
+            # Extract the required information from the XML file
             for report in root.findall('.//summary_of_maximum_element_usages_for_structure_range'):
                 seq_no = report.find('str_no').text
                 element_label = report.find('element_label').text
                 element_type = report.find('element_type').text
                 max_usage = report.find('maximum_usage').text
+                # Store the data in the output list only if the element type is "Guy"
                 if element_type == "Guy":
                     output_data.append((seq_no, element_label, element_type, max_usage))
             
+            # Write the extracted data to a new file
             with open(f"step{self.step}.txt", "w") as file:
                 file.write("Sequence #\tElement Label\tElement Type\tMaximum Usage\n")
                 for row in output_data:
                     file.write(f"{row[0]}\t{row[1]}\t{row[2]}\t{row[3]}\n")
             
+            # Show success message
             messagebox.showinfo("Success", f"Data from Step {self.step} saved successfully.")
         
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse XML file: {e}")
 
+# main function to run the application.
 if __name__ == "__main__":
     root = tk.Tk()
     app = DataExtractionApp(root)
