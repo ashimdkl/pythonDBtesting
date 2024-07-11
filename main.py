@@ -10,8 +10,7 @@ class DataExtractionApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Data Extraction App")
-        self.root.geometry('800x600')
-        
+        self.root.geometry('800x600') 
         self.file_path = None
         self.columns = []
         self.selected_columns = []
