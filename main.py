@@ -1,3 +1,4 @@
+# initial import of all the necessary libraries
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 from openpyxl import load_workbook
@@ -5,7 +6,7 @@ import xml.etree.ElementTree as ET
 import re
 import math
 
-
+# need an initial class to create the GUI
 class DataExtractionApp:
     def __init__(self, root):
         self.root = root
@@ -17,6 +18,7 @@ class DataExtractionApp:
         self.step = 1
         self.setup_gui()
         
+    # function to setup the GUI
     def setup_gui(self):
         self.intro_frame = tk.Frame(self.root, bg="white")
         self.intro_frame.pack(expand=True, fill="both")
@@ -50,11 +52,17 @@ class DataExtractionApp:
         self.paste_text.pack(pady=10)
         self.paste_label.pack_forget()
         self.paste_text.pack_forget()
-        
+
+     # fn start_analysis params: self
+     # fn start_analysis return: None
+     # fn start_analysis description: This function is used to hide the intro_frame and display the main_frame.   
     def start_analysis(self):
         self.intro_frame.pack_forget()
         self.main_frame.pack(expand=True, fill="both")
     
+    # fn upload_file params: self
+    # fn upload_file return: None
+    # fn upload_file description: This function is used to upload the file and load the columns from the file.
     def upload_file(self):
         filetypes = [("Excel files", "*.xlsx *.xls")] if self.step == 1 else [("XML files", "*.xml"), ("Text files", "*.txt")]
         self.file_path = filedialog.askopenfilename(filetypes=filetypes)
@@ -67,6 +75,9 @@ class DataExtractionApp:
                 self.parse_step6_structure_usage()
             messagebox.showinfo("File Uploaded", "File uploaded successfully.")
     
+    # fn load_columns_from_file params: self
+    # fn load_columns_from_file return: None
+    # fn load_columns_from_file description: This function is used to load the columns from the file.
     def load_columns_from_file(self):
         try:
             workbook = load_workbook(self.file_path)
@@ -78,21 +89,27 @@ class DataExtractionApp:
         except Exception as e:
             messagebox.showerror("Error", f"Failed to read file: {e}")
     
+    # fn parse_data params: self
+    # fn parse_data return: None
+    # fn parse_data description: This function is used to parse the data from the file.
     def parse_data(self):
         if not self.file_path:
             messagebox.showerror("Error", "Please upload a file first!")
             return
         
+        # Get the selected columns
         self.selected_columns = [self.column_listbox.get(i) for i in self.column_listbox.curselection()]
         if not self.selected_columns:
             messagebox.showerror("Error", "Please select at least one column to keep!")
             return
         
+        # Parse the data and save it to a file
         try:
             if self.step == 1:
                 workbook = load_workbook(self.file_path)
                 sheet = workbook.active
                 
+                # Write the selected columns to a file
                 with open(f"step{self.step}.txt", "w") as file:
                     file.write("\t".join(self.selected_columns) + "\n")
                     for row in sheet.iter_rows(min_row=2, values_only=True):
@@ -105,6 +122,9 @@ class DataExtractionApp:
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse file: {e}")
     
+    # fn next_step params: self
+    # fn next_step return: None
+    # fn next_step description: This function is used to move to the next step.
     def next_step(self):
         self.step += 1
         self.file_path = None
@@ -112,6 +132,7 @@ class DataExtractionApp:
         self.selected_columns = []
         self.column_listbox.delete(0, tk.END)
         
+        # Update the GUI based on the current step
         if self.step == 2:
             self.step_label.config(text="Step 2: Copy and Paste your Fusing Coordination Report")
             self.upload_btn.pack_forget()
@@ -155,12 +176,16 @@ class DataExtractionApp:
         else:
             messagebox.showinfo("Completed", "All steps completed. Now you can merge and download the data.")
     
+    # fn parse_pasted_data params: self
+    # fn parse_pasted_data return: None
+    # fn parse_pasted_data description: This function is used to parse the pasted data.
     def parse_pasted_data(self):
+        # Get the pasted data
         pasted_data = self.paste_text.get("1.0", tk.END).strip()
         if not pasted_data:
             messagebox.showerror("Error", "Please paste data into the text box.")
             return
-        
+        # if this is step 2, parse the pasted data and save it to a file
         try:
             lines = pasted_data.split("\n")
             header = lines[0].split("\t")
@@ -181,11 +206,16 @@ class DataExtractionApp:
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse pasted data: {e}")
     
+    # fn parse_step3_xml params: self
+    # fn parse_step3_xml return: None
+    # fn parse_step3_xml description: This function is used to parse the XML file.
     def parse_step3_xml(self):
         try:
+            # Parse the XML file and save the data to a file
             tree = ET.parse(self.file_path)
             root = tree.getroot()
             data = {}
+            # Extract the data from the XML file
             for report in root.findall('.//construction_staking_report'):
                 sequence = report.find('structure_number').text or ''
                 framing = report.find('structure_name').text or ''
@@ -195,14 +225,16 @@ class DataExtractionApp:
                 y_northing = report.find('y_northing').text or ''
                 stake_description = report.find('stake_description').text or ''
                 
+                # Remove the last word from the framing value
                 framing_parts = framing.split(" ", 2)
+                # if the length of the framing_parts is greater than 2, then framing is the last word
                 if len(framing_parts) > 2:
                     framing = framing_parts[-1]
                     framing = " ".join(framing.split()[:-1])
                 
                 if sequence not in data:
                     data[sequence] = []
-                
+                # append the data to the data dictionary
                 data[sequence].append({
                     'framing': framing,
                     'latitude': latitude,
@@ -212,8 +244,11 @@ class DataExtractionApp:
                     'stake_description': stake_description
                 })
             
+            # Process the data to calculate lead length and anchor direction
             anchor_data = []
+            # iterate over the data dictionary
             for sequence, points in data.items():
+                # iterate over the points
                 for i in range(len(points) - 1):
                     current = points[i]
                     next_point = points[i + 1]
@@ -257,6 +292,9 @@ class DataExtractionApp:
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse XML file: {e}")
 
+    # fn get_cardinal_direction params: self, angle
+    # fn get_cardinal_direction return: str
+    # fn get_cardinal_direction description: This function is used to get the cardinal direction based on the angle.
     def get_cardinal_direction(self, angle):
         if -22.5 < angle <= 22.5:
             return 'E'
@@ -275,6 +313,9 @@ class DataExtractionApp:
         else:
             return 'W'
     
+    # fn parse_stringing_chart_data params: self
+    # fn parse_stringing_chart_data return: None
+    # fn parse_stringing_chart_data description: This function is used to parse the stringing chart data.
     def parse_stringing_chart_data(self):
         pasted_data = self.paste_text.get("1.0", tk.END).strip()
         if not pasted_data:
@@ -287,6 +328,9 @@ class DataExtractionApp:
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse stringing chart data: {e}")
     
+    # fn parse_primary_conductor_data params: self
+    # fn parse_primary_conductor_data return: None
+    # fn parse_primary_conductor_data description: This function is used to parse the primary conductor data.
     def parse_primary_conductor_data(self):
         pasted_data = self.paste_text.get("1.0", tk.END).strip()
         if not pasted_data:
@@ -299,35 +343,51 @@ class DataExtractionApp:
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse primary conductor data: {e}")
     
+    # fn process_stringing_chart params: self, data
+    # fn process_stringing_chart return: None
+    # fn process_stringing_chart description: This function is used to process the stringing chart data.
     def process_stringing_chart(self, data):
         sections = re.findall(r"Stringing Chart Report\n\nCircuit '(.*?)' Section #(.*?) from structure #(.*?) to structure #(.*?),.*?Span\n(.*?)\n\n", data, re.DOTALL)
         output_data = []
         
+        # Process each section
         for section in sections:
             circuit_type, section_num, start_seq, end_seq, spans_data = section
+            # use regex to extract the span lengths
             spans = re.findall(r"\s+(\d+\.\d+)\s+", spans_data)
+            # calculate the total span length
             total_span_length = sum(map(float, spans))
+            # append the data to the output_data list
             sequences = f"{start_seq} - {end_seq}"
+            # append the data to the output_data list
             output_data.append((section_num, sequences, total_span_length, circuit_type))
         
+        # Write the data to a file
         with open(f"step{self.step}.txt", "w") as file:
             file.write("Section #\tSequence #s\tTotal Span Length\tCircuit Type\n")
             for row in output_data:
                 file.write(f"{row[0]}\t{row[1]}\t{row[2]}\t{row[3]}\n")
     
+    # fn parse_step6_structure_usage params: self
+    # fn parse_step6_structure_usage return: None
+    # fn parse_step6_structure_usage description: This function is used to parse the structure usage data.
     def parse_step6_structure_usage(self):
         try:
             tree = ET.parse(self.file_path)
             root = tree.getroot()
             output_data = []
+            # Extract the data from the XML file
             for report in root.findall('.//summary_of_maximum_element_usages_for_structure_range'):
+                # extract the data from the XML file
                 seq_no = report.find('str_no').text
                 element_label = report.find('element_label').text
                 element_type = report.find('element_type').text
                 max_usage = report.find('maximum_usage').text
+                # we only want to keep the guy's    
                 if element_type == "Guy":
                     output_data.append((seq_no, element_label, element_type, max_usage))
             
+            # Write the data to a file
             with open(f"step{self.step}.txt", "w") as file:
                 file.write("Sequence #\tElement Label\tElement Type\tMaximum Usage\n")
                 for row in output_data:
