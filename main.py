@@ -196,6 +196,12 @@ class DataExtractionApp:
                 else:
                     pole_type = ""
                 
+                # Remove the "SEQ XXXX " and the last identifier part from the framing string
+                framing_parts = framing.split(" ", 2)
+                if len(framing_parts) > 2:
+                    framing = framing_parts[-1]
+                    framing = " ".join(framing.split()[:-1])
+                
                 if sequence in data:
                     data[sequence]['framing'] = framing
                     data[sequence]['latitude'] = latitude
@@ -270,7 +276,8 @@ class DataExtractionApp:
                 element_label = report.find('element_label').text
                 element_type = report.find('element_type').text
                 max_usage = report.find('maximum_usage').text
-                output_data.append((seq_no, element_label, element_type, max_usage))
+                if element_type == "Guy":
+                    output_data.append((seq_no, element_label, element_type, max_usage))
             
             with open(f"step{self.step}.txt", "w") as file:
                 file.write("Sequence #\tElement Label\tElement Type\tMaximum Usage\n")
