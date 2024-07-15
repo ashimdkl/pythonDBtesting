@@ -11,51 +11,51 @@ class DataExtractionApp:
         self.root = root
         self.root.title("Data Extraction App")
         self.root.geometry('800x600')
-        
+
         self.file_path = None
         self.columns = []
         self.selected_columns = []
         self.step = 1
         self.setup_gui()
-        
+
     def setup_gui(self):
         self.intro_frame = tk.Frame(self.root, bg="white")
         self.intro_frame.pack(expand=True, fill="both")
-        
+
         self.start_btn = tk.Button(self.intro_frame, text="Click to Begin Analysis!", command=self.start_analysis, font=("Arial", 14), bg="#f0f0f0")
         self.start_btn.pack(pady=20)
-        
+
         self.main_frame = tk.Frame(self.root, bg="white")
-        
+
         self.step_label = tk.Label(self.main_frame, text="Step 1: Upload your Hendrix Input Sheet (HIS)", font=("Arial", 14), bg="white")
         self.step_label.pack(pady=10)
-        
+
         self.upload_btn = tk.Button(self.main_frame, text="Upload HIS Excel File", command=self.upload_file, font=("Arial", 14), bg="#f0f0f0")
         self.upload_btn.pack(pady=10)
-        
+
         self.column_label = tk.Label(self.main_frame, text="Select Columns to Keep (including Sequence #)", font=("Arial", 14), bg="white")
         self.column_label.pack(pady=10)
-        
+
         self.column_listbox = tk.Listbox(self.main_frame, selectmode=tk.MULTIPLE, font=("Arial", 12))
         self.column_listbox.pack(pady=10)
-        
+
         self.process_btn = tk.Button(self.main_frame, text="Parse Data", command=self.parse_data, font=("Arial", 12), bg="#f0f0f0")
         self.process_btn.pack(pady=10)
-        
+
         self.next_btn = tk.Button(self.main_frame, text="Next Step", command=self.next_step, font=("Arial", 12), bg="#f0f0f0")
         self.next_btn.pack(pady=10)
-        
+
         self.paste_label = tk.Label(self.main_frame, text="Paste Fusing Coordination Data Here", font=("Arial", 14), bg="white")
         self.paste_text = tk.Text(self.main_frame, wrap=tk.WORD, height=15, font=("Arial", 12))
         self.paste_label.pack(pady=10)
         self.paste_text.pack(pady=10)
         self.paste_label.pack_forget()
         self.paste_text.pack_forget()
-        
+
     def start_analysis(self):
         self.intro_frame.pack_forget()
         self.main_frame.pack(expand=True, fill="both")
-    
+
     def upload_file(self):
         filetypes = [("Excel files", "*.xlsx *.xls")] if self.step == 1 else [("XML files", "*.xml"), ("Text files", "*.txt")]
         self.file_path = filedialog.askopenfilename(filetypes=filetypes)
@@ -67,7 +67,7 @@ class DataExtractionApp:
             elif self.step == 6:
                 self.parse_step6_structure_usage()
             messagebox.showinfo("File Uploaded", "File uploaded successfully.")
-    
+
     def load_columns_from_file(self):
         try:
             workbook = load_workbook(self.file_path)
@@ -78,41 +78,41 @@ class DataExtractionApp:
                 self.column_listbox.insert(tk.END, column)
         except Exception as e:
             messagebox.showerror("Error", f"Failed to read file: {e}")
-    
+
     def parse_data(self):
         if not self.file_path:
             messagebox.showerror("Error", "Please upload a file first!")
             return
-        
+
         self.selected_columns = [self.column_listbox.get(i) for i in self.column_listbox.curselection()]
         if not self.selected_columns:
             messagebox.showerror("Error", "Please select at least one column to keep!")
             return
-        
+
         try:
             if self.step == 1:
                 workbook = load_workbook(self.file_path)
                 sheet = workbook.active
-                
+
                 with open(f"step{self.step}.txt", "w") as file:
                     file.write("\t".join(self.selected_columns) + "\n")
                     for row in sheet.iter_rows(min_row=2, values_only=True):
                         if row[0] is not None:  # Assuming sequence number is the first column
                             row_data = [str(row[self.columns.index(col)]) for col in self.selected_columns]
                             file.write("\t".join(row_data) + "\n")
-            
+
             messagebox.showinfo("Success", f"Data from Step {self.step} saved successfully.")
-        
+
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse file: {e}")
-    
+
     def next_step(self):
         self.step += 1
         self.file_path = None
         self.columns = []
         self.selected_columns = []
         self.column_listbox.delete(0, tk.END)
-        
+
         if self.step == 2:
             self.step_label.config(text="Step 2: Copy and Paste your Fusing Coordination Report")
             self.upload_btn.pack_forget()
@@ -157,13 +157,13 @@ class DataExtractionApp:
             self.process_btn.pack(pady=10)
         else:
             messagebox.showinfo("Completed", "All steps completed. Now you can merge and download the data.")
-    
+
     def parse_pasted_data(self):
         pasted_data = self.paste_text.get("1.0", tk.END).strip()
         if not pasted_data:
             messagebox.showerror("Error", "Please paste data into the text box.")
             return
-        
+
         try:
             lines = pasted_data.split("\n")
             header = lines[0].split("\t")
@@ -173,17 +173,17 @@ class DataExtractionApp:
                 sequence = fields[0][:4]  # Assuming sequence is the first 4 characters
                 existing = fields[2]  # Assuming existing value is the third field
                 data.append([sequence, existing])
-            
+
             with open(f"step{self.step}.txt", "w") as file:
                 file.write("Sequence\tExisting\n")
                 for row in data:
                     file.write("\t".join(row) + "\n")
-            
+
             messagebox.showinfo("Success", f"Data from Step {self.step} saved successfully.")
-        
+
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse pasted data: {e}")
-    
+
     def parse_step3_xml(self):
         try:
             tree = ET.parse(self.file_path)
@@ -198,19 +198,19 @@ class DataExtractionApp:
                 x_easting = report.find('x_easting').text or ''
                 y_northing = report.find('y_northing').text or ''
                 stake_description = report.find('stake_description').text or ''
-                
+
                 if "P1" in stake_description:
                     pole_type = report.find('pole_property_label').text or ''
                     pole_types[sequence] = pole_type
-                
+
                 framing_parts = framing.split(" ", 2)
                 if len(framing_parts) > 2:
                     framing = framing_parts[-1]
                     framing = " ".join(framing.split()[:-1])
-                
+
                 if sequence not in data:
                     data[sequence] = []
-                
+
                 data[sequence].append({
                     'framing': framing,
                     'latitude': latitude,
@@ -219,7 +219,7 @@ class DataExtractionApp:
                     'y_northing': y_northing,
                     'stake_description': stake_description
                 })
-            
+
             anchor_data = []
             guy_types = ["P2", "PG", "SE", "NG", "CM", "FG"]
             for sequence, points in data.items():
@@ -228,10 +228,11 @@ class DataExtractionApp:
                     if "P1" in point['stake_description']:
                         p1_point = point
                         break
-                
+
                 if p1_point:
                     x_origin = float(p1_point['x_easting'])
                     y_origin = float(p1_point['y_northing'])
+                    stake_description_set = set()
                     for point in points:
                         for guy_type in guy_types:
                             if guy_type in point['stake_description']:
@@ -242,19 +243,21 @@ class DataExtractionApp:
                                 direction = self.get_cardinal_direction(theta)
                                 descriptions = point['stake_description'].split(',')
                                 for description in descriptions:
-                                    anchor_data.append({
-                                        'sequence': sequence,
-                                        'type': f"P1 to {description.strip()}",
-                                        'latitude': point['latitude'],
-                                        'longitude': point['longitude'],
-                                        'framing': point['framing'],
-                                        'anchor_direction': direction,
-                                        'lead_length': lead_length
-                                    })
-            
+                                    if description.strip() not in stake_description_set:
+                                        stake_description_set.add(description.strip())
+                                        anchor_data.append({
+                                            'sequence': sequence,
+                                            'type': f"P1 to {description.strip()}",
+                                            'latitude': point['latitude'],
+                                            'longitude': point['longitude'],
+                                            'framing': point['framing'],
+                                            'anchor_direction': direction,
+                                            'lead_length': lead_length
+                                        })
+
             # Sort the anchor data by sequence number
             anchor_data.sort(key=lambda x: x['sequence'])
-            
+
             with open(f"step{self.step}.txt", "w") as file:
                 max_lengths = {
                     'sequence': max(len(item['sequence']) for item in anchor_data),
@@ -274,11 +277,11 @@ class DataExtractionApp:
                     ("Anchor Direction", max_lengths['anchor_direction']),
                     ("Lead Length", max_lengths['lead_length'])
                 ]
-                
+
                 header_row = " | ".join(f"{header[0]:<{header[1]}}" for header in headers)
                 file.write(header_row + "\n")
                 file.write("-" * len(header_row) + "\n")
-                
+
                 for item in anchor_data:
                     row = [
                         f"{item['sequence']:<{max_lengths['sequence']}}",
@@ -290,14 +293,14 @@ class DataExtractionApp:
                         f"{item['lead_length']:<{max_lengths['lead_length']}.2f}"
                     ]
                     file.write(" | ".join(row) + "\n")
-            
+
             with open("step3types.txt", "w") as file:
                 file.write("Sequence\tPole Type\n")
                 for sequence, pole_type in sorted(pole_types.items()):
                     file.write(f"{sequence}\t{pole_type}\n")
-            
+
             messagebox.showinfo("Success", f"Data from Step {self.step} saved successfully.")
-        
+
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse XML file: {e}")
 
@@ -318,42 +321,42 @@ class DataExtractionApp:
             return 'SW'
         else:
             return 'W'
-    
+
     def parse_stringing_chart_data(self):
         pasted_data = self.paste_text.get("1.0", tk.END).strip()
         if not pasted_data:
             messagebox.showerror("Error", "Please paste data into the text box.")
             return
-        
+
         try:
             self.process_stringing_chart(pasted_data)
             messagebox.showinfo("Success", f"Data from Step {self.step} saved successfully.")
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse stringing chart data: {e}")
-    
+
     def parse_primary_conductor_data(self):
         pasted_data = self.paste_text.get("1.0", tk.END).strip()
         if not pasted_data:
             messagebox.showerror("Error", "Please paste data into the text box.")
             return
-        
+
         try:
             self.process_stringing_chart(pasted_data)
             messagebox.showinfo("Success", f"Data from Step {self.step} saved successfully.")
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse primary conductor data: {e}")
-    
+
     def process_stringing_chart(self, data):
         sections = re.findall(r"Stringing Chart Report\n\nCircuit '(.*?)' Section #(.*?) from structure #(.*?) to structure #(.*?),.*?Span\n(.*?)\n\n", data, re.DOTALL)
         output_data = []
-        
+
         for section in sections:
             circuit_type, section_num, start_seq, end_seq, spans_data = section
             spans = re.findall(r"\s+(\d+\.\d+)\s+", spans_data)
             total_span_length = sum(map(float, spans))
             sequences = f"{start_seq} - {end_seq}"
             output_data.append((section_num, sequences, total_span_length, circuit_type))
-        
+
         with open(f"step{self.step}.txt", "w") as file:
             max_lengths = {
                 'section_num': max(len(str(row[0])) for row in output_data),
@@ -367,11 +370,11 @@ class DataExtractionApp:
                 ("Total Span Length", max_lengths['total_span_length']),
                 ("Circuit Type", max_lengths['circuit_type'])
             ]
-            
+
             header_row = " | ".join(f"{header[0]:<{header[1]}}" for header in headers)
             file.write(header_row + "\n")
             file.write("-" * len(header_row) + "\n")
-            
+
             for row in output_data:
                 formatted_row = [
                     f"{row[0]:<{max_lengths['section_num']}}",
@@ -380,7 +383,7 @@ class DataExtractionApp:
                     f"{row[3]:<{max_lengths['circuit_type']}}"
                 ]
                 file.write(" | ".join(formatted_row) + "\n")
-    
+
     def parse_step6_structure_usage(self):
         try:
             tree = ET.parse(self.file_path)
@@ -393,7 +396,7 @@ class DataExtractionApp:
                 max_usage = report.find('maximum_usage').text
                 if element_type == "Guy" or element_type == "Cable":
                     output_data.append((seq_no, element_label, element_type, max_usage))
-            
+
             with open(f"step{self.step}.txt", "w") as file:
                 max_lengths = {
                     'sequence': max(len(row[0]) for row in output_data),
@@ -407,11 +410,11 @@ class DataExtractionApp:
                     ("Element Type", max_lengths['element_type']),
                     ("Maximum Usage", max_lengths['max_usage'])
                 ]
-                
+
                 header_row = " | ".join(f"{header[0]:<{header[1]}}" for header in headers)
                 file.write(header_row + "\n")
                 file.write("-" * len(header_row) + "\n")
-                
+
                 for row in output_data:
                     formatted_row = [
                         f"{row[0]:<{max_lengths['sequence']}}",
@@ -420,9 +423,9 @@ class DataExtractionApp:
                         f"{row[3]:<{max_lengths['max_usage']}}"
                     ]
                     file.write(" | ".join(formatted_row) + "\n")
-            
+
             messagebox.showinfo("Success", f"Data from Step {self.step} saved successfully.")
-        
+
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse XML file: {e}")
 
