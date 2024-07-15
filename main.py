@@ -117,10 +117,11 @@ class DataExtractionApp:
             self.step_label.config(text="Step 2: Copy and Paste your Fusing Coordination Report")
             self.upload_btn.pack_forget()
             self.column_label.pack_forget()
-            self.column_listbox.pack.forget()
+            self.column_listbox.pack_forget()
             self.process_btn.config(text="Parse Pasted Data", command=self.parse_pasted_data)
             self.paste_label.pack(pady=10)
             self.paste_text.pack(pady=10)
+            self.process_btn.pack(pady=10)
         elif self.step == 3:
             self.step_label.config(text="Step 3: Upload your Construction Staking Report")
             self.upload_btn.config(text="Upload Construction Staking Report", command=self.upload_file)
@@ -140,7 +141,7 @@ class DataExtractionApp:
             self.process_btn.pack(pady=10)
         elif self.step == 5:
             self.step_label.config(text="Step 5: Copy and Paste your Stringing Chart - Primary Conductor")
-            self.upload_btn.pack.forget()
+            self.upload_btn.pack_forget()
             self.paste_label.config(text="Paste Primary Conductor Stringing Chart Data Here")
             self.paste_label.pack(pady=10)
             self.paste_text.pack(pady=10)
@@ -371,10 +372,10 @@ class DataExtractionApp:
                     'sequence': max(len(row[0]) for row in output_data),
                     'element_label': max(len(row[1]) for row in output_data),
                     'element_type': max(len(row[2]) for row in output_data),
-                    'max_usage': max(len(str(row[3])) for row in output_data)
+                    'max_usage': max(len(row[3]) for row in output_data)
                 }
                 headers = [
-                    ("Sequence", max_lengths['sequence']),
+                    ("Sequence #", max_lengths['sequence']),
                     ("Element Label", max_lengths['element_label']),
                     ("Element Type", max_lengths['element_type']),
                     ("Maximum Usage", max_lengths['max_usage'])
