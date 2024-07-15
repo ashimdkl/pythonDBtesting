@@ -141,7 +141,7 @@ class DataExtractionApp:
             self.process_btn.pack(pady=10)
         elif self.step == 5:
             self.step_label.config(text="Step 5: Copy and Paste your Stringing Chart - Primary Conductor")
-            self.upload_btn.pack_forget()
+            self.upload_btn.pack.forget()
             self.paste_label.config(text="Paste Primary Conductor Stringing Chart Data Here")
             self.paste_label.pack(pady=10)
             self.paste_text.pack(pady=10)
@@ -240,15 +240,20 @@ class DataExtractionApp:
                                 lead_length = math.sqrt((x_next - x_origin)**2 + (y_next - y_origin)**2)
                                 theta = math.degrees(math.atan2(y_next - y_origin, x_next - x_origin))
                                 direction = self.get_cardinal_direction(theta)
-                                anchor_data.append({
-                                    'sequence': sequence,
-                                    'type': f"P1 to {guy_type}",
-                                    'latitude': point['latitude'],
-                                    'longitude': point['longitude'],
-                                    'framing': point['framing'],
-                                    'anchor_direction': direction,
-                                    'lead_length': lead_length
-                                })
+                                descriptions = point['stake_description'].split(',')
+                                for description in descriptions:
+                                    anchor_data.append({
+                                        'sequence': sequence,
+                                        'type': f"P1 to {description.strip()}",
+                                        'latitude': point['latitude'],
+                                        'longitude': point['longitude'],
+                                        'framing': point['framing'],
+                                        'anchor_direction': direction,
+                                        'lead_length': lead_length
+                                    })
+            
+            # Sort the anchor data by sequence number
+            anchor_data.sort(key=lambda x: x['sequence'])
             
             with open(f"step{self.step}.txt", "w") as file:
                 max_lengths = {
@@ -288,7 +293,7 @@ class DataExtractionApp:
             
             with open("step3types.txt", "w") as file:
                 file.write("Sequence\tPole Type\n")
-                for sequence, pole_type in pole_types.items():
+                for sequence, pole_type in sorted(pole_types.items()):
                     file.write(f"{sequence}\t{pole_type}\n")
             
             messagebox.showinfo("Success", f"Data from Step {self.step} saved successfully.")
@@ -350,9 +355,31 @@ class DataExtractionApp:
             output_data.append((section_num, sequences, total_span_length, circuit_type))
         
         with open(f"step{self.step}.txt", "w") as file:
-            file.write("Section #\tSequence #s\tTotal Span Length\tCircuit Type\n")
+            max_lengths = {
+                'section_num': max(len(str(row[0])) for row in output_data),
+                'sequences': max(len(row[1]) for row in output_data),
+                'total_span_length': max(len(f"{row[2]:.2f}") for row in output_data),
+                'circuit_type': max(len(row[3]) for row in output_data)
+            }
+            headers = [
+                ("Section #", max_lengths['section_num']),
+                ("Sequence #s", max_lengths['sequences']),
+                ("Total Span Length", max_lengths['total_span_length']),
+                ("Circuit Type", max_lengths['circuit_type'])
+            ]
+            
+            header_row = " | ".join(f"{header[0]:<{header[1]}}" for header in headers)
+            file.write(header_row + "\n")
+            file.write("-" * len(header_row) + "\n")
+            
             for row in output_data:
-                file.write(f"{row[0]}\t{row[1]}\t{row[2]}\t{row[3]}\n")
+                formatted_row = [
+                    f"{row[0]:<{max_lengths['section_num']}}",
+                    f"{row[1]:<{max_lengths['sequences']}}",
+                    f"{row[2]:<{max_lengths['total_span_length']}.2f}",
+                    f"{row[3]:<{max_lengths['circuit_type']}}"
+                ]
+                file.write(" | ".join(formatted_row) + "\n")
     
     def parse_step6_structure_usage(self):
         try:

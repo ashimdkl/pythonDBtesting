@@ -1,5 +1,5 @@
-Sequence | Element Label | Element Type | Maximum Usage
--------------------------------------------------------
+Sequence # | Element Label | Element Type | Maximum Usage
+---------------------------------------------------------
 2080 | PG21  | Guy   | 82.20
 2080 | CM22  | Guy   | 82.68
 2080 | PG11  | Guy   | 64.68
