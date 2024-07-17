@@ -1,8 +1,8 @@
+import re
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 from openpyxl import load_workbook
 import xml.etree.ElementTree as ET
-import re
 import math
 
 
@@ -64,6 +64,8 @@ class DataExtractionApp:
                 self.load_columns_from_file()
             elif self.step == 3:
                 self.parse_step3_xml()
+            elif self.step == 4:
+                self.parse_stringing_chart_data()
             elif self.step == 6:
                 self.parse_step6_structure_usage()
             messagebox.showinfo("File Uploaded", "File uploaded successfully.")
@@ -141,7 +143,7 @@ class DataExtractionApp:
             self.process_btn.pack(pady=10)
         elif self.step == 5:
             self.step_label.config(text="Step 5: Copy and Paste your Stringing Chart - Primary Conductor")
-            self.upload_btn.pack.forget()
+            self.upload_btn.pack_forget()
             self.paste_label.config(text="Paste Primary Conductor Stringing Chart Data Here")
             self.paste_label.pack(pady=10)
             self.paste_text.pack(pady=10)
@@ -151,7 +153,7 @@ class DataExtractionApp:
             self.step_label.config(text="Step 6: Upload your Structure Usage Report")
             self.upload_btn.config(text="Upload Structure Usage Report", command=self.upload_file)
             self.paste_label.pack_forget()
-            self.paste_text.pack_forget()
+            self.paste_text.pack.forget()
             self.upload_btn.pack(pady=10)
             self.process_btn.config(text="Parse Data", command=self.parse_step6_structure_usage)
             self.process_btn.pack(pady=10)
@@ -184,6 +186,7 @@ class DataExtractionApp:
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse pasted data: {e}")
 
+    # Step 3: Construction Staking Report
     def parse_step3_xml(self):
         try:
             tree = ET.parse(self.file_path)
@@ -255,7 +258,6 @@ class DataExtractionApp:
                                             'lead_length': lead_length
                                         })
 
-            # Sort the anchor data by sequence number
             anchor_data.sort(key=lambda x: x['sequence'])
 
             with open(f"step{self.step}.txt", "w") as file:
@@ -329,7 +331,50 @@ class DataExtractionApp:
             return
 
         try:
-            self.process_stringing_chart(pasted_data)
+            sections = re.findall(r"Stringing Chart Report\n\nCircuit '(.*?)' Section #(.*?) from structure #(.*?) to structure #(.*?),.*?Span\n(.*?)\n\n", pasted_data, re.DOTALL)
+            output_data = []
+
+            for section in sections:
+                circuit_type, section_num, start_seq, end_seq, spans_data = section
+                spans = re.findall(r"\n\s+(\d+\.\d+)\s+", spans_data)
+                if spans:
+                    total_span_length = sum(map(float, spans))
+                else:
+                    total_span_length_match = re.search(r"Ruling span \(ft\) (\d+\.\d+)", spans_data)
+                    if total_span_length_match:
+                        total_span_length = float(total_span_length_match.group(1))
+                    else:
+                        total_span_length = 0.0
+                sequences = f"{start_seq} - {end_seq}"
+                output_data.append((section_num, sequences, total_span_length, circuit_type))
+
+            with open(f"step{self.step}.txt", "w") as file:
+                max_lengths = {
+                    'section_num': max(len(str(row[0])) for row in output_data),
+                    'sequences': max(len(row[1]) for row in output_data),
+                    'total_span_length': max(len(f"{row[2]:.2f}") for row in output_data),
+                    'circuit_type': max(len(row[3]) for row in output_data)
+                }
+                headers = [
+                    ("Section #", max_lengths['section_num']),
+                    ("Sequence #s", max_lengths['sequences']),
+                    ("Total Span Length", max_lengths['total_span_length']),
+                    ("Circuit Type", max_lengths['circuit_type'])
+                ]
+
+                header_row = " | ".join(f"{header[0]:<{header[1]}}" for header in headers)
+                file.write(header_row + "\n")
+                file.write("-" * len(header_row) + "\n")
+
+                for row in output_data:
+                    formatted_row = [
+                        f"{row[0]:<{max_lengths['section_num']}}",
+                        f"{row[1]:<{max_lengths['sequences']}}",
+                        f"{row[2]:<{max_lengths['total_span_length']}.2f}",
+                        f"{row[3]:<{max_lengths['circuit_type']}}"
+                    ]
+                    file.write(" | ".join(formatted_row) + "\n")
+
             messagebox.showinfo("Success", f"Data from Step {self.step} saved successfully.")
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse stringing chart data: {e}")
@@ -346,14 +391,22 @@ class DataExtractionApp:
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse primary conductor data: {e}")
 
+
     def process_stringing_chart(self, data):
         sections = re.findall(r"Stringing Chart Report\n\nCircuit '(.*?)' Section #(.*?) from structure #(.*?) to structure #(.*?),.*?Span\n(.*?)\n\n", data, re.DOTALL)
         output_data = []
 
         for section in sections:
             circuit_type, section_num, start_seq, end_seq, spans_data = section
-            spans = re.findall(r"\s+(\d+\.\d+)\s+", spans_data)
-            total_span_length = sum(map(float, spans))
+            spans = re.findall(r"\n\s+(\d+\.\d+)\s+", spans_data)
+            if spans:
+                total_span_length = sum(map(float, spans))
+            else:
+                total_span_length_match = re.search(r"Ruling span \(ft\) (\d+\.\d+)", spans_data)
+                if total_span_length_match:
+                    total_span_length = float(total_span_length_match.group(1))
+                else:
+                    total_span_length = 0.0
             sequences = f"{start_seq} - {end_seq}"
             output_data.append((section_num, sequences, total_span_length, circuit_type))
 
