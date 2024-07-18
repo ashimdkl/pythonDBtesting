@@ -5,7 +5,6 @@ from openpyxl import load_workbook
 import xml.etree.ElementTree as ET
 import math
 
-
 class DataExtractionApp:
     def __init__(self, root):
         self.root = root
@@ -187,7 +186,6 @@ class DataExtractionApp:
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse pasted data: {e}")
 
-    # Step 3: Construction Staking Report
     def parse_step3_xml(self):
         try:
             tree = ET.parse(self.file_path)
@@ -414,55 +412,55 @@ class DataExtractionApp:
             return
 
         try:
-            self.process_stringing_chart(pasted_data)
+            sections = re.findall(r"Stringing Chart Report\n\nCircuit '(.*?)' Section #(.*?) from structure #(.*?) to structure #(.*?),.*?Span\n(.*?)\n\n", pasted_data, re.DOTALL)
+            output_data = []
+
+            for section in sections:
+                circuit_type, section_num, start_seq, end_seq, spans_data = section
+                spans = re.findall(r"\n\s+(\d+\.\d+)\s+", spans_data)
+                total_span_length = sum(map(float, spans))
+                sequences = f"{start_seq} -> {end_seq}"
+                circuit_value = int(re.search(r'(\d+)PH', circuit_type).group(1))
+                result = total_span_length * circuit_value
+                output_data.append((section_num, sequences, circuit_type, circuit_value, total_span_length, result))
+
+            with open(f"step{self.step}.txt", "w") as file:
+                max_lengths = {
+                    'section_num': max(len(str(row[0])) for row in output_data),
+                    'sequences': max(len(row[1]) for row in output_data),
+                    'circuit_type': max(len(row[2]) for row in output_data),
+                    'circuit_value': max(len(str(row[3])) for row in output_data),
+                    'total_span_length': max(len(f"{row[4]:.2f}") for row in output_data),
+                    'result': max(len(f"{row[5]:.2f}") for row in output_data),
+                }
+                headers = [
+                    ("Section #", max_lengths['section_num']),
+                    ("Structure -> Structure", max_lengths['sequences']),
+                    ("Circuit Type", max_lengths['circuit_type']),
+                    ("Circuit Value", max_lengths['circuit_value']),
+                    ("Span Length", max_lengths['total_span_length']),
+                    ("Result", max_lengths['result'])
+                ]
+
+                header_row = " | ".join(f"{header[0]:<{header[1]}}" for header in headers)
+                file.write(header_row + "\n")
+                file.write("-" * len(header_row) + "\n")
+
+                for row in output_data:
+                    formatted_row = [
+                        f"{row[0]:<{max_lengths['section_num']}}",
+                        f"{row[1]:<{max_lengths['sequences']}}",
+                        f"{row[2]:<{max_lengths['circuit_type']}}",
+                        f"{row[3]:<{max_lengths['circuit_value']}}",
+                        f"{row[4]:<{max_lengths['total_span_length']}.2f}",
+                        f"{row[5]:<{max_lengths['result']}.2f}",
+                    ]
+                    file.write(" | ".join(formatted_row) + "\n")
+
             messagebox.showinfo("Success", f"Data from Step {self.step} saved successfully.")
+
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse primary conductor data: {e}")
-
-    def process_stringing_chart(self, data):
-        sections = re.findall(r"Stringing Chart Report\n\nCircuit '(.*?)' Section #(.*?) from structure #(.*?) to structure #(.*?),.*?Span\n(.*?)\n\n", data, re.DOTALL)
-        output_data = []
-
-        for section in sections:
-            circuit_type, section_num, start_seq, end_seq, spans_data = section
-            spans = re.findall(r"\n\s+(\d+\.\d+)\s+", spans_data)
-            if spans:
-                total_span_length = sum(map(float, spans))
-            else:
-                total_span_length_match = re.search(r"Ruling span \(ft\) (\d+\.\d+)", spans_data)
-                if total_span_length_match:
-                    total_span_length = float(total_span_length_match.group(1))
-                else:
-                    total_span_length = 0.0
-            sequences = f"{start_seq} - {end_seq}"
-            output_data.append((section_num, sequences, total_span_length, circuit_type))
-
-        with open(f"step{self.step}.txt", "w") as file:
-            max_lengths = {
-                'section_num': max(len(str(row[0])) for row in output_data),
-                'sequences': max(len(row[1]) for row in output_data),
-                'total_span_length': max(len(f"{row[2]:.2f}") for row in output_data),
-                'circuit_type': max(len(row[3]) for row in output_data)
-            }
-            headers = [
-                ("Section #", max_lengths['section_num']),
-                ("Sequence #s", max_lengths['sequences']),
-                ("Total Span Length", max_lengths['total_span_length']),
-                ("Circuit Type", max_lengths['circuit_type'])
-            ]
-
-            header_row = " | ".join(f"{header[0]:<{header[1]}}" for header in headers)
-            file.write(header_row + "\n")
-            file.write("-" * len(header_row) + "\n")
-
-            for row in output_data:
-                formatted_row = [
-                    f"{row[0]:<{max_lengths['section_num']}}",
-                    f"{row[1]:<{max_lengths['sequences']}}",
-                    f"{row[2]:<{max_lengths['total_span_length']}.2f}",
-                    f"{row[3]:<{max_lengths['circuit_type']}}"
-                ]
-                file.write(" | ".join(formatted_row) + "\n")
 
     def parse_step6_structure_usage(self):
         try:
@@ -508,7 +506,6 @@ class DataExtractionApp:
 
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse XML file: {e}")
-
 
 if __name__ == "__main__":
     root = tk.Tk()
