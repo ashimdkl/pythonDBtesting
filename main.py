@@ -16,6 +16,7 @@ class DataExtractionApp:
         self.columns = []
         self.selected_columns = []
         self.step = 1
+        self.output_data = []
         self.setup_gui()
 
     def setup_gui(self):
@@ -65,7 +66,7 @@ class DataExtractionApp:
             elif self.step == 3:
                 self.parse_step3_xml()
             elif self.step == 4:
-                self.parse_stringing_chart_data()
+                self.parse_span_guy_xml()
             elif self.step == 6:
                 self.parse_step6_structure_usage()
             messagebox.showinfo("File Uploaded", "File uploaded successfully.")
@@ -139,7 +140,7 @@ class DataExtractionApp:
             self.paste_label.config(text="Paste Stringing Chart Data Here")
             self.paste_label.pack(pady=10)
             self.paste_text.pack(pady=10)
-            self.process_btn.config(text="Parse Stringing Chart Data", command=self.parse_stringing_chart_data)
+            self.process_btn.config(text="Parse and Continue", command=self.parse_and_continue_stringing_chart)
             self.process_btn.pack(pady=10)
         elif self.step == 5:
             self.step_label.config(text="Step 5: Copy and Paste your Stringing Chart - Primary Conductor")
@@ -153,7 +154,7 @@ class DataExtractionApp:
             self.step_label.config(text="Step 6: Upload your Structure Usage Report")
             self.upload_btn.config(text="Upload Structure Usage Report", command=self.upload_file)
             self.paste_label.pack_forget()
-            self.paste_text.pack.forget()
+            self.paste_text.pack_forget()
             self.upload_btn.pack(pady=10)
             self.process_btn.config(text="Parse Data", command=self.parse_step6_structure_usage)
             self.process_btn.pack(pady=10)
@@ -324,7 +325,7 @@ class DataExtractionApp:
         else:
             return 'W'
 
-    def parse_stringing_chart_data(self):
+    def parse_and_continue_stringing_chart(self):
         pasted_data = self.paste_text.get("1.0", tk.END).strip()
         if not pasted_data:
             messagebox.showerror("Error", "Please paste data into the text box.")
@@ -332,10 +333,13 @@ class DataExtractionApp:
 
         try:
             sections = re.findall(r"Stringing Chart Report\n\nCircuit '(.*?)' Section #(.*?) from structure #(.*?) to structure #(.*?),.*?Span\n(.*?)\n\n", pasted_data, re.DOTALL)
-            output_data = []
+            self.output_data = []
 
             for section in sections:
                 circuit_type, section_num, start_seq, end_seq, spans_data = section
+                if "Span Guy" in circuit_type:
+                    continue  # Skip Span Guy entries from the pasted data
+
                 spans = re.findall(r"\n\s+(\d+\.\d+)\s+", spans_data)
                 if spans:
                     total_span_length = sum(map(float, spans))
@@ -346,14 +350,38 @@ class DataExtractionApp:
                     else:
                         total_span_length = 0.0
                 sequences = f"{start_seq} - {end_seq}"
-                output_data.append((section_num, sequences, total_span_length, circuit_type))
+                self.output_data.append((section_num, sequences, total_span_length, circuit_type))
+
+            messagebox.showinfo("Success", f"Pasted data parsed successfully. Please upload the Span Guy XML file.")
+            self.upload_file()
+
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to parse stringing chart data: {e}")
+
+    def parse_span_guy_xml(self):
+        try:
+            tree = ET.parse(self.file_path)
+            root = tree.getroot()
+
+            for section in root.findall('.//section_sagging_data'):
+                circuit_type = section.find('circuit').text.strip()
+                section_num = section.find('sec_no').text.strip()
+                start_seq = section.find('from_str').text.strip()
+                end_seq = section.find('to_str').text.strip()
+                ruling_span = section.find('ruling_span').text.strip()
+
+                sequences = f"{start_seq} - {end_seq}"
+                total_span_length = float(ruling_span) if ruling_span else 0.0
+                self.output_data.append((section_num, sequences, total_span_length, circuit_type))
+
+            self.output_data.sort(key=lambda x: int(x[0]))
 
             with open(f"step{self.step}.txt", "w") as file:
                 max_lengths = {
-                    'section_num': max(len(str(row[0])) for row in output_data),
-                    'sequences': max(len(row[1]) for row in output_data),
-                    'total_span_length': max(len(f"{row[2]:.2f}") for row in output_data),
-                    'circuit_type': max(len(row[3]) for row in output_data)
+                    'section_num': max(len(str(row[0])) for row in self.output_data),
+                    'sequences': max(len(row[1]) for row in self.output_data),
+                    'total_span_length': max(len(f"{row[2]:.2f}") for row in self.output_data),
+                    'circuit_type': max(len(row[3]) for row in self.output_data)
                 }
                 headers = [
                     ("Section #", max_lengths['section_num']),
@@ -366,7 +394,7 @@ class DataExtractionApp:
                 file.write(header_row + "\n")
                 file.write("-" * len(header_row) + "\n")
 
-                for row in output_data:
+                for row in self.output_data:
                     formatted_row = [
                         f"{row[0]:<{max_lengths['section_num']}}",
                         f"{row[1]:<{max_lengths['sequences']}}",
@@ -377,7 +405,7 @@ class DataExtractionApp:
 
             messagebox.showinfo("Success", f"Data from Step {self.step} saved successfully.")
         except Exception as e:
-            messagebox.showerror("Error", f"Failed to parse stringing chart data: {e}")
+            messagebox.showerror("Error", f"Failed to parse Span Guy XML file: {e}")
 
     def parse_primary_conductor_data(self):
         pasted_data = self.paste_text.get("1.0", tk.END).strip()
@@ -390,7 +418,6 @@ class DataExtractionApp:
             messagebox.showinfo("Success", f"Data from Step {self.step} saved successfully.")
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse primary conductor data: {e}")
-
 
     def process_stringing_chart(self, data):
         sections = re.findall(r"Stringing Chart Report\n\nCircuit '(.*?)' Section #(.*?) from structure #(.*?) to structure #(.*?),.*?Span\n(.*?)\n\n", data, re.DOTALL)
