@@ -1,15 +1,16 @@
 import re
 import tkinter as tk
-from tkinter import filedialog, messagebox, ttk
-from openpyxl import load_workbook
+from tkinter import filedialog, messagebox
+from openpyxl import load_workbook, Workbook
 import xml.etree.ElementTree as ET
 import math
+
 
 class DataExtractionApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Data Extraction App")
-        self.root.geometry('800x600')
+        self.root.geometry('1000x800')
 
         self.file_path = None
         self.columns = []
@@ -51,6 +52,9 @@ class DataExtractionApp:
         self.paste_text.pack(pady=10)
         self.paste_label.pack_forget()
         self.paste_text.pack_forget()
+
+        self.output_frame = tk.Frame(self.root, bg="white")
+        self.output_frame.pack(expand=True, fill="both")
 
     def start_analysis(self):
         self.intro_frame.pack_forget()
@@ -96,7 +100,7 @@ class DataExtractionApp:
                 workbook = load_workbook(self.file_path)
                 sheet = workbook.active
 
-                with open(f"step{self.step}.txt", "w") as file:
+                with open("extractHIS_seq_facID_existingTrans_primaryRiser_secondaryRiser.txt", "w") as file:
                     file.write("\t".join(self.selected_columns) + "\n")
                     for row in sheet.iter_rows(min_row=2, values_only=True):
                         if row[0] is not None:  # Assuming sequence number is the first column
@@ -157,8 +161,8 @@ class DataExtractionApp:
             self.upload_btn.pack(pady=10)
             self.process_btn.config(text="Parse Data", command=self.parse_step6_structure_usage)
             self.process_btn.pack(pady=10)
-        else:
-            messagebox.showinfo("Completed", "All steps completed. Now you can merge and download the data.")
+            self.next_btn.config(text="Generate Report", command=self.generate_report)
+            self.download_btn.pack_forget()  # Hide the download button
 
     def parse_pasted_data(self):
         pasted_data = self.paste_text.get("1.0", tk.END).strip()
@@ -176,7 +180,7 @@ class DataExtractionApp:
                 existing = fields[2]  # Assuming existing value is the third field
                 data.append([sequence, existing])
 
-            with open(f"step{self.step}.txt", "w") as file:
+            with open("extractFusingCoordination_newOrExistingFusing.txt", "w") as file:
                 file.write("Sequence\tExisting\n")
                 for row in data:
                     file.write("\t".join(row) + "\n")
@@ -259,7 +263,7 @@ class DataExtractionApp:
 
             anchor_data.sort(key=lambda x: x['sequence'])
 
-            with open(f"step{self.step}.txt", "w") as file:
+            with open("extractConstrucStakingReport_framing_type_direction_length.txt", "w") as file:
                 max_lengths = {
                     'sequence': max(len(item['sequence']) for item in anchor_data),
                     'type': max(len(item['type']) for item in anchor_data),
@@ -295,7 +299,7 @@ class DataExtractionApp:
                     ]
                     file.write(" | ".join(row) + "\n")
 
-            with open("step3types.txt", "w") as file:
+            with open("extractPoleType.txt", "w") as file:
                 file.write("Sequence\tPole Type\n")
                 for sequence, pole_type in sorted(pole_types.items()):
                     file.write(f"{sequence}\t{pole_type}\n")
@@ -374,7 +378,7 @@ class DataExtractionApp:
 
             self.output_data.sort(key=lambda x: int(x[0]))
 
-            with open(f"step{self.step}.txt", "w") as file:
+            with open("extractStringingChartNeutralSpan_section_seq_totalSpanLength_circuitType.txt", "w") as file:
                 max_lengths = {
                     'section_num': max(len(str(row[0])) for row in self.output_data),
                     'sequences': max(len(row[1]) for row in self.output_data),
@@ -424,7 +428,7 @@ class DataExtractionApp:
                 result = total_span_length * circuit_value
                 output_data.append((section_num, sequences, circuit_type, circuit_value, total_span_length, result))
 
-            with open(f"step{self.step}.txt", "w") as file:
+            with open("extractStringingChartPrimary_section_struct_circuitType_spanLength_total.txt", "w") as file:
                 max_lengths = {
                     'section_num': max(len(str(row[0])) for row in output_data),
                     'sequences': max(len(row[1]) for row in output_data),
@@ -475,7 +479,7 @@ class DataExtractionApp:
                 if element_type == "Guy" or element_type == "Cable":
                     output_data.append((seq_no, element_label, element_type, max_usage))
 
-            with open(f"step{self.step}.txt", "w") as file:
+            with open("extractGuyUsage_seq_elementType_usage.txt", "w") as file:
                 max_lengths = {
                     'sequence': max(len(row[0]) for row in output_data),
                     'element_label': max(len(row[1]) for row in output_data),
@@ -506,6 +510,208 @@ class DataExtractionApp:
 
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse XML file: {e}")
+
+    def generate_report(self):
+        # Clear previous output
+        for widget in self.output_frame.winfo_children():
+            widget.destroy()
+
+        files_to_combine = [
+            "extractHIS_seq_facID_existingTrans_primaryRiser_secondaryRiser.txt",
+            "extractFusingCoordination_newOrExistingFusing.txt",
+            "extractConstrucStakingReport_framing_type_direction_length.txt",
+            "extractPoleType.txt",
+            "extractStringingChartNeutralSpan_section_seq_totalSpanLength_circuitType.txt",
+            "extractStringingChartPrimary_section_struct_circuitType_spanLength_total.txt",
+            "extractGuyUsage_seq_elementType_usage.txt"
+        ]
+
+        parsed_data = {}
+        for file_path in files_to_combine:
+            try:
+                with open(file_path, 'r') as file:
+                    lines = file.readlines()
+                if "extractHIS_seq_facID_existingTrans_primaryRiser_secondaryRiser.txt" in file_path:
+                    parsed_data['his_seq'] = self.parse_his_seq(lines)
+                elif "extractFusingCoordination_newOrExistingFusing.txt" in file_path:
+                    parsed_data['fusing'] = self.parse_fusing_coordination(lines)
+                elif "extractConstrucStakingReport_framing_type_direction_length.txt" in file_path:
+                    parsed_data['construction'] = self.parse_construction_staking(lines)
+                elif "extractPoleType.txt" in file_path:
+                    parsed_data['pole_type'] = self.parse_pole_type(lines)
+                elif "extractStringingChartNeutralSpan_section_seq_totalSpanLength_circuitType.txt" in file_path:
+                    parsed_data['stringing_neutral_span'] = self.parse_stringing_neutral_span(lines)
+                elif "extractStringingChartPrimary_section_struct_circuitType_spanLength_total.txt" in file_path:
+                    parsed_data['stringing_primary'] = self.parse_stringing_primary(lines)
+                elif "extractGuyUsage_seq_elementType_usage.txt" in file_path:
+                    parsed_data['guy_usage'] = self.parse_guy_usage(lines)
+            except Exception as e:
+                messagebox.showerror("Error", f"Failed to read file {file_path}: {e}")
+                return
+
+        combined_data = self.combine_data(parsed_data)
+        self.display_combined_data(combined_data)
+
+    def display_combined_data(self, data):
+        text_widget = tk.Text(self.output_frame, wrap=tk.WORD, font=("Arial", 10))
+        text_widget.pack(expand=True, fill="both")
+
+        headers = ['sequence', 'facility_id', 'existing_transformers', 'primary_riser', 'secondary_riser',
+                   'existing_or_new_tap', 'type', 'latitude', 'longitude', 'framing', 'anchor_direction',
+                   'lead_length', 'pole_type', 'element_label', 'element_type', 'max_usage']
+
+        header_line = "\t".join(headers) + "\n"
+        text_widget.insert(tk.END, header_line)
+        text_widget.insert(tk.END, "-" * len(header_line) + "\n")
+
+        for seq, info in sorted(data.items(), key=lambda x: int(re.findall(r'\d+', x[0])[0])):
+            base_row = [seq, info['facility_id'], info['existing_transformers'], info['primary_riser'],
+                        info['secondary_riser']]
+
+            max_length = max(len(info['existing_or_new_tap']), len(info['construction']), len(info['guy_usage']), 1)
+
+            for i in range(max_length):
+                row = base_row.copy()
+                row.append(info['existing_or_new_tap'][i] if i < len(info['existing_or_new_tap']) else '')
+                if i < len(info['construction']):
+                    const = info['construction'][i]
+                    row.extend([const['type'], const['latitude'], const['longitude'], const['framing'],
+                                const['anchor_direction'], const['lead_length']])
+                else:
+                    row.extend([''] * 6)
+                row.append(info['pole_type'] if i == 0 else '')
+                if i < len(info['guy_usage']):
+                    guy = info['guy_usage'][i]
+                    row.extend([guy['element_label'], guy['element_type'], guy['max_usage']])
+                else:
+                    row.extend([''] * 3)
+                text_widget.insert(tk.END, "\t".join(map(str, row)) + "\n")
+
+
+    # Provided functions for combining data
+    def read_file(self, filename):
+        with open(filename, 'r') as file:
+            return file.readlines()
+
+    def parse_his_seq(self, lines):
+        data = {}
+        for line in lines[1:]:  # Skip header
+            parts = line.strip().split('\t')
+            if len(parts) == 5:
+                seq, fac_id, existing_trans, primary_riser, secondary_riser = parts
+                data[seq] = {
+                    'facility_id': fac_id,
+                    'existing_transformers': existing_trans,
+                    'primary_riser': primary_riser,
+                    'secondary_riser': secondary_riser
+                }
+        return data
+
+    def parse_fusing_coordination(self, lines):
+        data = {}
+        for line in lines[1:]:  # Skip header
+            parts = line.strip().split('\t')
+            if len(parts) == 2:
+                seq, existing = parts
+                if seq not in data:
+                    data[seq] = []
+                data[seq].append(existing)
+        return data
+
+    def parse_construction_staking(self, lines):
+        data = {}
+        for line in lines[1:]:  # Skip header
+            parts = line.strip().split('|')
+            if len(parts) == 7:
+                seq, type_, lat, lon, framing, anchor_dir, lead_length = [p.strip() for p in parts]
+                if seq not in data:
+                    data[seq] = []
+                data[seq].append({
+                    'type': type_,
+                    'latitude': lat,
+                    'longitude': lon,
+                    'framing': framing,
+                    'anchor_direction': anchor_dir,
+                    'lead_length': lead_length
+                })
+        return data
+
+    def parse_pole_type(self, lines):
+        data = {}
+        for line in lines[1:]:  # Skip header
+            parts = line.strip().split('\t')
+            if len(parts) == 2:
+                seq, pole_type = parts
+                data[seq] = pole_type
+        return data
+
+    def parse_guy_usage(self, lines):
+        data = {}
+        for line in lines[1:]:  # Skip header
+            parts = line.strip().split('|')
+            if len(parts) == 4:
+                seq, element_label, element_type, max_usage = [p.strip() for p in parts]
+                if seq not in data:
+                    data[seq] = []
+                data[seq].append({
+                    'element_label': element_label,
+                    'element_type': element_type,
+                    'max_usage': max_usage
+                })
+        return data
+
+    def parse_stringing_neutral_span(self, lines):
+        data = {}
+        for line in lines[1:]:  # Skip header
+            parts = line.strip().split('|')
+            if len(parts) == 4:
+                section, sequences, total_span_length, circuit_type = [p.strip() for p in parts]
+                if section not in data:
+                    data[section] = []
+                data[section].append({
+                    'sequences': sequences,
+                    'total_span_length': total_span_length,
+                    'circuit_type': circuit_type
+                })
+        return data
+
+    def parse_stringing_primary(self, lines):
+        data = {}
+        for line in lines[1:]:  # Skip header
+            parts = line.strip().split('|')
+            if len(parts) == 6:
+                section, structures, circuit_type, circuit_value, span_length, result = [p.strip() for p in parts]
+                if section not in data:
+                    data[section] = []
+                data[section].append({
+                    'structures': structures,
+                    'circuit_type': circuit_type,
+                    'circuit_value': circuit_value,
+                    'span_length': span_length,
+                    'result': result
+                })
+        return data
+
+    def combine_data(self, parsed_data):
+        combined = {}
+        all_sequences = set(parsed_data['his_seq'].keys()) | set(parsed_data['fusing'].keys()) | \
+                        set(parsed_data['construction'].keys()) | set(parsed_data['pole_type'].keys()) | \
+                        set(parsed_data['guy_usage'].keys())
+
+        for seq in all_sequences:
+            combined[seq] = {
+                'facility_id': parsed_data['his_seq'].get(seq, {}).get('facility_id', ''),
+                'existing_transformers': parsed_data['his_seq'].get(seq, {}).get('existing_transformers', ''),
+                'primary_riser': parsed_data['his_seq'].get(seq, {}).get('primary_riser', ''),
+                'secondary_riser': parsed_data['his_seq'].get(seq, {}).get('secondary_riser', ''),
+                'existing_or_new_tap': parsed_data['fusing'].get(seq, []),
+                'construction': parsed_data['construction'].get(seq, []),
+                'pole_type': parsed_data['pole_type'].get(seq, ''),
+                'guy_usage': parsed_data['guy_usage'].get(seq, [])
+            }
+
+        return combined
+
 
 if __name__ == "__main__":
     root = tk.Tk()
