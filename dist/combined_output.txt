@@ -1,1 +1,0 @@
-sequence|facility_id|existing_transformers|primary_riser|secondary_riser|existing_or_new_tap|type|latitude|longitude|framing|anchor_direction|lead_length|pole_type|element_label|element_type|max_usage

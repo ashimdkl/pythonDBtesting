@@ -4,6 +4,7 @@ from tkinter import filedialog, messagebox
 from openpyxl import load_workbook, Workbook
 import xml.etree.ElementTree as ET
 import math
+from openpyxl.styles import PatternFill, Font, Alignment
 
 
 class DataExtractionApp:
@@ -11,7 +12,6 @@ class DataExtractionApp:
         self.root = root
         self.root.title("Data Extraction App")
         self.root.geometry('1000x800')
-
         self.file_path = None
         self.columns = []
         self.selected_columns = []
@@ -22,37 +22,27 @@ class DataExtractionApp:
     def setup_gui(self):
         self.intro_frame = tk.Frame(self.root, bg="white")
         self.intro_frame.pack(expand=True, fill="both")
-
         self.start_btn = tk.Button(self.intro_frame, text="Click to Begin Analysis!", command=self.start_analysis, font=("Arial", 14), bg="#f0f0f0")
         self.start_btn.pack(pady=20)
-
         self.main_frame = tk.Frame(self.root, bg="white")
-
         self.step_label = tk.Label(self.main_frame, text="Step 1: Upload your Hendrix Input Sheet (HIS)", font=("Arial", 14), bg="white")
         self.step_label.pack(pady=10)
-
         self.upload_btn = tk.Button(self.main_frame, text="Upload HIS Excel File", command=self.upload_file, font=("Arial", 14), bg="#f0f0f0")
         self.upload_btn.pack(pady=10)
-
         self.column_label = tk.Label(self.main_frame, text="Select Columns to Keep (including Sequence #)", font=("Arial", 14), bg="white")
         self.column_label.pack(pady=10)
-
         self.column_listbox = tk.Listbox(self.main_frame, selectmode=tk.MULTIPLE, font=("Arial", 12))
         self.column_listbox.pack(pady=10)
-
         self.process_btn = tk.Button(self.main_frame, text="Parse Data", command=self.parse_data, font=("Arial", 12), bg="#f0f0f0")
         self.process_btn.pack(pady=10)
-
         self.next_btn = tk.Button(self.main_frame, text="Next Step", command=self.next_step, font=("Arial", 12), bg="#f0f0f0")
         self.next_btn.pack(pady=10)
-
         self.paste_label = tk.Label(self.main_frame, text="Paste Fusing Coordination Data Here", font=("Arial", 14), bg="white")
         self.paste_text = tk.Text(self.main_frame, wrap=tk.WORD, height=15, font=("Arial", 12))
         self.paste_label.pack(pady=10)
         self.paste_text.pack(pady=10)
         self.paste_label.pack_forget()
         self.paste_text.pack_forget()
-
         self.output_frame = tk.Frame(self.root, bg="white")
         self.output_frame.pack(expand=True, fill="both")
 
@@ -162,7 +152,7 @@ class DataExtractionApp:
             self.process_btn.config(text="Parse Data", command=self.parse_step6_structure_usage)
             self.process_btn.pack(pady=10)
             self.next_btn.config(text="Generate Report", command=self.generate_report)
-            self.download_btn.pack_forget()  # Hide the download button
+            self.next_btn.pack(pady=10)  # Show the Generate Report button
 
     def parse_pasted_data(self):
         pasted_data = self.paste_text.get("1.0", tk.END).strip()
@@ -177,7 +167,7 @@ class DataExtractionApp:
             for line in lines[1:]:
                 fields = line.split("\t")
                 sequence = fields[0][:4]  # Assuming sequence is the first 4 characters
-                existing = fields[2]  # Assuming existing value is the third field
+                existing = fields[2]  # Assuming existing value is the second field
                 data.append([sequence, existing])
 
             with open("extractFusingCoordination_newOrExistingFusing.txt", "w") as file:
@@ -186,7 +176,6 @@ class DataExtractionApp:
                     file.write("\t".join(row) + "\n")
 
             messagebox.showinfo("Success", f"Data from Step {self.step} saved successfully.")
-
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse pasted data: {e}")
 
@@ -244,7 +233,7 @@ class DataExtractionApp:
                             if guy_type in point['stake_description']:
                                 x_next = float(point['x_easting'])
                                 y_next = float(point['y_northing'])
-                                lead_length = math.sqrt((x_next - x_origin)**2 + (y_next - y_origin)**2)
+                                lead_length = math.sqrt((x_next - x_origin) ** 2 + (y_next - y_origin) ** 2)
                                 theta = math.degrees(math.atan2(y_next - y_origin, x_next - x_origin))
                                 direction = self.get_cardinal_direction(theta)
                                 descriptions = point['stake_description'].split(',')
@@ -399,7 +388,7 @@ class DataExtractionApp:
                 for row in self.output_data:
                     formatted_row = [
                         f"{row[0]:<{max_lengths['section_num']}}",
-                        f"{row[1]:<{max_lengths['sequences']}}",
+                                                f"{row[1]:<{max_lengths['sequences']}}",
                         f"{row[2]:<{max_lengths['total_span_length']}.2f}",
                         f"{row[3]:<{max_lengths['circuit_type']}}"
                     ]
@@ -521,8 +510,6 @@ class DataExtractionApp:
             "extractFusingCoordination_newOrExistingFusing.txt",
             "extractConstrucStakingReport_framing_type_direction_length.txt",
             "extractPoleType.txt",
-            "extractStringingChartNeutralSpan_section_seq_totalSpanLength_circuitType.txt",
-            "extractStringingChartPrimary_section_struct_circuitType_spanLength_total.txt",
             "extractGuyUsage_seq_elementType_usage.txt"
         ]
 
@@ -539,10 +526,6 @@ class DataExtractionApp:
                     parsed_data['construction'] = self.parse_construction_staking(lines)
                 elif "extractPoleType.txt" in file_path:
                     parsed_data['pole_type'] = self.parse_pole_type(lines)
-                elif "extractStringingChartNeutralSpan_section_seq_totalSpanLength_circuitType.txt" in file_path:
-                    parsed_data['stringing_neutral_span'] = self.parse_stringing_neutral_span(lines)
-                elif "extractStringingChartPrimary_section_struct_circuitType_spanLength_total.txt" in file_path:
-                    parsed_data['stringing_primary'] = self.parse_stringing_primary(lines)
                 elif "extractGuyUsage_seq_elementType_usage.txt" in file_path:
                     parsed_data['guy_usage'] = self.parse_guy_usage(lines)
             except Exception as e:
@@ -551,6 +534,11 @@ class DataExtractionApp:
 
         combined_data = self.combine_data(parsed_data)
         self.display_combined_data(combined_data)
+
+        # Ask user where to save the Excel file
+        save_path = filedialog.asksaveasfilename(defaultextension=".xlsx", filetypes=[("Excel files", "*.xlsx")])
+        if save_path:
+            self.save_to_excel(combined_data, save_path)
 
     def display_combined_data(self, data):
         text_widget = tk.Text(self.output_frame, wrap=tk.WORD, font=("Arial", 10))
@@ -587,18 +575,123 @@ class DataExtractionApp:
                     row.extend([''] * 3)
                 text_widget.insert(tk.END, "\t".join(map(str, row)) + "\n")
 
+    def display_combined_data(self, data):
+        text_widget = tk.Text(self.output_frame, wrap=tk.WORD, font=("Arial", 10))
+        text_widget.pack(expand=True, fill="both")
 
-    # Provided functions for combining data
-    def read_file(self, filename):
-        with open(filename, 'r') as file:
-            return file.readlines()
+        headers = ['sequence', 'facility_id', 'existing_transformers', 'primary_riser', 'secondary_riser',
+                   'existing_or_new_tap', 'type', 'latitude', 'longitude', 'framing', 'anchor_direction',
+                   'lead_length', 'pole_type', 'element_label', 'element_type', 'max_usage']
+
+        header_line = "\t".join(headers) + "\n"
+        text_widget.insert(tk.END, header_line)
+        text_widget.insert(tk.END, "-" * len(header_line) + "\n")
+
+        for seq, info in sorted(data.items(), key=lambda x: int(re.findall(r'\d+', x[0])[0])):
+            base_row = [seq, info['facility_id'], info['existing_transformers'], info['primary_riser'],
+                        info['secondary_riser']]
+
+            max_length = max(len(info['existing_or_new_tap']), len(info['construction']), len(info['guy_usage']), 1)
+
+            for i in range(max_length):
+                row = base_row.copy()
+                row.append(info['existing_or_new_tap'][i] if i < len(info['existing_or_new_tap']) else '')
+                if i < len(info['construction']):
+                    const = info['construction'][i]
+                    row.extend([const['type'], const['latitude'], const['longitude'], const['framing'],
+                                const['anchor_direction'], const['lead_length']])
+                else:
+                    row.extend([''] * 6)
+                row.append(info['pole_type'] if i == 0 else '')
+                if i < len(info['guy_usage']):
+                    guy = info['guy_usage'][i]
+                    row.extend([guy['element_label'], guy['element_type'], guy['max_usage']])
+                else:
+                    row.extend([''] * 3)
+                text_widget.insert(tk.END, "\t".join(map(str, row)) + "\n")
+
+        # Save data to Excel file
+        save_path = filedialog.asksaveasfilename(defaultextension=".xlsx", filetypes=[("Excel files", "*.xlsx")])
+        if save_path:
+            self.save_to_excel(data, save_path)
+
+    def save_to_excel(self, data, file_path):
+        workbook = Workbook()
+        sheet = workbook.active
+        sheet.title = "Data Report"
+
+        headers = ['sequence', 'facility_id', 'existing_transformers', 'primary_riser', 'secondary_riser',
+                   'existing_or_new_tap', 'type', 'latitude', 'longitude', 'framing', 'anchor_direction',
+                   'lead_length', 'pole_type', 'element_label', 'element_type', 'max_usage']
+        sheet.append(headers)
+
+        # Styling for the header
+        header_fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
+        header_font = Font(bold=True)
+        for cell in sheet["1:1"]:
+            cell.fill = header_fill
+            cell.font = header_font
+
+        light_green = PatternFill(start_color="90EE90", end_color="90EE90", fill_type="solid")
+        light_blue = PatternFill(start_color="ADD8E6", end_color="ADD8E6", fill_type="solid")
+        current_fill = light_green
+        previous_seq = None
+
+        for seq, info in sorted(data.items(), key=lambda x: int(re.findall(r'\d+', x[0])[0])):
+            max_length = max(len(info['existing_or_new_tap']), len(info['construction']), len(info['guy_usage']), 1)
+            for i in range(max_length):
+                row = []
+                if seq != previous_seq:
+                    row = [seq, info['facility_id'], info['existing_transformers'], info['primary_riser'],
+                           info['secondary_riser']]
+                    # Alternate fill color when sequence changes
+                    current_fill = light_blue if current_fill == light_green else light_green
+                    previous_seq = seq
+                else:
+                    row = ['', '', '', '', '']  # Leave sequence and related fields blank
+
+                row.append(info['existing_or_new_tap'][i] if i < len(info['existing_or_new_tap']) else '')
+                if i < len(info['construction']):
+                    const = info['construction'][i]
+                    row.extend([const['type'], const['latitude'], const['longitude'], const['framing'],
+                                const['anchor_direction'], const['lead_length']])
+                else:
+                    row.extend([''] * 6)
+                row.append(info['pole_type'] if i == 0 else '')
+                if i < len(info['guy_usage']):
+                    guy = info['guy_usage'][i]
+                    row.extend([guy['element_label'], guy['element_type'], guy['max_usage']])
+                else:
+                    row.extend([''] * 3)
+                sheet.append(row)
+
+                # Apply the current fill color to the row
+                for cell in sheet[sheet.max_row]:
+                    cell.fill = current_fill
+
+        # Adjust column widths
+        for column in sheet.columns:
+            max_length = 0
+            column = list(column)
+            for cell in column:
+                try:
+                    if len(str(cell.value)) > max_length:
+                        max_length = len(cell.value)
+                except:
+                    pass
+            adjusted_width = (max_length + 2)
+            sheet.column_dimensions[column[0].column_letter].width = adjusted_width
+
+        workbook.save(file_path)
+        messagebox.showinfo("Success", f"Data has been saved to {file_path}")
 
     def parse_his_seq(self, lines):
         data = {}
-        for line in lines[1:]:  # Skip header
-            parts = line.strip().split('\t')
-            if len(parts) == 5:
-                seq, fac_id, existing_trans, primary_riser, secondary_riser = parts
+        pattern = r"(\d{4})\s+([\d\.]+|None)\s+(\d+|None)\s+(Replace|None)?\s+(Replace|None)?"
+        for line in lines[1:]:
+            match = re.match(pattern, line.strip())
+            if match:
+                seq, fac_id, existing_trans, primary_riser, secondary_riser = match.groups()
                 data[seq] = {
                     'facility_id': fac_id,
                     'existing_transformers': existing_trans,
@@ -609,10 +702,11 @@ class DataExtractionApp:
 
     def parse_fusing_coordination(self, lines):
         data = {}
-        for line in lines[1:]:  # Skip header
-            parts = line.strip().split('\t')
-            if len(parts) == 2:
-                seq, existing = parts
+        pattern = r"(\d{4})\s+(.+)"
+        for line in lines[1:]:
+            match = re.match(pattern, line.strip())
+            if match:
+                seq, existing = match.groups()
                 if seq not in data:
                     data[seq] = []
                 data[seq].append(existing)
@@ -620,76 +714,47 @@ class DataExtractionApp:
 
     def parse_construction_staking(self, lines):
         data = {}
-        for line in lines[1:]:  # Skip header
-            parts = line.strip().split('|')
-            if len(parts) == 7:
-                seq, type_, lat, lon, framing, anchor_dir, lead_length = [p.strip() for p in parts]
-                if seq not in data:
-                    data[seq] = []
-                data[seq].append({
-                    'type': type_,
-                    'latitude': lat,
-                    'longitude': lon,
-                    'framing': framing,
-                    'anchor_direction': anchor_dir,
-                    'lead_length': lead_length
-                })
+        for line in lines[2:]:  # Skip header and separator line
+            parts = [part.strip() for part in line.split('|')]
+            if len(parts) != 7:
+                continue  # Skip lines that don't have exactly 7 parts
+            seq, type_, lat, lon, framing, anchor_dir, lead_length = parts
+            if seq not in data:
+                data[seq] = []
+            data[seq].append({
+                'type': type_,
+                'latitude': lat,
+                'longitude': lon,
+                'framing': framing,
+                'anchor_direction': anchor_dir,
+                'lead_length': lead_length
+            })
         return data
 
     def parse_pole_type(self, lines):
         data = {}
-        for line in lines[1:]:  # Skip header
-            parts = line.strip().split('\t')
-            if len(parts) == 2:
-                seq, pole_type = parts
+        pattern = r"(\d{4})\s+([\w\-\.]+)"
+        for line in lines[1:]:
+            match = re.match(pattern, line.strip())
+            if match:
+                seq, pole_type = match.groups()
                 data[seq] = pole_type
         return data
 
     def parse_guy_usage(self, lines):
         data = {}
-        for line in lines[1:]:  # Skip header
-            parts = line.strip().split('|')
-            if len(parts) == 4:
-                seq, element_label, element_type, max_usage = [p.strip() for p in parts]
-                if seq not in data:
-                    data[seq] = []
-                data[seq].append({
-                    'element_label': element_label,
-                    'element_type': element_type,
-                    'max_usage': max_usage
-                })
-        return data
-
-    def parse_stringing_neutral_span(self, lines):
-        data = {}
-        for line in lines[1:]:  # Skip header
-            parts = line.strip().split('|')
-            if len(parts) == 4:
-                section, sequences, total_span_length, circuit_type = [p.strip() for p in parts]
-                if section not in data:
-                    data[section] = []
-                data[section].append({
-                    'sequences': sequences,
-                    'total_span_length': total_span_length,
-                    'circuit_type': circuit_type
-                })
-        return data
-
-    def parse_stringing_primary(self, lines):
-        data = {}
-        for line in lines[1:]:  # Skip header
-            parts = line.strip().split('|')
-            if len(parts) == 6:
-                section, structures, circuit_type, circuit_value, span_length, result = [p.strip() for p in parts]
-                if section not in data:
-                    data[section] = []
-                data[section].append({
-                    'structures': structures,
-                    'circuit_type': circuit_type,
-                    'circuit_value': circuit_value,
-                    'span_length': span_length,
-                    'result': result
-                })
+        for line in lines[2:]:  # Skip header and separator line
+            parts = [part.strip() for part in line.split('|')]
+            if len(parts) != 4:
+                continue  # Skip lines that don't have exactly 4 parts
+            seq, element_label, element_type, max_usage = parts
+            if seq not in data:
+                data[seq] = []
+            data[seq].append({
+                'element_label': element_label,
+                'element_type': element_type,
+                'max_usage': max_usage
+            })
         return data
 
     def combine_data(self, parsed_data):
@@ -717,3 +782,6 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = DataExtractionApp(root)
     root.mainloop()
+
+
+
