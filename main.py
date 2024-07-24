@@ -2,10 +2,9 @@ import re
 import tkinter as tk
 from tkinter import filedialog, messagebox
 from openpyxl import load_workbook, Workbook
+from openpyxl.styles import PatternFill, Font
 import xml.etree.ElementTree as ET
 import math
-from openpyxl.styles import PatternFill, Font, Alignment
-
 
 class DataExtractionApp:
     def __init__(self, root):
@@ -33,16 +32,17 @@ class DataExtractionApp:
         self.column_label.pack(pady=10)
         self.column_listbox = tk.Listbox(self.main_frame, selectmode=tk.MULTIPLE, font=("Arial", 12))
         self.column_listbox.pack(pady=10)
-        self.process_btn = tk.Button(self.main_frame, text="Parse Data", command=self.parse_data, font=("Arial", 12), bg="#f0f0f0")
+        self.process_btn = tk.Button(self.main_frame, text="Parse Data and Move to Next Step", command=self.parse_and_next_step, font=("Arial", 12), bg="#f0f0f0")
         self.process_btn.pack(pady=10)
-        self.next_btn = tk.Button(self.main_frame, text="Next Step", command=self.next_step, font=("Arial", 12), bg="#f0f0f0")
-        self.next_btn.pack(pady=10)
         self.paste_label = tk.Label(self.main_frame, text="Paste Fusing Coordination Data Here", font=("Arial", 14), bg="white")
         self.paste_text = tk.Text(self.main_frame, wrap=tk.WORD, height=15, font=("Arial", 12))
         self.paste_label.pack(pady=10)
         self.paste_text.pack(pady=10)
         self.paste_label.pack_forget()
         self.paste_text.pack_forget()
+        self.next_btn = tk.Button(self.main_frame, text="Generate Report", command=self.generate_report, font=("Arial", 12), bg="#f0f0f0")
+        self.next_btn.pack(pady=10)
+        self.next_btn.pack_forget()
         self.output_frame = tk.Frame(self.root, bg="white")
         self.output_frame.pack(expand=True, fill="both")
 
@@ -114,7 +114,7 @@ class DataExtractionApp:
             self.upload_btn.pack_forget()
             self.column_label.pack_forget()
             self.column_listbox.pack_forget()
-            self.process_btn.config(text="Parse Pasted Data", command=self.parse_pasted_data)
+            self.process_btn.config(text="Parse Data and Move to Next Step", command=self.parse_and_next_step)
             self.paste_label.pack(pady=10)
             self.paste_text.pack(pady=10)
             self.process_btn.pack(pady=10)
@@ -125,7 +125,7 @@ class DataExtractionApp:
             self.paste_text.pack_forget()
             self.upload_btn.pack(pady=10)
             self.column_listbox.pack_forget()
-            self.process_btn.config(text="Parse Data", command=self.parse_step3_xml)
+            self.process_btn.config(text="Parse Data and Move to Next Step", command=self.parse_and_next_step)
             self.process_btn.pack(pady=10)
         elif self.step == 4:
             self.step_label.config(text="Step 4: Copy and Paste your Stringing Chart - Neutral and Span Guy")
@@ -133,7 +133,7 @@ class DataExtractionApp:
             self.paste_label.config(text="Paste Stringing Chart Data Here")
             self.paste_label.pack(pady=10)
             self.paste_text.pack(pady=10)
-            self.process_btn.config(text="Parse and Continue", command=self.parse_and_continue_stringing_chart)
+            self.process_btn.config(text="Parse Data and Move to Next Step", command=self.parse_and_next_step)
             self.process_btn.pack(pady=10)
         elif self.step == 5:
             self.step_label.config(text="Step 5: Copy and Paste your Stringing Chart - Primary Conductor")
@@ -141,7 +141,7 @@ class DataExtractionApp:
             self.paste_label.config(text="Paste Primary Conductor Stringing Chart Data Here")
             self.paste_label.pack(pady=10)
             self.paste_text.pack(pady=10)
-            self.process_btn.config(text="Parse Primary Conductor Data", command=self.parse_primary_conductor_data)
+            self.process_btn.config(text="Parse Data and Move to Next Step", command=self.parse_and_next_step)
             self.process_btn.pack(pady=10)
         elif self.step == 6:
             self.step_label.config(text="Step 6: Upload your Structure Usage Report")
@@ -149,10 +149,24 @@ class DataExtractionApp:
             self.paste_label.pack_forget()
             self.paste_text.pack_forget()
             self.upload_btn.pack(pady=10)
-            self.process_btn.config(text="Parse Data", command=self.parse_step6_structure_usage)
+            self.process_btn.config(text="Parse Data and Move to Next Step", command=self.parse_and_next_step)
             self.process_btn.pack(pady=10)
-            self.next_btn.config(text="Generate Report", command=self.generate_report)
             self.next_btn.pack(pady=10)  # Show the Generate Report button
+
+    def parse_and_next_step(self):
+        if self.step == 1:
+            self.parse_data()
+        elif self.step == 2:
+            self.parse_pasted_data()
+        elif self.step == 3:
+            self.parse_step3_xml()
+        elif self.step == 4:
+            self.parse_and_continue_stringing_chart()
+        elif self.step == 5:
+            self.parse_primary_conductor_data()
+        elif self.step == 6:
+            self.parse_step6_structure_usage()
+        self.next_step()
 
     def parse_pasted_data(self):
         pasted_data = self.paste_text.get("1.0", tk.END).strip()
@@ -332,14 +346,7 @@ class DataExtractionApp:
                     continue  # Skip Span Guy entries from the pasted data
 
                 spans = re.findall(r"\n\s+(\d+\.\d+)\s+", spans_data)
-                if spans:
-                    total_span_length = sum(map(float, spans))
-                else:
-                    total_span_length_match = re.search(r"Ruling span \(ft\) (\d+\.\d+)", spans_data)
-                    if total_span_length_match:
-                        total_span_length = float(total_span_length_match.group(1))
-                    else:
-                        total_span_length = 0.0
+                total_span_length = sum(map(float, spans))
                 sequences = f"{start_seq} - {end_seq}"
                 self.output_data.append((section_num, sequences, total_span_length, circuit_type))
 
@@ -388,7 +395,7 @@ class DataExtractionApp:
                 for row in self.output_data:
                     formatted_row = [
                         f"{row[0]:<{max_lengths['section_num']}}",
-                                                f"{row[1]:<{max_lengths['sequences']}}",
+                        f"{row[1]:<{max_lengths['sequences']}}",
                         f"{row[2]:<{max_lengths['total_span_length']}.2f}",
                         f"{row[3]:<{max_lengths['circuit_type']}}"
                     ]
@@ -412,27 +419,31 @@ class DataExtractionApp:
                 circuit_type, section_num, start_seq, end_seq, spans_data = section
                 spans = re.findall(r"\n\s+(\d+\.\d+)\s+", spans_data)
                 total_span_length = sum(map(float, spans))
-                sequences = f"{start_seq} -> {end_seq}"
+                sequences = re.findall(r"\d{4}", spans_data)  # Extract all sequences
+                sequences_str = ", ".join(sequences)
+                structure_to_structure = f"{start_seq} -> {end_seq}"
                 circuit_value = int(re.search(r'(\d+)PH', circuit_type).group(1))
                 result = total_span_length * circuit_value
-                output_data.append((section_num, sequences, circuit_type, circuit_value, total_span_length, result))
+                output_data.append((section_num, structure_to_structure, circuit_type, circuit_value, total_span_length, result, sequences_str))
 
             with open("extractStringingChartPrimary_section_struct_circuitType_spanLength_total.txt", "w") as file:
                 max_lengths = {
                     'section_num': max(len(str(row[0])) for row in output_data),
-                    'sequences': max(len(row[1]) for row in output_data),
+                    'structure_to_structure': max(len(row[1]) for row in output_data),
                     'circuit_type': max(len(row[2]) for row in output_data),
                     'circuit_value': max(len(str(row[3])) for row in output_data),
                     'total_span_length': max(len(f"{row[4]:.2f}") for row in output_data),
                     'result': max(len(f"{row[5]:.2f}") for row in output_data),
+                    'sequences': max(len(row[6]) for row in output_data),
                 }
                 headers = [
                     ("Section #", max_lengths['section_num']),
-                    ("Structure -> Structure", max_lengths['sequences']),
+                    ("Structure -> Structure", max_lengths['structure_to_structure']),
                     ("Circuit Type", max_lengths['circuit_type']),
                     ("Circuit Value", max_lengths['circuit_value']),
                     ("Span Length", max_lengths['total_span_length']),
-                    ("Result", max_lengths['result'])
+                    ("Result", max_lengths['result']),
+                    ("Sequences", max_lengths['sequences'])
                 ]
 
                 header_row = " | ".join(f"{header[0]:<{header[1]}}" for header in headers)
@@ -442,11 +453,12 @@ class DataExtractionApp:
                 for row in output_data:
                     formatted_row = [
                         f"{row[0]:<{max_lengths['section_num']}}",
-                        f"{row[1]:<{max_lengths['sequences']}}",
+                        f"{row[1]:<{max_lengths['structure_to_structure']}}",
                         f"{row[2]:<{max_lengths['circuit_type']}}",
                         f"{row[3]:<{max_lengths['circuit_value']}}",
                         f"{row[4]:<{max_lengths['total_span_length']}.2f}",
                         f"{row[5]:<{max_lengths['result']}.2f}",
+                        f"{row[6]:<{max_lengths['sequences']}}",
                     ]
                     file.write(" | ".join(formatted_row) + "\n")
 
@@ -533,87 +545,55 @@ class DataExtractionApp:
                 return
 
         combined_data = self.combine_data(parsed_data)
-        self.display_combined_data(combined_data)
 
         # Ask user where to save the Excel file
         save_path = filedialog.asksaveasfilename(defaultextension=".xlsx", filetypes=[("Excel files", "*.xlsx")])
         if save_path:
             self.save_to_excel(combined_data, save_path)
+            self.save_stringing_report(save_path)
 
-    def display_combined_data(self, data):
-        text_widget = tk.Text(self.output_frame, wrap=tk.WORD, font=("Arial", 10))
-        text_widget.pack(expand=True, fill="both")
+    def save_stringing_report(self, file_path):
+        neutral_span_file = "extractStringingChartNeutralSpan_section_seq_totalSpanLength_circuitType.txt"
+        primary_span_file = "extractStringingChartPrimary_section_struct_circuitType_spanLength_total.txt"
+        
+        neutral_data = self.parse_stringing_file(neutral_span_file, is_primary=False)
+        primary_data = self.parse_stringing_file(primary_span_file, is_primary=True)
+        
+        workbook = load_workbook(file_path)
+        sheet = workbook.create_sheet(title="StringingReport")
+        
+        headers = ["Section", "Sequences", "Total Span Length 1", "Circuit Type 1", "Total Span Length 2", "Circuit Type 2", "Circuit Value", "Result"]
+        sheet.append(headers)
+        
+        # Combine data from both files
+        for neutral, primary in zip(neutral_data, primary_data):
+            section, sequences, total_span_length1, circuit_type1 = neutral
+            _, _, total_span_length2, circuit_type2, circuit_value, result = primary
+            sheet.append([section, sequences, total_span_length1, circuit_type1, total_span_length2, circuit_type2, circuit_value, result])
+        
+        # Styling for the header
+        header_fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
+        header_font = Font(bold=True)
+        for cell in sheet["1:1"]:
+            cell.fill = header_fill
+            cell.font = header_font
+        
+        workbook.save(file_path)
+        messagebox.showinfo("Success", f"Stringing report has been added to {file_path}")
 
-        headers = ['sequence', 'facility_id', 'existing_transformers', 'primary_riser', 'secondary_riser',
-                   'existing_or_new_tap', 'type', 'latitude', 'longitude', 'framing', 'anchor_direction',
-                   'lead_length', 'pole_type', 'element_label', 'element_type', 'max_usage']
-
-        header_line = "\t".join(headers) + "\n"
-        text_widget.insert(tk.END, header_line)
-        text_widget.insert(tk.END, "-" * len(header_line) + "\n")
-
-        for seq, info in sorted(data.items(), key=lambda x: int(re.findall(r'\d+', x[0])[0])):
-            base_row = [seq, info['facility_id'], info['existing_transformers'], info['primary_riser'],
-                        info['secondary_riser']]
-
-            max_length = max(len(info['existing_or_new_tap']), len(info['construction']), len(info['guy_usage']), 1)
-
-            for i in range(max_length):
-                row = base_row.copy()
-                row.append(info['existing_or_new_tap'][i] if i < len(info['existing_or_new_tap']) else '')
-                if i < len(info['construction']):
-                    const = info['construction'][i]
-                    row.extend([const['type'], const['latitude'], const['longitude'], const['framing'],
-                                const['anchor_direction'], const['lead_length']])
+    def parse_stringing_file(self, file_path, is_primary):
+        data = []
+        with open(file_path, 'r') as file:
+            lines = file.readlines()[2:]  # Skip header and separator line
+            for line in lines:
+                parts = [part.strip() for part in line.split('|')]
+                if is_primary:
+                    section, sequences, circuit_type, circuit_value, total_span_length, result = parts
+                    data.append((section, sequences, total_span_length, circuit_type, circuit_value, result))
                 else:
-                    row.extend([''] * 6)
-                row.append(info['pole_type'] if i == 0 else '')
-                if i < len(info['guy_usage']):
-                    guy = info['guy_usage'][i]
-                    row.extend([guy['element_label'], guy['element_type'], guy['max_usage']])
-                else:
-                    row.extend([''] * 3)
-                text_widget.insert(tk.END, "\t".join(map(str, row)) + "\n")
-
-    def display_combined_data(self, data):
-        text_widget = tk.Text(self.output_frame, wrap=tk.WORD, font=("Arial", 10))
-        text_widget.pack(expand=True, fill="both")
-
-        headers = ['sequence', 'facility_id', 'existing_transformers', 'primary_riser', 'secondary_riser',
-                   'existing_or_new_tap', 'type', 'latitude', 'longitude', 'framing', 'anchor_direction',
-                   'lead_length', 'pole_type', 'element_label', 'element_type', 'max_usage']
-
-        header_line = "\t".join(headers) + "\n"
-        text_widget.insert(tk.END, header_line)
-        text_widget.insert(tk.END, "-" * len(header_line) + "\n")
-
-        for seq, info in sorted(data.items(), key=lambda x: int(re.findall(r'\d+', x[0])[0])):
-            base_row = [seq, info['facility_id'], info['existing_transformers'], info['primary_riser'],
-                        info['secondary_riser']]
-
-            max_length = max(len(info['existing_or_new_tap']), len(info['construction']), len(info['guy_usage']), 1)
-
-            for i in range(max_length):
-                row = base_row.copy()
-                row.append(info['existing_or_new_tap'][i] if i < len(info['existing_or_new_tap']) else '')
-                if i < len(info['construction']):
-                    const = info['construction'][i]
-                    row.extend([const['type'], const['latitude'], const['longitude'], const['framing'],
-                                const['anchor_direction'], const['lead_length']])
-                else:
-                    row.extend([''] * 6)
-                row.append(info['pole_type'] if i == 0 else '')
-                if i < len(info['guy_usage']):
-                    guy = info['guy_usage'][i]
-                    row.extend([guy['element_label'], guy['element_type'], guy['max_usage']])
-                else:
-                    row.extend([''] * 3)
-                text_widget.insert(tk.END, "\t".join(map(str, row)) + "\n")
-
-        # Save data to Excel file
-        save_path = filedialog.asksaveasfilename(defaultextension=".xlsx", filetypes=[("Excel files", "*.xlsx")])
-        if save_path:
-            self.save_to_excel(data, save_path)
+                    section, sequences, total_span_length, circuit_type = parts
+                    data.append((section, sequences, total_span_length, circuit_type))
+        return data
 
     def save_to_excel(self, data, file_path):
         workbook = Workbook()
@@ -632,8 +612,8 @@ class DataExtractionApp:
             cell.fill = header_fill
             cell.font = header_font
 
-        light_green = PatternFill(start_color="90EE90", end_color="90EE90", fill_type="solid")
-        light_blue = PatternFill(start_color="ADD8E6", end_color="ADD8E6", fill_type="solid")
+        light_green = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
+        light_blue = PatternFill(start_color="F5F5F5", end_color="F5F5F5", fill_type="solid")
         current_fill = light_green
         previous_seq = None
 
@@ -777,11 +757,7 @@ class DataExtractionApp:
 
         return combined
 
-
 if __name__ == "__main__":
     root = tk.Tk()
     app = DataExtractionApp(root)
     root.mainloop()
-
-
-
