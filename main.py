@@ -62,6 +62,8 @@ class DataExtractionApp:
                 self.parse_span_guy_xml()
             elif self.step == 6:
                 self.parse_step6_structure_usage()
+            elif self.step == 7:
+                self.parse_step7_joint_support()
             messagebox.showinfo("File Uploaded", "File uploaded successfully.")
 
     def load_columns_from_file(self):
@@ -151,6 +153,14 @@ class DataExtractionApp:
             self.upload_btn.pack(pady=10)
             self.process_btn.config(text="Parse Data and Move to Next Step", command=self.parse_and_next_step)
             self.process_btn.pack(pady=10)
+        elif self.step == 7:
+            self.step_label.config(text="Step 7: Upload your Joint Support XML")
+            self.upload_btn.config(text="Upload Joint Support XML", command=self.upload_file)
+            self.paste_label.pack_forget()
+            self.paste_text.pack_forget()
+            self.upload_btn.pack(pady=10)
+            self.process_btn.config(text="Parse Data and Generate Report", command=self.parse_and_next_step)
+            self.process_btn.pack(pady=10)
             self.next_btn.pack(pady=10)  # Show the Generate Report button
 
     def parse_and_next_step(self):
@@ -166,6 +176,8 @@ class DataExtractionApp:
             self.parse_primary_conductor_data()
         elif self.step == 6:
             self.parse_step6_structure_usage()
+        elif self.step == 7:
+            self.parse_step7_joint_support()
         self.next_step()
 
     def parse_pasted_data(self):
@@ -512,6 +524,47 @@ class DataExtractionApp:
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse XML file: {e}")
 
+    def parse_step7_joint_support(self):
+        try:
+            tree = ET.parse(self.file_path)
+            root = tree.getroot()
+            max_force_data = {}
+            for report in root.findall('.//summary_of_joint_support_reactions_for_all_load_cases_for_structure_range'):
+                seq_no = report.find('str_no').text
+                shear_force = float(report.find('shear_force').text)
+                bending_moment = float(report.find('bending_moment').text)
+                max_force = max(shear_force, bending_moment)
+
+                if seq_no not in max_force_data:
+                    max_force_data[seq_no] = max_force
+                else:
+                    max_force_data[seq_no] = max(max_force_data[seq_no], max_force)
+
+            with open("extractMAX_sequence_MaxForce.txt", "w") as file:
+                max_lengths = {
+                    'sequence': max(len(seq) for seq in max_force_data),
+                    'max_force': max(len(f"{force:.2f}") for force in max_force_data.values())
+                }
+                headers = [
+                    ("Sequence", max_lengths['sequence']),
+                    ("Max Force", max_lengths['max_force'])
+                ]
+
+                header_row = " | ".join(f"{header[0]:<{header[1]}}" for header in headers)
+                file.write(header_row + "\n")
+                file.write("-" * len(header_row) + "\n")
+
+                for seq, force in sorted(max_force_data.items()):
+                    row = [
+                        f"{seq:<{max_lengths['sequence']}}",
+                        f"{force:<{max_lengths['max_force']}.2f}"
+                    ]
+                    file.write(" | ".join(row) + "\n")
+
+            messagebox.showinfo("Success", f"Data from Step {self.step} saved successfully.")
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to parse Joint Support XML file: {e}")
+
     def generate_report(self):
         # Clear previous output
         for widget in self.output_frame.winfo_children():
@@ -522,7 +575,8 @@ class DataExtractionApp:
             "extractFusingCoordination_newOrExistingFusing.txt",
             "extractConstrucStakingReport_framing_type_direction_length.txt",
             "extractPoleType.txt",
-            "extractGuyUsage_seq_elementType_usage.txt"
+            "extractGuyUsage_seq_elementType_usage.txt",
+            "extractMAX_sequence_MaxForce.txt"
         ]
 
         parsed_data = {}
@@ -540,6 +594,8 @@ class DataExtractionApp:
                     parsed_data['pole_type'] = self.parse_pole_type(lines)
                 elif "extractGuyUsage_seq_elementType_usage.txt" in file_path:
                     parsed_data['guy_usage'] = self.parse_guy_usage(lines)
+                elif "extractMAX_sequence_MaxForce.txt" in file_path:
+                    parsed_data['max_force'] = self.parse_max_force(lines)
             except Exception as e:
                 messagebox.showerror("Error", f"Failed to read file {file_path}: {e}")
                 return
@@ -560,24 +616,43 @@ class DataExtractionApp:
         primary_data = self.parse_stringing_file(primary_span_file, is_primary=True)
         
         workbook = load_workbook(file_path)
-        sheet = workbook.create_sheet(title="StringingReport")
+        primary_sheet = workbook.create_sheet(title="Primary Stringing Data")
+        neutral_sheet = workbook.create_sheet(title="Neutral Span Stringing Data")
         
-        headers = ["Section", "Sequences", "Total Span Length 1", "Circuit Type 1", "Total Span Length 2", "Circuit Type 2", "Circuit Value", "Result"]
-        sheet.append(headers)
+        primary_headers = ["Section #", "Structure -> Structure", "Circuit Type", "Circuit Value", "Span Length", "Result", "Sequences"]
+        neutral_headers = ["Section #", "Sequence #s", "Total Span Length", "Circuit Type"]
         
-        # Combine data from both files
-        for neutral, primary in zip(neutral_data, primary_data):
-            section, sequences, total_span_length1, circuit_type1 = neutral
-            _, _, total_span_length2, circuit_type2, circuit_value, result = primary
-            sheet.append([section, sequences, total_span_length1, circuit_type1, total_span_length2, circuit_type2, circuit_value, result])
+        primary_sheet.append(primary_headers)
+        neutral_sheet.append(neutral_headers)
+        
+        for row in primary_data:
+            primary_sheet.append(row)
+        
+        for row in neutral_data:
+            neutral_sheet.append(row)
         
         # Styling for the header
         header_fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
         header_font = Font(bold=True)
-        for cell in sheet["1:1"]:
-            cell.fill = header_fill
-            cell.font = header_font
+        for sheet in [primary_sheet, neutral_sheet]:
+            for cell in sheet["1:1"]:
+                cell.fill = header_fill
+                cell.font = header_font
         
+        # Adjust column widths
+        for sheet in [primary_sheet, neutral_sheet]:
+            for column in sheet.columns:
+                max_length = 0
+                column = list(column)
+                for cell in column:
+                    try:
+                        if len(str(cell.value)) > max_length:
+                            max_length = len(cell.value)
+                    except:
+                        pass
+                adjusted_width = (max_length + 2)
+                sheet.column_dimensions[column[0].column_letter].width = adjusted_width
+
         workbook.save(file_path)
         messagebox.showinfo("Success", f"Stringing report has been added to {file_path}")
 
@@ -588,11 +663,9 @@ class DataExtractionApp:
             for line in lines:
                 parts = [part.strip() for part in line.split('|')]
                 if is_primary:
-                    section, sequences, circuit_type, circuit_value, total_span_length, result = parts
-                    data.append((section, sequences, total_span_length, circuit_type, circuit_value, result))
+                    data.append(parts)
                 else:
-                    section, sequences, total_span_length, circuit_type = parts
-                    data.append((section, sequences, total_span_length, circuit_type))
+                    data.append(parts)
         return data
 
     def save_to_excel(self, data, file_path):
@@ -602,7 +675,7 @@ class DataExtractionApp:
 
         headers = ['sequence', 'facility_id', 'existing_transformers', 'primary_riser', 'secondary_riser',
                    'existing_or_new_tap', 'type', 'latitude', 'longitude', 'framing', 'anchor_direction',
-                   'lead_length', 'pole_type', 'element_label', 'element_type', 'max_usage']
+                   'lead_length', 'pole_type', 'element_label', 'element_type', 'max_usage', 'max_force']
         sheet.append(headers)
 
         # Styling for the header
@@ -643,6 +716,7 @@ class DataExtractionApp:
                     row.extend([guy['element_label'], guy['element_type'], guy['max_usage']])
                 else:
                     row.extend([''] * 3)
+                row.append(info['max_force'] if i == 0 else '')
                 sheet.append(row)
 
                 # Apply the current fill color to the row
@@ -737,11 +811,21 @@ class DataExtractionApp:
             })
         return data
 
+    def parse_max_force(self, lines):
+        data = {}
+        for line in lines[2:]:  # Skip header and separator line
+            parts = [part.strip() for part in line.split('|')]
+            if len(parts) != 2:
+                continue  # Skip lines that don't have exactly 2 parts
+            seq, max_force = parts
+            data[seq] = max_force
+        return data
+
     def combine_data(self, parsed_data):
         combined = {}
         all_sequences = set(parsed_data['his_seq'].keys()) | set(parsed_data['fusing'].keys()) | \
                         set(parsed_data['construction'].keys()) | set(parsed_data['pole_type'].keys()) | \
-                        set(parsed_data['guy_usage'].keys())
+                        set(parsed_data['guy_usage'].keys()) | set(parsed_data['max_force'].keys())
 
         for seq in all_sequences:
             combined[seq] = {
@@ -752,7 +836,8 @@ class DataExtractionApp:
                 'existing_or_new_tap': parsed_data['fusing'].get(seq, []),
                 'construction': parsed_data['construction'].get(seq, []),
                 'pole_type': parsed_data['pole_type'].get(seq, ''),
-                'guy_usage': parsed_data['guy_usage'].get(seq, [])
+                'guy_usage': parsed_data['guy_usage'].get(seq, []),
+                'max_force': parsed_data['max_force'].get(seq, '')
             }
 
         return combined
