@@ -16,6 +16,8 @@ class DataExtractionApp:
         self.selected_columns = []
         self.step = 1
         self.output_data = []
+        self.max_force_data = {}
+        self.soil_class_data = {}  # New dictionary to store soil class data
         self.setup_gui()
 
     def setup_gui(self):
@@ -154,12 +156,13 @@ class DataExtractionApp:
             self.process_btn.config(text="Parse Data and Move to Next Step", command=self.parse_and_next_step)
             self.process_btn.pack(pady=10)
         elif self.step == 7:
-            self.step_label.config(text="Step 7: Upload your Joint Support XML")
-            self.upload_btn.config(text="Upload Joint Support XML", command=self.upload_file)
-            self.paste_label.pack_forget()
-            self.paste_text.pack_forget()
+            self.step_label.config(text="Step 7: Copy and Paste Soil Class Data")
+            self.paste_label.config(text="Paste Soil Class Data Here")
+            self.paste_label.pack(pady=10)
+            self.paste_text.pack(pady=10)
+            self.upload_btn.config(text="Upload Joint Support XML and Parse", command=self.upload_file)
             self.upload_btn.pack(pady=10)
-            self.process_btn.config(text="Parse Data and Generate Report", command=self.parse_and_next_step)
+            self.process_btn.config(text="Parse Soil Class Data", command=self.parse_soil_class_data)
             self.process_btn.pack(pady=10)
             self.next_btn.pack(pady=10)  # Show the Generate Report button
 
@@ -204,6 +207,54 @@ class DataExtractionApp:
             messagebox.showinfo("Success", f"Data from Step {self.step} saved successfully.")
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse pasted data: {e}")
+
+    def parse_soil_class_data(self):
+        pasted_data = self.paste_text.get("1.0", tk.END).strip()
+        if not pasted_data:
+            messagebox.showerror("Error", "Please paste data into the text box.")
+            return
+
+        try:
+            lines = pasted_data.split('\n')
+            pattern = r'(\d+)(?:-(\d+))?\s+(\d+)\s+(.*)'
+            
+            for line in lines:
+                match = re.match(pattern, line.strip())
+                if match:
+                    start_seq, end_seq, soil_class, description = match.groups()
+                    start_seq = int(start_seq)
+                    end_seq = int(end_seq) if end_seq else start_seq
+
+                    for seq in range(start_seq, end_seq + 1):
+                        self.soil_class_data[seq] = {'soil_class': soil_class, 'description': description}
+
+            messagebox.showinfo("Success", "Soil class data parsed successfully.")
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to parse soil class data: {e}")
+
+        # Now, update the MAX force file with soil class information
+        self.update_max_force_file_with_soil_class()
+
+    def update_max_force_file_with_soil_class(self):
+        try:
+            with open("extractMAX_sequence_MaxForce.txt", "r") as file:
+                lines = file.readlines()
+
+            updated_lines = [lines[0], "Sequence | Max Force | Soil Class\n", "-" * 40 + "\n"]
+
+            for line in lines[2:]:
+                parts = line.strip().split('|')
+                sequence = int(parts[0].strip())
+                max_force = parts[1].strip()
+                soil_class = self.soil_class_data.get(sequence, {}).get('soil_class', 'N/A')
+                updated_lines.append(f"{sequence:4d} | {max_force:8} | {soil_class}\n")
+
+            with open("extractMAX_sequence_MaxForce.txt", "w") as file:
+                file.writelines(updated_lines)
+
+            messagebox.showinfo("Success", "MAX force file updated with soil class information.")
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to update MAX force file: {e}")
 
     def parse_step3_xml(self):
         try:
@@ -528,22 +579,21 @@ class DataExtractionApp:
         try:
             tree = ET.parse(self.file_path)
             root = tree.getroot()
-            max_force_data = {}
             for report in root.findall('.//summary_of_joint_support_reactions_for_all_load_cases_for_structure_range'):
                 seq_no = report.find('str_no').text
                 shear_force = float(report.find('shear_force').text)
                 bending_moment = float(report.find('bending_moment').text)
                 max_force = max(shear_force, bending_moment)
 
-                if seq_no not in max_force_data:
-                    max_force_data[seq_no] = max_force
+                if seq_no not in self.max_force_data:
+                    self.max_force_data[seq_no] = max_force
                 else:
-                    max_force_data[seq_no] = max(max_force_data[seq_no], max_force)
+                    self.max_force_data[seq_no] = max(self.max_force_data[seq_no], max_force)
 
             with open("extractMAX_sequence_MaxForce.txt", "w") as file:
                 max_lengths = {
-                    'sequence': max(len(seq) for seq in max_force_data),
-                    'max_force': max(len(f"{force:.2f}") for force in max_force_data.values())
+                    'sequence': max(len(seq) for seq in self.max_force_data),
+                    'max_force': max(len(f"{force:.2f}") for force in self.max_force_data.values())
                 }
                 headers = [
                     ("Sequence", max_lengths['sequence']),
@@ -554,7 +604,7 @@ class DataExtractionApp:
                 file.write(header_row + "\n")
                 file.write("-" * len(header_row) + "\n")
 
-                for seq, force in sorted(max_force_data.items()):
+                for seq, force in sorted(self.max_force_data.items()):
                     row = [
                         f"{seq:<{max_lengths['sequence']}}",
                         f"{force:<{max_lengths['max_force']}.2f}"
@@ -675,7 +725,7 @@ class DataExtractionApp:
 
         headers = ['sequence', 'facility_id', 'existing_transformers', 'primary_riser', 'secondary_riser',
                    'existing_or_new_tap', 'type', 'latitude', 'longitude', 'framing', 'anchor_direction',
-                   'lead_length', 'pole_type', 'element_label', 'element_type', 'max_usage', 'max_force']
+                   'lead_length', 'pole_type', 'element_label', 'element_type', 'max_usage', 'max_force', 'soil_class', 'description']
         sheet.append(headers)
 
         # Styling for the header
@@ -717,6 +767,8 @@ class DataExtractionApp:
                 else:
                     row.extend([''] * 3)
                 row.append(info['max_force'] if i == 0 else '')
+                row.append(info.get('soil_class', ''))  # Add soil class
+                row.append(info.get('description', ''))  # Add soil class description
                 sheet.append(row)
 
                 # Apply the current fill color to the row
@@ -732,7 +784,7 @@ class DataExtractionApp:
                     if len(str(cell.value)) > max_length:
                         max_length = len(cell.value)
                 except:
-                    pass
+                        pass
             adjusted_width = (max_length + 2)
             sheet.column_dimensions[column[0].column_letter].width = adjusted_width
 
@@ -815,10 +867,10 @@ class DataExtractionApp:
         data = {}
         for line in lines[2:]:  # Skip header and separator line
             parts = [part.strip() for part in line.split('|')]
-            if len(parts) != 2:
-                continue  # Skip lines that don't have exactly 2 parts
-            seq, max_force = parts
-            data[seq] = max_force
+            if len(parts) != 3:
+                continue  # Skip lines that don't have exactly 3 parts
+            seq, max_force, soil_class = parts
+            data[seq] = {'max_force': max_force, 'soil_class': soil_class}
         return data
 
     def combine_data(self, parsed_data):
@@ -837,7 +889,9 @@ class DataExtractionApp:
                 'construction': parsed_data['construction'].get(seq, []),
                 'pole_type': parsed_data['pole_type'].get(seq, ''),
                 'guy_usage': parsed_data['guy_usage'].get(seq, []),
-                'max_force': parsed_data['max_force'].get(seq, '')
+                'max_force': parsed_data['max_force'].get(seq, {}).get('max_force', ''),
+                'soil_class': parsed_data['max_force'].get(seq, {}).get('soil_class', ''),
+                'description': parsed_data['max_force'].get(seq, {}).get('description', '')
             }
 
         return combined
