@@ -36,6 +36,8 @@ class DataExtractionApp:
         self.column_listbox.pack(pady=10)
         self.process_btn = tk.Button(self.main_frame, text="Parse Data and Move to Next Step", command=self.parse_and_next_step, font=("Arial", 12), bg="#f0f0f0")
         self.process_btn.pack(pady=10)
+        self.skip_btn = tk.Button(self.main_frame, text="Skip This Step", command=self.next_step, font=("Arial", 12), bg="#f0f0f0")
+        self.skip_btn.pack(pady=10)
         self.paste_label = tk.Label(self.main_frame, text="Paste Fusing Coordination Data Here", font=("Arial", 14), bg="white")
         self.paste_text = tk.Text(self.main_frame, wrap=tk.WORD, height=15, font=("Arial", 12))
         self.paste_label.pack(pady=10)
@@ -122,6 +124,7 @@ class DataExtractionApp:
             self.paste_label.pack(pady=10)
             self.paste_text.pack(pady=10)
             self.process_btn.pack(pady=10)
+            self.skip_btn.pack(pady=10)
         elif self.step == 3:
             self.step_label.config(text="Step 3: Upload your Construction Staking Report")
             self.upload_btn.config(text="Upload Construction Staking Report", command=self.upload_file)
@@ -131,6 +134,7 @@ class DataExtractionApp:
             self.column_listbox.pack_forget()
             self.process_btn.config(text="Parse Data and Move to Next Step", command=self.parse_and_next_step)
             self.process_btn.pack(pady=10)
+            self.skip_btn.pack(pady=10)
         elif self.step == 4:
             self.step_label.config(text="Step 4: Copy and Paste your Stringing Chart - Neutral and Span Guy")
             self.upload_btn.pack_forget()
@@ -139,6 +143,7 @@ class DataExtractionApp:
             self.paste_text.pack(pady=10)
             self.process_btn.config(text="Parse Data and Move to Next Step", command=self.parse_and_next_step)
             self.process_btn.pack(pady=10)
+            self.skip_btn.pack(pady=10)
         elif self.step == 5:
             self.step_label.config(text="Step 5: Copy and Paste your Stringing Chart - Primary Conductor")
             self.upload_btn.pack_forget()
@@ -147,6 +152,7 @@ class DataExtractionApp:
             self.paste_text.pack(pady=10)
             self.process_btn.config(text="Parse Data and Move to Next Step", command=self.parse_and_next_step)
             self.process_btn.pack(pady=10)
+            self.skip_btn.pack(pady=10)
         elif self.step == 6:
             self.step_label.config(text="Step 6: Upload your Structure Usage Report")
             self.upload_btn.config(text="Upload Structure Usage Report", command=self.upload_file)
@@ -155,6 +161,7 @@ class DataExtractionApp:
             self.upload_btn.pack(pady=10)
             self.process_btn.config(text="Parse Data and Move to Next Step", command=self.parse_and_next_step)
             self.process_btn.pack(pady=10)
+            self.skip_btn.pack(pady=10)
         elif self.step == 7:
             self.step_label.config(text="Step 7: Copy and Paste Soil Class Data")
             self.paste_label.config(text="Paste Soil Class Data Here")
@@ -165,6 +172,7 @@ class DataExtractionApp:
             self.process_btn.config(text="Parse Soil Class Data", command=self.parse_soil_class_data)
             self.process_btn.pack(pady=10)
             self.next_btn.pack(pady=10)  # Show the Generate Report button
+            self.skip_btn.pack_forget()  # Remove the Skip button on the last step
 
     def parse_and_next_step(self):
         if self.step == 1:
