@@ -384,19 +384,19 @@ class DataExtractionApp:
             messagebox.showerror("Error", f"Failed to parse XML file: {e}")
 
     def get_cardinal_direction(self, angle):
-        if -22.5 < angle <= 22.5:
+        if -2.0 < angle <= 2.0:
             return 'E'
-        elif 22.5 < angle <= 67.5:
+        elif 2.0 < angle <= 88.0:
             return 'NE'
-        elif 67.5 < angle <= 112.5:
+        elif 88.0 < angle <= 92.0:
             return 'N'
-        elif 112.5 < angle <= 157.5:
+        elif 92.0 < angle <= 178.0:
             return 'NW'
-        elif -67.5 < angle <= -22.5:
+        elif -88.0 < angle <= -2.0:
             return 'SE'
-        elif -112.5 < angle <= -67.5:
+        elif -92.0 < angle <= -88.0:
             return 'S'
-        elif -157.5 < angle <= -112.5:
+        elif -178.0 < angle <= -92.0:
             return 'SW'
         else:
             return 'W'
