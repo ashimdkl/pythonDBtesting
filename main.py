@@ -17,7 +17,7 @@ class DataExtractionApp:
         self.step = 1
         self.output_data = []
         self.max_force_data = {}
-        self.soil_class_data = {}  # New dictionary to store soil class data
+        self.soil_class_data = {}
         self.setup_gui()
 
     def setup_gui(self):
@@ -171,8 +171,8 @@ class DataExtractionApp:
             self.upload_btn.pack(pady=10)
             self.process_btn.config(text="Parse Soil Class Data", command=self.parse_soil_class_data)
             self.process_btn.pack(pady=10)
-            self.next_btn.pack(pady=10)  # Show the Generate Report button
-            self.skip_btn.pack_forget()  # Remove the Skip button on the last step
+            self.next_btn.pack(pady=10)
+            self.skip_btn.pack_forget()
 
     def parse_and_next_step(self):
         if self.step == 1:
@@ -203,8 +203,8 @@ class DataExtractionApp:
             data = []
             for line in lines[1:]:
                 fields = line.split("\t")
-                sequence = fields[0][:4]  # Assuming sequence is the first 4 characters
-                existing = fields[2]  # Assuming existing value is the second field
+                sequence = fields[0][:4]
+                existing = fields[2]
                 data.append([sequence, existing])
 
             with open("extractFusingCoordination_newOrExistingFusing.txt", "w") as file:
@@ -240,7 +240,6 @@ class DataExtractionApp:
         except Exception as e:
             messagebox.showerror("Error", f"Failed to parse soil class data: {e}")
 
-        # Now, update the MAX force file with soil class information
         self.update_max_force_file_with_soil_class()
 
     def update_max_force_file_with_soil_class(self):
@@ -283,16 +282,16 @@ class DataExtractionApp:
                     pole_type = report.find('pole_property_label').text or ''
                     pole_types[sequence] = pole_type
 
-                framing_parts = framing.split(" ", 2)
-                if len(framing_parts) > 2:
-                    framing = framing_parts[-1]
-                    framing = " ".join(framing.split()[:-1])
+                # Split framing into primary and secondary based on "+"
+                primary_framing, secondary_framing = framing.split("+", 1) if "+" in framing else (framing, "")
+                secondary_framing = secondary_framing.strip()
 
                 if sequence not in data:
                     data[sequence] = []
 
                 data[sequence].append({
-                    'framing': framing,
+                    'primary_framing': primary_framing.strip(),
+                    'secondary_framing': secondary_framing,
                     'latitude': latitude,
                     'longitude': longitude,
                     'x_easting': x_easting,
@@ -313,9 +312,11 @@ class DataExtractionApp:
                     x_origin = float(p1_point['x_easting'])
                     y_origin = float(p1_point['y_northing'])
                     stake_description_set = set()
+                    has_guy_connections = False
                     for point in points:
                         for guy_type in guy_types:
                             if guy_type in point['stake_description']:
+                                has_guy_connections = True
                                 x_next = float(point['x_easting'])
                                 y_next = float(point['y_northing'])
                                 lead_length = math.sqrt((x_next - x_origin) ** 2 + (y_next - y_origin) ** 2)
@@ -330,10 +331,22 @@ class DataExtractionApp:
                                             'type': f"P1 to {description.strip()}",
                                             'latitude': point['latitude'],
                                             'longitude': point['longitude'],
-                                            'framing': point['framing'],
+                                            'primary_framing': point['primary_framing'],
+                                            'secondary_framing': point['secondary_framing'],
                                             'anchor_direction': direction,
                                             'lead_length': lead_length
                                         })
+                    if not has_guy_connections:
+                        anchor_data.append({
+                            'sequence': sequence,
+                            'type': 'P1',
+                            'latitude': p1_point['latitude'],
+                            'longitude': p1_point['longitude'],
+                            'primary_framing': p1_point['primary_framing'],
+                            'secondary_framing': p1_point['secondary_framing'],
+                            'anchor_direction': '',
+                            'lead_length': ''
+                        })
 
             anchor_data.sort(key=lambda x: x['sequence'])
 
@@ -343,16 +356,18 @@ class DataExtractionApp:
                     'type': max(len(item['type']) for item in anchor_data),
                     'latitude': max(len(str(item['latitude'])) for item in anchor_data),
                     'longitude': max(len(str(item['longitude'])) for item in anchor_data),
-                    'framing': max(len(item['framing']) for item in anchor_data),
-                    'anchor_direction': max(len(item['anchor_direction']) for item in anchor_data),
-                    'lead_length': max(len(f"{item['lead_length']:.2f}") for item in anchor_data)
+                    'primary_framing': max(len(item['primary_framing']) for item in anchor_data),
+                    'secondary_framing': max(len(item['secondary_framing']) for item in anchor_data),
+                    'anchor_direction': max(len(item['anchor_direction']) if item['anchor_direction'] else 0 for item in anchor_data),
+                    'lead_length': max(len(f"{item['lead_length']:.2f}") if isinstance(item['lead_length'], (int, float)) else 0 for item in anchor_data)
                 }
                 headers = [
                     ("Sequence", max_lengths['sequence']),
                     ("Type", max_lengths['type']),
                     ("Latitude", max_lengths['latitude']),
                     ("Longitude", max_lengths['longitude']),
-                    ("Framing", max_lengths['framing']),
+                    ("Primary Framing", max_lengths['primary_framing']),
+                    ("Secondary Framing", max_lengths['secondary_framing']),
                     ("Anchor Direction", max_lengths['anchor_direction']),
                     ("Lead Length", max_lengths['lead_length'])
                 ]
@@ -362,14 +377,17 @@ class DataExtractionApp:
                 file.write("-" * len(header_row) + "\n")
 
                 for item in anchor_data:
+                    lead_length = item['lead_length']
+                    lead_length_str = f"{lead_length:.2f}" if isinstance(lead_length, (int, float)) else lead_length
                     row = [
                         f"{item['sequence']:<{max_lengths['sequence']}}",
                         f"{item['type']:<{max_lengths['type']}}",
                         f"{item['latitude']:<{max_lengths['latitude']}}",
                         f"{item['longitude']:<{max_lengths['longitude']}}",
-                        f"{item['framing']:<{max_lengths['framing']}}",
+                        f"{item['primary_framing']:<{max_lengths['primary_framing']}}",
+                        f"{item['secondary_framing']:<{max_lengths['secondary_framing']}}",
                         f"{item['anchor_direction']:<{max_lengths['anchor_direction']}}",
-                        f"{item['lead_length']:<{max_lengths['lead_length']}.2f}"
+                        f"{lead_length_str:<{max_lengths['lead_length']}}"
                     ]
                     file.write(" | ".join(row) + "\n")
 
@@ -490,7 +508,7 @@ class DataExtractionApp:
                 circuit_type, section_num, start_seq, end_seq, spans_data = section
                 spans = re.findall(r"\n\s+(\d+\.\d+)\s+", spans_data)
                 total_span_length = sum(map(float, spans))
-                sequences = re.findall(r"\d{4}", spans_data)  # Extract all sequences
+                sequences = re.findall(r"\d{4}", spans_data)
                 sequences_str = ", ".join(sequences)
                 structure_to_structure = f"{start_seq} -> {end_seq}"
                 circuit_value = int(re.search(r'(\d+)PH', circuit_type).group(1))
@@ -624,7 +642,6 @@ class DataExtractionApp:
             messagebox.showerror("Error", f"Failed to parse Joint Support XML file: {e}")
 
     def generate_report(self):
-        # Clear previous output
         for widget in self.output_frame.winfo_children():
             widget.destroy()
 
@@ -660,7 +677,6 @@ class DataExtractionApp:
 
         combined_data = self.combine_data(parsed_data)
 
-        # Ask user where to save the Excel file
         save_path = filedialog.asksaveasfilename(defaultextension=".xlsx", filetypes=[("Excel files", "*.xlsx")])
         if save_path:
             self.save_to_excel(combined_data, save_path)
@@ -689,7 +705,6 @@ class DataExtractionApp:
         for row in neutral_data:
             neutral_sheet.append(row)
         
-        # Styling for the header
         header_fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
         header_font = Font(bold=True)
         for sheet in [primary_sheet, neutral_sheet]:
@@ -697,7 +712,6 @@ class DataExtractionApp:
                 cell.fill = header_fill
                 cell.font = header_font
         
-        # Adjust column widths
         for sheet in [primary_sheet, neutral_sheet]:
             for column in sheet.columns:
                 max_length = 0
@@ -717,13 +731,10 @@ class DataExtractionApp:
     def parse_stringing_file(self, file_path, is_primary):
         data = []
         with open(file_path, 'r') as file:
-            lines = file.readlines()[2:]  # Skip header and separator line
+            lines = file.readlines()[2:]  
             for line in lines:
                 parts = [part.strip() for part in line.split('|')]
-                if is_primary:
-                    data.append(parts)
-                else:
-                    data.append(parts)
+                data.append(parts)
         return data
 
     def save_to_excel(self, data, file_path):
@@ -732,11 +743,11 @@ class DataExtractionApp:
         sheet.title = "Data Report"
 
         headers = ['sequence', 'facility_id', 'existing_transformers', 'primary_riser', 'secondary_riser',
-                   'existing_or_new_tap', 'type', 'latitude', 'longitude', 'framing', 'anchor_direction',
-                   'lead_length', 'pole_type', 'element_label', 'element_type', 'max_usage', 'max_force', 'soil_class', 'description']
+                   'existing_or_new_tap', 'type', 'latitude', 'longitude', 'primary_framing', 'secondary_framing',
+                   'anchor_direction', 'lead_length', 'pole_type', 'element_label', 'element_type', 'max_usage', 
+                   'max_force', 'soil_class', 'description']
         sheet.append(headers)
 
-        # Styling for the header
         header_fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
         header_font = Font(bold=True)
         for cell in sheet["1:1"]:
@@ -755,19 +766,18 @@ class DataExtractionApp:
                 if seq != previous_seq:
                     row = [seq, info['facility_id'], info['existing_transformers'], info['primary_riser'],
                            info['secondary_riser']]
-                    # Alternate fill color when sequence changes
                     current_fill = light_blue if current_fill == light_green else light_green
                     previous_seq = seq
                 else:
-                    row = ['', '', '', '', '']  # Leave sequence and related fields blank
+                    row = ['', '', '', '', ''] 
 
                 row.append(info['existing_or_new_tap'][i] if i < len(info['existing_or_new_tap']) else '')
                 if i < len(info['construction']):
                     const = info['construction'][i]
-                    row.extend([const['type'], const['latitude'], const['longitude'], const['framing'],
-                                const['anchor_direction'], const['lead_length']])
+                    row.extend([const['type'], const['latitude'], const['longitude'], const['primary_framing'],
+                                const['secondary_framing'], const['anchor_direction'], const['lead_length']])
                 else:
-                    row.extend([''] * 6)
+                    row.extend([''] * 7)
                 row.append(info['pole_type'] if i == 0 else '')
                 if i < len(info['guy_usage']):
                     guy = info['guy_usage'][i]
@@ -775,15 +785,13 @@ class DataExtractionApp:
                 else:
                     row.extend([''] * 3)
                 row.append(info['max_force'] if i == 0 else '')
-                row.append(info.get('soil_class', ''))  # Add soil class
-                row.append(info.get('description', ''))  # Add soil class description
+                row.append(info.get('soil_class', ''))  
+                row.append(info.get('description', ''))  
                 sheet.append(row)
 
-                # Apply the current fill color to the row
                 for cell in sheet[sheet.max_row]:
                     cell.fill = current_fill
 
-        # Adjust column widths
         for column in sheet.columns:
             max_length = 0
             column = list(column)
@@ -828,18 +836,28 @@ class DataExtractionApp:
 
     def parse_construction_staking(self, lines):
         data = {}
-        for line in lines[2:]:  # Skip header and separator line
+        framing_pattern = r'((?:EH|EI|EJ|TF)[\w\s]+(?:TAN|DEA|ANG)?(?:\s*\([^)]*\))?)'
+        for line in lines[2:]:
             parts = [part.strip() for part in line.split('|')]
-            if len(parts) != 7:
-                continue  # Skip lines that don't have exactly 7 parts
-            seq, type_, lat, lon, framing, anchor_dir, lead_length = parts
+            if len(parts) != 8:
+                continue  
+            seq, type_, lat, lon, primary_framing, secondary_framing, anchor_dir, lead_length = parts
+            
+            # Extract framing information
+            primary_matches = re.findall(framing_pattern, primary_framing)
+            secondary_matches = re.findall(framing_pattern, secondary_framing)
+            
+            primary_framing = ' '.join(primary_matches).strip()
+            secondary_framing = ' '.join(secondary_matches).strip()
+            
             if seq not in data:
                 data[seq] = []
             data[seq].append({
                 'type': type_,
                 'latitude': lat,
                 'longitude': lon,
-                'framing': framing,
+                'primary_framing': primary_framing,
+                'secondary_framing': secondary_framing,
                 'anchor_direction': anchor_dir,
                 'lead_length': lead_length
             })
@@ -857,10 +875,10 @@ class DataExtractionApp:
 
     def parse_guy_usage(self, lines):
         data = {}
-        for line in lines[2:]:  # Skip header and separator line
+        for line in lines[2:]:
             parts = [part.strip() for part in line.split('|')]
             if len(parts) != 4:
-                continue  # Skip lines that don't have exactly 4 parts
+                continue  
             seq, element_label, element_type, max_usage = parts
             if seq not in data:
                 data[seq] = []
@@ -873,10 +891,10 @@ class DataExtractionApp:
 
     def parse_max_force(self, lines):
         data = {}
-        for line in lines[2:]:  # Skip header and separator line
+        for line in lines[2:]:
             parts = [part.strip() for part in line.split('|')]
             if len(parts) != 3:
-                continue  # Skip lines that don't have exactly 3 parts
+                continue  
             seq, max_force, soil_class = parts
             data[seq] = {'max_force': max_force, 'soil_class': soil_class}
         return data
