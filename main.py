@@ -8,56 +8,79 @@ import math
 
 class DataExtractionApp:
     def __init__(self, root):
+        # Initialize the application window and set up basic variables and GUI components
         self.root = root
         self.root.title("Data Extraction App")
         self.root.geometry('1000x800')
+        
+        # Variables to hold file paths, columns, and selected data
         self.file_path = None
         self.columns = []
         self.selected_columns = []
-        self.step = 1
+        self.step = 1  # Step in the process
         self.output_data = []
-        self.max_force_data = {}
+        self.max_force_data = {}  # Dictionary to hold maximum force data by sequence number
         self.soil_class_data = {}  # New dictionary to store soil class data
+        
+        # Set up the graphical user interface (GUI)
         self.setup_gui()
 
     def setup_gui(self):
+        # Create the introductory frame with a button to start the analysis
         self.intro_frame = tk.Frame(self.root, bg="white")
         self.intro_frame.pack(expand=True, fill="both")
         self.start_btn = tk.Button(self.intro_frame, text="Click to Begin Analysis!", command=self.start_analysis, font=("Arial", 14), bg="#f0f0f0")
         self.start_btn.pack(pady=20)
+        
+        # Create the main frame where most of the application interactions happen
         self.main_frame = tk.Frame(self.root, bg="white")
         self.step_label = tk.Label(self.main_frame, text="Step 1: Upload your Hendrix Input Sheet (HIS)", font=("Arial", 14), bg="white")
         self.step_label.pack(pady=10)
+        
+        # Button to upload files (e.g., Excel, XML) depending on the current step
         self.upload_btn = tk.Button(self.main_frame, text="Upload HIS Excel File", command=self.upload_file, font=("Arial", 14), bg="#f0f0f0")
         self.upload_btn.pack(pady=10)
+        
+        # Listbox to allow the user to select columns from the uploaded Excel file
         self.column_label = tk.Label(self.main_frame, text="Select Columns to Keep (including Sequence #)", font=("Arial", 14), bg="white")
         self.column_label.pack(pady=10)
         self.column_listbox = tk.Listbox(self.main_frame, selectmode=tk.MULTIPLE, font=("Arial", 12))
         self.column_listbox.pack(pady=10)
+        
+        # Buttons to process the data or skip steps
         self.process_btn = tk.Button(self.main_frame, text="Parse Data and Move to Next Step", command=self.parse_and_next_step, font=("Arial", 12), bg="#f0f0f0")
         self.process_btn.pack(pady=10)
         self.skip_btn = tk.Button(self.main_frame, text="Skip This Step", command=self.next_step, font=("Arial", 12), bg="#f0f0f0")
         self.skip_btn.pack(pady=10)
+        
+        # Widgets to paste and display data, initially hidden until needed
         self.paste_label = tk.Label(self.main_frame, text="Paste Fusing Coordination Data Here", font=("Arial", 14), bg="white")
         self.paste_text = tk.Text(self.main_frame, wrap=tk.WORD, height=15, font=("Arial", 12))
         self.paste_label.pack(pady=10)
         self.paste_text.pack(pady=10)
         self.paste_label.pack_forget()
         self.paste_text.pack_forget()
+        
+        # Button to generate the final report, hidden until the final step
         self.next_btn = tk.Button(self.main_frame, text="Generate Report", command=self.generate_report, font=("Arial", 12), bg="#f0f0f0")
         self.next_btn.pack(pady=10)
         self.next_btn.pack_forget()
+        
+        # Frame to hold the output results
         self.output_frame = tk.Frame(self.root, bg="white")
         self.output_frame.pack(expand=True, fill="both")
 
     def start_analysis(self):
+        # Transition from the intro frame to the main frame where analysis starts
         self.intro_frame.pack_forget()
         self.main_frame.pack(expand=True, fill="both")
 
     def upload_file(self):
+        # File dialog to let the user upload a file based on the current step
         filetypes = [("Excel files", "*.xlsx *.xls")] if self.step == 1 else [("XML files", "*.xml"), ("Text files", "*.txt")]
         self.file_path = filedialog.askopenfilename(filetypes=filetypes)
         if self.file_path:
+            # Call the appropriate function based on the step of the process
             if self.step == 1:
                 self.load_columns_from_file()
             elif self.step == 3:
@@ -71,6 +94,7 @@ class DataExtractionApp:
             messagebox.showinfo("File Uploaded", "File uploaded successfully.")
 
     def load_columns_from_file(self):
+        # Load columns from the first row of the Excel file to allow user selection
         try:
             workbook = load_workbook(self.file_path)
             sheet = workbook.active
@@ -79,13 +103,16 @@ class DataExtractionApp:
             for column in self.columns:
                 self.column_listbox.insert(tk.END, column)
         except Exception as e:
+            # Show an error if something goes wrong while reading the file
             messagebox.showerror("Error", f"Failed to read file: {e}")
 
     def parse_data(self):
+        # Parse the Excel data based on the columns selected by the user
         if not self.file_path:
             messagebox.showerror("Error", "Please upload a file first!")
             return
 
+        # Get the columns selected by the user
         self.selected_columns = [self.column_listbox.get(i) for i in self.column_listbox.curselection()]
         if not self.selected_columns:
             messagebox.showerror("Error", "Please select at least one column to keep!")
@@ -96,6 +123,7 @@ class DataExtractionApp:
                 workbook = load_workbook(self.file_path)
                 sheet = workbook.active
 
+                # Open a file to write the selected data
                 with open("extractHIS_seq_facID_existingTrans_primaryRiser_secondaryRiser.txt", "w") as file:
                     file.write("\t".join(self.selected_columns) + "\n")
                     for row in sheet.iter_rows(min_row=2, values_only=True):
@@ -109,12 +137,14 @@ class DataExtractionApp:
             messagebox.showerror("Error", f"Failed to parse file: {e}")
 
     def next_step(self):
+        # Move to the next step in the process
         self.step += 1
         self.file_path = None
         self.columns = []
         self.selected_columns = []
         self.column_listbox.delete(0, tk.END)
 
+        # Adjust GUI elements based on the current step
         if self.step == 2:
             self.step_label.config(text="Step 2: Copy and Paste your Fusing Coordination Report")
             self.upload_btn.pack_forget()
@@ -175,6 +205,7 @@ class DataExtractionApp:
             self.skip_btn.pack_forget()  # Remove the Skip button on the last step
 
     def parse_and_next_step(self):
+        # Parse the data and move to the next step based on the current step
         if self.step == 1:
             self.parse_data()
         elif self.step == 2:
@@ -192,12 +223,14 @@ class DataExtractionApp:
         self.next_step()
 
     def parse_pasted_data(self):
+        # Parse data pasted by the user into the text box
         pasted_data = self.paste_text.get("1.0", tk.END).strip()
         if not pasted_data:
             messagebox.showerror("Error", "Please paste data into the text box.")
             return
 
         try:
+            # Split the pasted data into lines and extract relevant fields using regular expressions
             lines = pasted_data.split("\n")
             header = lines[0].split("\t")
             data = []
@@ -207,6 +240,7 @@ class DataExtractionApp:
                 existing = fields[2]  # Assuming existing value is the second field
                 data.append([sequence, existing])
 
+            # Save the extracted data to a file
             with open("extractFusingCoordination_newOrExistingFusing.txt", "w") as file:
                 file.write("Sequence\tExisting\n")
                 for row in data:
@@ -217,12 +251,14 @@ class DataExtractionApp:
             messagebox.showerror("Error", f"Failed to parse pasted data: {e}")
 
     def parse_soil_class_data(self):
+        # Parse soil class data pasted by the user into the text box
         pasted_data = self.paste_text.get("1.0", tk.END).strip()
         if not pasted_data:
             messagebox.showerror("Error", "Please paste data into the text box.")
             return
 
         try:
+            # Regular expression pattern to extract soil class information from the pasted data
             lines = pasted_data.split('\n')
             pattern = r'(\d+)(?:-(\d+))?\s+(\d+)\s+(.*)'
             
@@ -233,6 +269,7 @@ class DataExtractionApp:
                     start_seq = int(start_seq)
                     end_seq = int(end_seq) if end_seq else start_seq
 
+                    # Store the soil class information for each sequence in the range
                     for seq in range(start_seq, end_seq + 1):
                         self.soil_class_data[seq] = {'soil_class': soil_class, 'description': description}
 
@@ -244,6 +281,7 @@ class DataExtractionApp:
         self.update_max_force_file_with_soil_class()
 
     def update_max_force_file_with_soil_class(self):
+        # Update the MAX force file with the soil class data parsed earlier
         try:
             with open("extractMAX_sequence_MaxForce.txt", "r") as file:
                 lines = file.readlines()
@@ -257,6 +295,7 @@ class DataExtractionApp:
                 soil_class = self.soil_class_data.get(sequence, {}).get('soil_class', 'N/A')
                 updated_lines.append(f"{sequence:4d} | {max_force:8} | {soil_class}\n")
 
+            # Write the updated lines back to the file
             with open("extractMAX_sequence_MaxForce.txt", "w") as file:
                 file.writelines(updated_lines)
 
@@ -265,11 +304,14 @@ class DataExtractionApp:
             messagebox.showerror("Error", f"Failed to update MAX force file: {e}")
 
     def parse_step3_xml(self):
+        # Parse the XML file for construction staking data
         try:
             tree = ET.parse(self.file_path)
             root = tree.getroot()
             data = {}
             pole_types = {}
+
+            # Extract relevant data from the XML structure
             for report in root.findall('.//construction_staking_report'):
                 sequence = report.find('structure_number').text or ''
                 framing = report.find('structure_name').text or ''
@@ -279,10 +321,12 @@ class DataExtractionApp:
                 y_northing = report.find('y_northing').text or ''
                 stake_description = report.find('stake_description').text or ''
 
+                # Store pole type if it is "P1"
                 if "P1" in stake_description:
                     pole_type = report.find('pole_property_label').text or ''
                     pole_types[sequence] = pole_type
 
+                # Simplify framing description by removing extraneous parts
                 framing_parts = framing.split(" ", 2)
                 if len(framing_parts) > 2:
                     framing = framing_parts[-1]
@@ -291,6 +335,7 @@ class DataExtractionApp:
                 if sequence not in data:
                     data[sequence] = []
 
+                # Store the parsed data in a dictionary
                 data[sequence].append({
                     'framing': framing,
                     'latitude': latitude,
@@ -309,6 +354,7 @@ class DataExtractionApp:
                         p1_point = point
                         break
 
+                # Calculate lead length and direction for anchor points
                 if p1_point:
                     x_origin = float(p1_point['x_easting'])
                     y_origin = float(p1_point['y_northing'])
@@ -337,6 +383,7 @@ class DataExtractionApp:
 
             anchor_data.sort(key=lambda x: x['sequence'])
 
+            # Save the extracted anchor data to a file
             with open("extractConstrucStakingReport_framing_type_direction_length.txt", "w") as file:
                 max_lengths = {
                     'sequence': max(len(item['sequence']) for item in anchor_data),
@@ -373,6 +420,7 @@ class DataExtractionApp:
                     ]
                     file.write(" | ".join(row) + "\n")
 
+            # Save pole type data to a separate file
             with open("extractPoleType.txt", "w") as file:
                 file.write("Sequence\tPole Type\n")
                 for sequence, pole_type in sorted(pole_types.items()):
@@ -384,6 +432,7 @@ class DataExtractionApp:
             messagebox.showerror("Error", f"Failed to parse XML file: {e}")
 
     def get_cardinal_direction(self, angle):
+        # Convert an angle into a cardinal direction (e.g., N, NE, E)
         if -2.0 < angle <= 2.0:
             return 'E'
         elif 2.0 < angle <= 88.0:
@@ -402,12 +451,14 @@ class DataExtractionApp:
             return 'W'
 
     def parse_and_continue_stringing_chart(self):
+        # Parse stringing chart data pasted by the user and continue processing with the XML file
         pasted_data = self.paste_text.get("1.0", tk.END).strip()
         if not pasted_data:
             messagebox.showerror("Error", "Please paste data into the text box.")
             return
 
         try:
+            # Use regular expressions to extract relevant sections from the pasted data
             sections = re.findall(r"Stringing Chart Report\n\nCircuit '(.*?)' Section #(.*?) from structure #(.*?) to structure #(.*?),.*?Span\n(.*?)\n\n", pasted_data, re.DOTALL)
             self.output_data = []
 
@@ -428,6 +479,7 @@ class DataExtractionApp:
             messagebox.showerror("Error", f"Failed to parse stringing chart data: {e}")
 
     def parse_span_guy_xml(self):
+        # Parse the XML file for span guy data (wires supporting poles)
         try:
             tree = ET.parse(self.file_path)
             root = tree.getroot()
@@ -445,6 +497,7 @@ class DataExtractionApp:
 
             self.output_data.sort(key=lambda x: int(x[0]))
 
+            # Save the extracted span guy data to a file
             with open("extractStringingChartNeutralSpan_section_seq_totalSpanLength_circuitType.txt", "w") as file:
                 max_lengths = {
                     'section_num': max(len(str(row[0])) for row in self.output_data),
@@ -477,12 +530,14 @@ class DataExtractionApp:
             messagebox.showerror("Error", f"Failed to parse Span Guy XML file: {e}")
 
     def parse_primary_conductor_data(self):
+        # Parse data related to the primary conductor (main electrical wire) from the pasted data
         pasted_data = self.paste_text.get("1.0", tk.END).strip()
         if not pasted_data:
             messagebox.showerror("Error", "Please paste data into the text box.")
             return
 
         try:
+            # Regular expression pattern to extract relevant sections from the pasted data
             sections = re.findall(r"Stringing Chart Report\n\nCircuit '(.*?)' Section #(.*?) from structure #(.*?) to structure #(.*?),.*?Span\n(.*?)\n\n", pasted_data, re.DOTALL)
             output_data = []
 
@@ -497,6 +552,7 @@ class DataExtractionApp:
                 result = total_span_length * circuit_value
                 output_data.append((section_num, structure_to_structure, circuit_type, circuit_value, total_span_length, result, sequences_str))
 
+            # Save the extracted primary conductor data to a file
             with open("extractStringingChartPrimary_section_struct_circuitType_spanLength_total.txt", "w") as file:
                 max_lengths = {
                     'section_num': max(len(str(row[0])) for row in output_data),
@@ -539,6 +595,7 @@ class DataExtractionApp:
             messagebox.showerror("Error", f"Failed to parse primary conductor data: {e}")
 
     def parse_step6_structure_usage(self):
+        # Parse XML data related to structure usage (e.g., guy wire tension) and save to file
         try:
             tree = ET.parse(self.file_path)
             root = tree.getroot()
@@ -551,6 +608,7 @@ class DataExtractionApp:
                 if element_type == "Guy" or element_type == "Cable":
                     output_data.append((seq_no, element_label, element_type, max_usage))
 
+            # Save the extracted structure usage data to a file
             with open("extractGuyUsage_seq_elementType_usage.txt", "w") as file:
                 max_lengths = {
                     'sequence': max(len(row[0]) for row in output_data),
@@ -584,6 +642,7 @@ class DataExtractionApp:
             messagebox.showerror("Error", f"Failed to parse XML file: {e}")
 
     def parse_step7_joint_support(self):
+        # Parse XML data related to joint support (e.g., forces on structures) and save to file
         try:
             tree = ET.parse(self.file_path)
             root = tree.getroot()
@@ -593,11 +652,13 @@ class DataExtractionApp:
                 bending_moment = float(report.find('bending_moment').text)
                 max_force = max(shear_force, bending_moment)
 
+                # Store the maximum force for each sequence number
                 if seq_no not in self.max_force_data:
                     self.max_force_data[seq_no] = max_force
                 else:
                     self.max_force_data[seq_no] = max(self.max_force_data[seq_no], max_force)
 
+            # Save the maximum force data to a file
             with open("extractMAX_sequence_MaxForce.txt", "w") as file:
                 max_lengths = {
                     'sequence': max(len(seq) for seq in self.max_force_data),
@@ -624,10 +685,12 @@ class DataExtractionApp:
             messagebox.showerror("Error", f"Failed to parse Joint Support XML file: {e}")
 
     def generate_report(self):
+        # Generate the final report by combining data from multiple steps and saving to Excel
         # Clear previous output
         for widget in self.output_frame.winfo_children():
             widget.destroy()
 
+        # List of files to combine into the final report
         files_to_combine = [
             "extractHIS_seq_facID_existingTrans_primaryRiser_secondaryRiser.txt",
             "extractFusingCoordination_newOrExistingFusing.txt",
@@ -642,6 +705,7 @@ class DataExtractionApp:
             try:
                 with open(file_path, 'r') as file:
                     lines = file.readlines()
+                # Parse each file and store the data in a dictionary
                 if "extractHIS_seq_facID_existingTrans_primaryRiser_secondaryRiser.txt" in file_path:
                     parsed_data['his_seq'] = self.parse_his_seq(lines)
                 elif "extractFusingCoordination_newOrExistingFusing.txt" in file_path:
@@ -667,6 +731,7 @@ class DataExtractionApp:
             self.save_stringing_report(save_path)
 
     def save_stringing_report(self, file_path):
+        # Save the stringing chart data (neutral and primary) to the Excel file
         neutral_span_file = "extractStringingChartNeutralSpan_section_seq_totalSpanLength_circuitType.txt"
         primary_span_file = "extractStringingChartPrimary_section_struct_circuitType_spanLength_total.txt"
         
@@ -677,12 +742,14 @@ class DataExtractionApp:
         primary_sheet = workbook.create_sheet(title="Primary Stringing Data")
         neutral_sheet = workbook.create_sheet(title="Neutral Span Stringing Data")
         
+        # Define headers for the data
         primary_headers = ["Section #", "Structure -> Structure", "Circuit Type", "Circuit Value", "Span Length", "Result", "Sequences"]
         neutral_headers = ["Section #", "Sequence #s", "Total Span Length", "Circuit Type"]
         
         primary_sheet.append(primary_headers)
         neutral_sheet.append(neutral_headers)
         
+        # Append data to the respective sheets
         for row in primary_data:
             primary_sheet.append(row)
         
@@ -697,7 +764,7 @@ class DataExtractionApp:
                 cell.fill = header_fill
                 cell.font = header_font
         
-        # Adjust column widths
+        # Adjust column widths for better readability
         for sheet in [primary_sheet, neutral_sheet]:
             for column in sheet.columns:
                 max_length = 0
@@ -715,6 +782,7 @@ class DataExtractionApp:
         messagebox.showinfo("Success", f"Stringing report has been added to {file_path}")
 
     def parse_stringing_file(self, file_path, is_primary):
+        # Parse stringing chart data from a file and return it as a list of rows
         data = []
         with open(file_path, 'r') as file:
             lines = file.readlines()[2:]  # Skip header and separator line
@@ -727,10 +795,12 @@ class DataExtractionApp:
         return data
 
     def save_to_excel(self, data, file_path):
+        # Save the combined data from all steps into an Excel file
         workbook = Workbook()
         sheet = workbook.active
         sheet.title = "Data Report"
 
+        # Define headers for the report
         headers = ['sequence', 'facility_id', 'existing_transformers', 'primary_riser', 'secondary_riser',
                    'existing_or_new_tap', 'type', 'latitude', 'longitude', 'framing', 'anchor_direction',
                    'lead_length', 'pole_type', 'element_label', 'element_type', 'max_usage', 'max_force', 'soil_class', 'description']
@@ -743,11 +813,13 @@ class DataExtractionApp:
             cell.fill = header_fill
             cell.font = header_font
 
+        # Alternate row colors for better readability
         light_green = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
         light_blue = PatternFill(start_color="F5F5F5", end_color="F5F5F5", fill_type="solid")
         current_fill = light_green
         previous_seq = None
 
+        # Append data to the sheet, alternating row colors
         for seq, info in sorted(data.items(), key=lambda x: int(re.findall(r'\d+', x[0])[0])):
             max_length = max(len(info['existing_or_new_tap']), len(info['construction']), len(info['guy_usage']), 1)
             for i in range(max_length):
@@ -783,7 +855,7 @@ class DataExtractionApp:
                 for cell in sheet[sheet.max_row]:
                     cell.fill = current_fill
 
-        # Adjust column widths
+        # Adjust column widths for better readability
         for column in sheet.columns:
             max_length = 0
             column = list(column)
@@ -800,6 +872,7 @@ class DataExtractionApp:
         messagebox.showinfo("Success", f"Data has been saved to {file_path}")
 
     def parse_his_seq(self, lines):
+        # Parse Hendrix Input Sheet (HIS) data from a file and return it as a dictionary
         data = {}
         pattern = r"(\d{4})\s+([\d\.]+|None)\s+(\d+|None)\s+(Replace|None)?\s+(Replace|None)?"
         for line in lines[1:]:
@@ -815,6 +888,7 @@ class DataExtractionApp:
         return data
 
     def parse_fusing_coordination(self, lines):
+        # Parse fusing coordination data from a file and return it as a dictionary
         data = {}
         pattern = r"(\d{4})\s+(.+)"
         for line in lines[1:]:
@@ -827,6 +901,7 @@ class DataExtractionApp:
         return data
 
     def parse_construction_staking(self, lines):
+        # Parse construction staking data from a file and return it as a dictionary
         data = {}
         for line in lines[2:]:  # Skip header and separator line
             parts = [part.strip() for part in line.split('|')]
@@ -846,6 +921,7 @@ class DataExtractionApp:
         return data
 
     def parse_pole_type(self, lines):
+        # Parse pole type data from a file and return it as a dictionary
         data = {}
         pattern = r"(\d{4})\s+([\w\-\.]+)"
         for line in lines[1:]:
@@ -856,6 +932,7 @@ class DataExtractionApp:
         return data
 
     def parse_guy_usage(self, lines):
+        # Parse guy usage data from a file and return it as a dictionary
         data = {}
         for line in lines[2:]:  # Skip header and separator line
             parts = [part.strip() for part in line.split('|')]
@@ -872,6 +949,7 @@ class DataExtractionApp:
         return data
 
     def parse_max_force(self, lines):
+        # Parse maximum force data from a file and return it as a dictionary
         data = {}
         for line in lines[2:]:  # Skip header and separator line
             parts = [part.strip() for part in line.split('|')]
@@ -882,6 +960,7 @@ class DataExtractionApp:
         return data
 
     def combine_data(self, parsed_data):
+        # Combine parsed data from all steps into a single dictionary for final report
         combined = {}
         all_sequences = set(parsed_data['his_seq'].keys()) | set(parsed_data['fusing'].keys()) | \
                         set(parsed_data['construction'].keys()) | set(parsed_data['pole_type'].keys()) | \
@@ -905,6 +984,7 @@ class DataExtractionApp:
         return combined
 
 if __name__ == "__main__":
+    # Initialize the application and start the main loop
     root = tk.Tk()
     app = DataExtractionApp(root)
     root.mainloop()
