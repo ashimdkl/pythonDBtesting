@@ -1,8 +1,11 @@
 import re
 import tkinter as tk
 from tkinter import filedialog, messagebox
+from tkinter import ttk
+from ttkthemes import ThemedTk
 from openpyxl import load_workbook, Workbook
-from openpyxl.styles import PatternFill, Font
+from openpyxl.styles import PatternFill, Font, Alignment
+from openpyxl.utils import get_column_letter
 import xml.etree.ElementTree as ET
 import math
 
@@ -11,8 +14,8 @@ class DataExtractionApp:
         # Initialize the application window and set up basic variables and GUI components
         self.root = root
         self.root.title("Data Extraction App")
-        self.root.geometry('1000x800')
-        
+        self.root.geometry('1920x1080')
+
         # Variables to hold file paths, columns, and selected data
         self.file_path = None
         self.columns = []
@@ -21,53 +24,70 @@ class DataExtractionApp:
         self.output_data = []
         self.max_force_data = {}  # Dictionary to hold maximum force data by sequence number
         self.soil_class_data = {}  # New dictionary to store soil class data
-        
+
         # Set up the graphical user interface (GUI)
         self.setup_gui()
 
     def setup_gui(self):
         # Create the introductory frame with a button to start the analysis
-        self.intro_frame = tk.Frame(self.root, bg="white")
+        self.intro_frame = ttk.Frame(self.root)
         self.intro_frame.pack(expand=True, fill="both")
-        self.start_btn = tk.Button(self.intro_frame, text="Click to Begin Analysis!", command=self.start_analysis, font=("Arial", 14), bg="#f0f0f0")
+        self.start_btn = ttk.Button(self.intro_frame, text="Click to Begin Analysis!", command=self.start_analysis)
         self.start_btn.pack(pady=20)
-        
+
         # Create the main frame where most of the application interactions happen
-        self.main_frame = tk.Frame(self.root, bg="white")
-        self.step_label = tk.Label(self.main_frame, text="Step 1: Upload your Hendrix Input Sheet (HIS)", font=("Arial", 14), bg="white")
+        self.main_frame = ttk.Frame(self.root)
+
+        self.step_label = ttk.Label(self.main_frame, text="Step 1: Upload your Hendrix Input Sheet (HIS)", font=("Arial", 14))
         self.step_label.pack(pady=10)
-        
+
         # Button to upload files (e.g., Excel, XML) depending on the current step
-        self.upload_btn = tk.Button(self.main_frame, text="Upload HIS Excel File", command=self.upload_file, font=("Arial", 14), bg="#f0f0f0")
+        self.upload_btn = ttk.Button(self.main_frame, text="Upload HIS Excel File", command=self.upload_file)
         self.upload_btn.pack(pady=10)
-        
+
         # Listbox to allow the user to select columns from the uploaded Excel file
-        self.column_label = tk.Label(self.main_frame, text="Select Columns to Keep (including Sequence #)", font=("Arial", 14), bg="white")
+        self.column_label = ttk.Label(self.main_frame, text="Select Columns to Keep (including Sequence #)", font=("Arial", 14))
         self.column_label.pack(pady=10)
-        self.column_listbox = tk.Listbox(self.main_frame, selectmode=tk.MULTIPLE, font=("Arial", 12))
-        self.column_listbox.pack(pady=10)
-        
+
+        # Frame and scrollbar for the listbox
+        self.listbox_frame = ttk.Frame(self.main_frame)
+        self.listbox_frame.pack(pady=10)
+        self.column_listbox = tk.Listbox(self.listbox_frame, selectmode=tk.MULTIPLE, font=("Arial", 12), width=50, height=10)
+        self.column_listbox.pack(side=tk.LEFT, fill=tk.BOTH)
+        self.scrollbar = ttk.Scrollbar(self.listbox_frame, orient=tk.VERTICAL, command=self.column_listbox.yview)
+        self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        self.column_listbox.config(yscrollcommand=self.scrollbar.set)
+
         # Buttons to process the data or skip steps
-        self.process_btn = tk.Button(self.main_frame, text="Parse Data and Move to Next Step", command=self.parse_and_next_step, font=("Arial", 12), bg="#f0f0f0")
+        self.process_btn = ttk.Button(self.main_frame, text="Parse Data and Move to Next Step", command=self.parse_and_next_step)
         self.process_btn.pack(pady=10)
-        self.skip_btn = tk.Button(self.main_frame, text="Skip This Step", command=self.next_step, font=("Arial", 12), bg="#f0f0f0")
+        self.skip_btn = ttk.Button(self.main_frame, text="Skip This Step", command=self.next_step)
         self.skip_btn.pack(pady=10)
-        
+
         # Widgets to paste and display data, initially hidden until needed
-        self.paste_label = tk.Label(self.main_frame, text="Paste Fusing Coordination Data Here", font=("Arial", 14), bg="white")
-        self.paste_text = tk.Text(self.main_frame, wrap=tk.WORD, height=15, font=("Arial", 12))
-        self.paste_label.pack(pady=10)
-        self.paste_text.pack(pady=10)
+        self.paste_label = ttk.Label(self.main_frame, text="Paste Fusing Coordination Data Here", font=("Arial", 14))
+        self.text_frame = ttk.Frame(self.main_frame)
+        self.text_frame.pack(pady=10)
+        self.paste_text = tk.Text(self.text_frame, wrap=tk.WORD, height=15, font=("Arial", 12))
+        self.text_scrollbar = ttk.Scrollbar(self.text_frame, orient=tk.VERTICAL, command=self.paste_text.yview)
+        self.paste_text.config(yscrollcommand=self.text_scrollbar.set)
+        self.paste_text.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        self.text_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        self.text_frame.pack_forget()
         self.paste_label.pack_forget()
-        self.paste_text.pack_forget()
-        
+
         # Button to generate the final report, hidden until the final step
-        self.next_btn = tk.Button(self.main_frame, text="Generate Report", command=self.generate_report, font=("Arial", 12), bg="#f0f0f0")
+        self.next_btn = ttk.Button(self.main_frame, text="Generate Report", command=self.generate_report)
         self.next_btn.pack(pady=10)
         self.next_btn.pack_forget()
-        
+
+        # Button for step 7 "Generate Results"
+        self.gen_results_btn = ttk.Button(self.main_frame, text="Generate Deliverables", command=self.go_to_step8)
+        self.gen_results_btn.pack(pady=10)
+        self.gen_results_btn.pack_forget()
+
         # Frame to hold the output results
-        self.output_frame = tk.Frame(self.root, bg="white")
+        self.output_frame = ttk.Frame(self.root)
         self.output_frame.pack(expand=True, fill="both")
 
     def start_analysis(self):
@@ -91,6 +111,8 @@ class DataExtractionApp:
                 self.parse_step6_structure_usage()
             elif self.step == 7:
                 self.parse_step7_joint_support()
+            elif self.step == 8:
+                self.parse_guy_calc_report(self.file_path)
             messagebox.showinfo("File Uploaded", "File uploaded successfully.")
 
     def load_columns_from_file(self):
@@ -113,7 +135,8 @@ class DataExtractionApp:
             return
 
         # Get the columns selected by the user
-        self.selected_columns = [self.column_listbox.get(i) for i in self.column_listbox.curselection()]
+        selected_indices = self.column_listbox.curselection()
+        self.selected_columns = [self.column_listbox.get(i) for i in selected_indices]
         if not self.selected_columns:
             messagebox.showerror("Error", "Please select at least one column to keep!")
             return
@@ -149,19 +172,21 @@ class DataExtractionApp:
             self.step_label.config(text="Step 2: Copy and Paste your Fusing Coordination Report")
             self.upload_btn.pack_forget()
             self.column_label.pack_forget()
-            self.column_listbox.pack_forget()
+            self.listbox_frame.pack_forget()
             self.process_btn.config(text="Parse Data and Move to Next Step", command=self.parse_and_next_step)
+            self.paste_label.config(text="Paste Fusing Coordination Data Here")
             self.paste_label.pack(pady=10)
-            self.paste_text.pack(pady=10)
+            self.text_frame.pack(pady=10)
             self.process_btn.pack(pady=10)
             self.skip_btn.pack(pady=10)
         elif self.step == 3:
             self.step_label.config(text="Step 3: Upload your Construction Staking Report")
-            self.upload_btn.config(text="Upload Construction Staking Report", command=self.upload_file)
+            self.upload_btn.config(text="Upload Construction Staking Report")
             self.paste_label.pack_forget()
-            self.paste_text.pack_forget()
+            self.text_frame.pack_forget()
             self.upload_btn.pack(pady=10)
-            self.column_listbox.pack_forget()
+            self.column_label.pack_forget()
+            self.listbox_frame.pack_forget()
             self.process_btn.config(text="Parse Data and Move to Next Step", command=self.parse_and_next_step)
             self.process_btn.pack(pady=10)
             self.skip_btn.pack(pady=10)
@@ -170,7 +195,7 @@ class DataExtractionApp:
             self.upload_btn.pack_forget()
             self.paste_label.config(text="Paste Stringing Chart Data Here")
             self.paste_label.pack(pady=10)
-            self.paste_text.pack(pady=10)
+            self.text_frame.pack(pady=10)
             self.process_btn.config(text="Parse Data and Move to Next Step", command=self.parse_and_next_step)
             self.process_btn.pack(pady=10)
             self.skip_btn.pack(pady=10)
@@ -179,15 +204,15 @@ class DataExtractionApp:
             self.upload_btn.pack_forget()
             self.paste_label.config(text="Paste Primary Conductor Stringing Chart Data Here")
             self.paste_label.pack(pady=10)
-            self.paste_text.pack(pady=10)
+            self.text_frame.pack(pady=10)
             self.process_btn.config(text="Parse Data and Move to Next Step", command=self.parse_and_next_step)
             self.process_btn.pack(pady=10)
             self.skip_btn.pack(pady=10)
         elif self.step == 6:
             self.step_label.config(text="Step 6: Upload your Structure Usage Report")
-            self.upload_btn.config(text="Upload Structure Usage Report", command=self.upload_file)
+            self.upload_btn.config(text="Upload Structure Usage Report")
             self.paste_label.pack_forget()
-            self.paste_text.pack_forget()
+            self.text_frame.pack_forget()
             self.upload_btn.pack(pady=10)
             self.process_btn.config(text="Parse Data and Move to Next Step", command=self.parse_and_next_step)
             self.process_btn.pack(pady=10)
@@ -196,13 +221,136 @@ class DataExtractionApp:
             self.step_label.config(text="Step 7: Copy and Paste Soil Class Data")
             self.paste_label.config(text="Paste Soil Class Data Here")
             self.paste_label.pack(pady=10)
-            self.paste_text.pack(pady=10)
-            self.upload_btn.config(text="Upload Joint Support XML and Parse", command=self.upload_file)
+            self.text_frame.pack(pady=10)
+            self.upload_btn.config(text="Upload Joint Support XML and Parse")
             self.upload_btn.pack(pady=10)
             self.process_btn.config(text="Parse Soil Class Data", command=self.parse_soil_class_data)
             self.process_btn.pack(pady=10)
             self.next_btn.pack(pady=10)  # Show the Generate Report button
+            self.gen_results_btn.pack(pady=10)  # Show the Generate Results button
             self.skip_btn.pack_forget()  # Remove the Skip button on the last step
+
+    def go_to_step8(self):
+        # Transition to Step 8 for generating deliverables
+        self.main_frame.pack_forget()
+        self.step = 8
+        self.step8_frame = ttk.Frame(self.root)
+        self.step8_frame.pack(expand=True, fill="both")
+        self.step8_label = ttk.Label(self.step8_frame, text="Step 8: Generate Guy Calc Report Deliverable", font=("Arial", 14))
+        self.step8_label.pack(pady=10)
+
+        # Button to allow users to select the generated report Excel
+        self.upload_btn_8 = ttk.Button(self.step8_frame, text="Please Select Your Generated Report", command=self.upload_generated_report)
+        self.upload_btn_8.pack(pady=10)
+
+    def upload_generated_report(self):
+        # Let the user select the generated report Excel file
+        filetypes = [("Excel files", "*.xlsx")]
+        self.file_path = filedialog.askopenfilename(filetypes=filetypes)
+        if self.file_path:
+            try:
+                # Load the workbook and check for available sheets
+                workbook = load_workbook(self.file_path)
+                available_sheets = workbook.sheetnames
+                if "Data Report" in available_sheets:
+                    self.parse_guy_calc_report(self.file_path)
+                else:
+                    messagebox.showerror("Error", "Worksheet 'Data Report' does not exist in the uploaded file.")
+            except Exception as e:
+                messagebox.showerror("Error", f"Failed to parse file: {e}")
+
+    def parse_guy_calc_report(self, file_path):
+        try:
+            # Load the workbook and the relevant sheet
+            workbook = load_workbook(file_path)
+            sheet = workbook['Data Report']
+
+            # Create a new workbook for the output
+            output_workbook = Workbook()
+            output_sheet = output_workbook.active
+            output_sheet.title = "Guy Calc Report"
+
+            # Add the instructions block at the top
+            instructions = [
+                "1. Calculations and guying specified at each location based on Final construction drawings.",
+                "2. Existing and proposed pole installations are determined based on POWER Engineers PLS-CADD Plan Drawing.",
+                "3. Guy label taken from PLS-CADD Pole Report provided by POWER Engineers.",
+                "4. Existing and proposed guy installations are determined based on POWER Engineers EST Map.",
+                "5. Guy Notes and Direction taken from POWER Engineers PLS-CADD EST Map.",
+                "6. Anchor Type specified by using Anchor Selection Guide in PacifiCorp standard EG041.",
+                "7. Usage % taken from 'Summary of Guy Usages - Maximum Usage %' in the PLS-CADD Pole Report provided by POWER Engineers.",
+                "8. Tension is calculated using Usage % multiplied by 'Cable Properties - Ultimate Tension' in the PLS-CADD Pole Report.",
+                "9. Total Max Anchor Tension is calculated by summing the guys attached to anchor, based on class 5 soil.",
+                "10. All new installations are assuming 7/16\" UG guy wire installation",
+                "11. Red text indicates existing Transmission guying that is assumed to be 7/16\" UG minimum.",
+                "12. Guys on same pole highlighted with the same color attach to the same anchor."
+            ]
+
+            for i, instruction in enumerate(instructions, start=2):
+                output_sheet.merge_cells(start_row=i, start_column=2, end_row=i, end_column=12)
+                cell = output_sheet.cell(row=i, column=2, value=instruction)
+                cell.alignment = Alignment(wrap_text=True)
+
+            # Add headers
+            headers = [
+                "Pole Number", "Facility Pole ID", "Existing or Proposed Pole", "Guy Label", "Type of Guy",
+                "Lead Length", "Anchor Direction", "Anchor Number", "Anchor Type", "% Usage", "Guy Tension (lb)",
+                "Total Max Anchor Tension (lb)", "Material to Include in RCMS Estimate"
+            ]
+            header_row = len(instructions) + 3  # Start headers after instructions
+            header_fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
+            header_font = Font(bold=True)
+            header_alignment = Alignment(horizontal="center", vertical="center")
+
+            for col_num, header in enumerate(headers, start=2):
+                cell = output_sheet.cell(row=header_row, column=col_num, value=header)
+                cell.fill = header_fill
+                cell.font = header_font
+                cell.alignment = header_alignment
+
+            # Append the data from the 'Data Report' sheet
+            for row in sheet.iter_rows(min_row=2, values_only=True):
+                type_of_guy = row[6] if row[6] is not None else ""
+                
+                # Logic to extract proper guy label from connections
+                if "to" in type_of_guy:  # Assuming column 6 contains the type like 'P1 to PG11'
+                    guy_label = type_of_guy.split("to")[1].strip()
+                    output_sheet.append([
+                        row[0],  # Pole Number (sequence)
+                        row[1],  # Facility Pole ID (facility_id)
+                        "Proposed" if row[2] else "Existing",  # Existing or Proposed Pole based on transformers
+                        guy_label,  # Extracted Guy Label
+                        type_of_guy,  # Type of Guy (from type column)
+                        row[8],  # Lead Length
+                        row[7],  # Anchor Direction
+                        None,    # Placeholder for Anchor Number (add logic if required)
+                        row[9],  # Anchor Type
+                        row[10], # % Usage
+                        row[11], # Guy Tension
+                        row[12], # Total Max Anchor Tension
+                        None     # Placeholder for Material to Include in RCMS Estimate (add logic if required)
+                    ])
+
+            # Auto adjust column widths for readability
+            for col in output_sheet.columns:
+                max_length = 0
+                col_letter = get_column_letter(col[0].column)
+                for cell in col:
+                    try:
+                        if len(str(cell.value)) > max_length:
+                            max_length = len(str(cell.value))
+                    except:
+                        pass
+                adjusted_width = (max_length + 2)
+                output_sheet.column_dimensions[col_letter].width = adjusted_width
+
+            # Prompt the user to save the final report
+            save_path = filedialog.asksaveasfilename(defaultextension=".xlsx", filetypes=[("Excel files", "*.xlsx")])
+            if save_path:
+                output_workbook.save(save_path)
+                messagebox.showinfo("Success", f"Guy Calc Report saved to {save_path}")
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to generate Guy Calc Report: {e}")
 
     def parse_and_next_step(self):
         # Parse the data and move to the next step based on the current step
