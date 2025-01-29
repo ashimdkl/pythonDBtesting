@@ -1,0 +1,2536 @@
+Sequence | Label | Type      | Grade
+----------------------------------------
+2010     | P1    | Steel Pole | B
+2010     | U4p   | Post       | B
+2010     | P1    | Pole Deflection | B
+2010     | P1    | Steel Pole | B
+2010     | U1p   | Post       | B
+2010     | P1    | Pole Deflection | B
+2010     | P1    | Steel Pole | C
+2010     | U4p   | Post       | C
+2010     | P1    | Pole Deflection | C
+2010     | P1    | Steel Pole | C
+2010     | U1p   | Post       | C
+2010     | P1    | Pole Deflection | C
+2010     | P1    | Steel Pole | C
+2010     | U4p   | Post       | C
+2010     | P1    | Pole Deflection | C
+2010     | P1    | Steel Pole | C
+2010     | U1p   | Post       | C
+2010     | P1    | Pole Deflection | C
+2020     | P1    | Steel Pole | B
+2020     | U4p   | Post       | B
+2020     | P1    | Pole Deflection | B
+2020     | P1    | Steel Pole | B
+2020     | U4p   | Post       | B
+2020     | P1    | Pole Deflection | B
+2020     | P1    | Steel Pole | C
+2020     | U4p   | Post       | C
+2020     | P1    | Pole Deflection | C
+2020     | P1    | Steel Pole | C
+2020     | U4p   | Post       | C
+2020     | P1    | Pole Deflection | C
+2020     | P1    | Steel Pole | C
+2020     | U4p   | Post       | C
+2020     | P1    | Pole Deflection | C
+2020     | P1    | Steel Pole | C
+2020     | U4p   | Post       | C
+2020     | P1    | Pole Deflection | C
+2050     | P1    | Steel Pole | B
+2050     | T1    | Post       | B
+2050     | P1    | Pole Deflection | B
+2050     | P1    | Steel Pole | B
+2050     | U4p   | Post       | B
+2050     | P1    | Pole Deflection | B
+2050     | P1    | Steel Pole | B
+2050     | U4p   | Post       | B
+2050     | P1    | Pole Deflection | B
+2050     | P1    | Steel Pole | B
+2050     | U4p   | Post       | B
+2050     | P1    | Pole Deflection | B
+2050     | P1    | Steel Pole | B
+2050     | T1    | Post       | B
+2050     | P1    | Pole Deflection | B
+2050     | P1    | Steel Pole | B
+2050     | T1    | Post       | B
+2050     | P1    | Pole Deflection | B
+2050     | P1    | Steel Pole | C
+2050     | T1    | Post       | C
+2050     | P1    | Pole Deflection | C
+2050     | P1    | Steel Pole | C
+2050     | T1    | Post       | C
+2050     | P1    | Pole Deflection | C
+2050     | P1    | Steel Pole | C
+2050     | U4p   | Post       | C
+2050     | P1    | Pole Deflection | C
+2050     | P1    | Steel Pole | C
+2050     | U4p   | Post       | C
+2050     | P1    | Pole Deflection | C
+2060     | P1    | FRP Pole   | B
+2060     | C2-c1 | Clamp      | B
+2060     | P1    | Pole Deflection | B
+2060     | P1    | FRP Pole   | B
+2060     | C2-c1 | Clamp      | B
+2060     | P1    | Pole Deflection | B
+2060     | P1    | FRP Pole   | C
+2060     | C2-c1 | Clamp      | C
+2060     | P1    | Pole Deflection | C
+2060     | P1    | FRP Pole   | C
+2060     | C2-c1 | Clamp      | C
+2060     | P1    | Pole Deflection | C
+2060     | P1    | FRP Pole   | C
+2060     | C2-c1 | Clamp      | C
+2060     | P1    | Pole Deflection | C
+2060     | P1    | FRP Pole   | C
+2060     | C2-c1 | Clamp      | C
+2060     | P1    | Pole Deflection | C
+2070     | P1    | Steel Pole | B
+2070     | U4p   | Post       | B
+2070     | P1    | Pole Deflection | B
+2070     | P1    | Steel Pole | B
+2070     | U4p   | Post       | B
+2070     | P1    | Pole Deflection | B
+2070     | P1    | Steel Pole | C
+2070     | U4p   | Post       | C
+2070     | P1    | Pole Deflection | C
+2070     | P1    | Steel Pole | C
+2070     | U4p   | Post       | C
+2070     | P1    | Pole Deflection | C
+2070     | P1    | Steel Pole | C
+2070     | U4p   | Post       | C
+2070     | P1    | Pole Deflection | C
+2070     | P1    | Steel Pole | C
+2070     | U4p   | Post       | C
+2070     | P1    | Pole Deflection | C
+2080 & 2085 | CM12  | Guy        | B
+2080 & 2085 | C1-c1 | Clamp      | B
+2080 & 2085 | P1    | Pole Deflection | B
+2080 & 2085 | PG21  | Guy        | B
+2080 & 2085 | C1-c1 | Clamp      | B
+2080 & 2085 | P1    | Pole Deflection | B
+2080 & 2085 | P1    | Steel Pole | C
+2080 & 2085 | C1-c1 | Clamp      | C
+2080 & 2085 | P1    | Pole Deflection | C
+2080 & 2085 | PG21  | Guy        | C
+2080 & 2085 | C1-c1 | Clamp      | C
+2080 & 2085 | P1    | Pole Deflection | C
+2080 & 2085 | P1    | Steel Pole | C
+2080 & 2085 | C1-c1 | Clamp      | C
+2080 & 2085 | P1    | Pole Deflection | C
+2080 & 2085 | PG21  | Guy        | C
+2080 & 2085 | C1-c1 | Clamp      | C
+2080 & 2085 | P1    | Pole Deflection | C
+2080 & 2085 | PG11  | Guy        | C
+2080 & 2085 | C1-c1 | Clamp      | C
+2080 & 2085 | P1    | Pole Deflection | C
+2080 & 2085 | PG21  | Guy        | C
+2080 & 2085 | C1-c1 | Clamp      | C
+2080 & 2085 | P1    | Pole Deflection | C
+2080 & 2085 | PG11  | Guy        | B
+2080 & 2085 | C1-c1 | Clamp      | B
+2080 & 2085 | P1    | Pole Deflection | B
+2080 & 2085 | PG21  | Guy        | B
+2080 & 2085 | C1-c1 | Clamp      | B
+2080 & 2085 | P1    | Pole Deflection | B
+2120     | P1    | Steel Pole | B
+2120     | U1p   | Post       | B
+2120     | P1    | Pole Deflection | B
+2120     | P1    | Steel Pole | B
+2120     | U1p   | Post       | B
+2120     | P1    | Pole Deflection | B
+2120     | P1    | Steel Pole | C
+2120     | U1p   | Post       | C
+2120     | P1    | Pole Deflection | C
+2120     | P1    | Steel Pole | C
+2120     | U1p   | Post       | C
+2120     | P1    | Pole Deflection | C
+2120     | P1    | Steel Pole | C
+2120     | U1p   | Post       | C
+2120     | P1    | Pole Deflection | C
+2120     | P1    | Steel Pole | C
+2120     | U1p   | Post       | C
+2120     | P1    | Pole Deflection | C
+2130     | P1    | Steel Pole | B
+2130     | U4p   | Post       | B
+2130     | P1    | Pole Deflection | B
+2130     | F2-a1 | X-Arm      | B
+2130     | U4p   | Post       | B
+2130     | P1    | Pole Deflection | B
+2130     | P1    | Steel Pole | C
+2130     | U4p   | Post       | C
+2130     | P1    | Pole Deflection | C
+2130     | F2-a1 | X-Arm      | C
+2130     | U4p   | Post       | C
+2130     | P1    | Pole Deflection | C
+2130     | P1    | Steel Pole | C
+2130     | U4p   | Post       | C
+2130     | P1    | Pole Deflection | C
+2130     | F2-a1 | X-Arm      | C
+2130     | U4p   | Post       | C
+2130     | P1    | Pole Deflection | C
+2200     | P1    | FRP Pole   | B
+2200     | U1p   | Post       | B
+2200     | P1    | Pole Deflection | B
+2200     | P1    | FRP Pole   | B
+2200     | U1p   | Post       | B
+2200     | P1    | Pole Deflection | B
+2200     | P1    | FRP Pole   | C
+2200     | U1p   | Post       | C
+2200     | P1    | Pole Deflection | C
+2200     | P1    | FRP Pole   | C
+2200     | U1p   | Post       | C
+2200     | P1    | Pole Deflection | C
+2200     | P1    | FRP Pole   | C
+2200     | U1p   | Post       | C
+2200     | P1    | Pole Deflection | C
+2200     | P1    | FRP Pole   | C
+2200     | U1p   | Post       | C
+2200     | P1    | Pole Deflection | C
+2210     | P1    | Steel Pole | B
+2210     | U4p   | Post       | B
+2210     | P1    | Pole Deflection | B
+2210     | P1    | Steel Pole | B
+2210     | U4p   | Post       | B
+2210     | P1    | Pole Deflection | B
+2210     | P1    | Steel Pole | C
+2210     | U4p   | Post       | C
+2210     | P1    | Pole Deflection | C
+2210     | P1    | Steel Pole | C
+2210     | U4p   | Post       | C
+2210     | P1    | Pole Deflection | C
+2210     | P1    | Steel Pole | C
+2210     | U4p   | Post       | C
+2210     | P1    | Pole Deflection | C
+2210     | P1    | Steel Pole | C
+2210     | U4p   | Post       | C
+2210     | P1    | Pole Deflection | C
+2240     | P1    | Steel Pole | B
+2240     | U4p   | Post       | B
+2240     | P1    | Pole Deflection | B
+2240     | P1    | Steel Pole | B
+2240     | U4p   | Post       | B
+2240     | P1    | Pole Deflection | B
+2240     | P1    | Steel Pole | C
+2240     | U4p   | Post       | C
+2240     | P1    | Pole Deflection | C
+2240     | P1    | Steel Pole | C
+2240     | U4p   | Post       | C
+2240     | P1    | Pole Deflection | C
+2240     | P1    | Steel Pole | C
+2240     | U4p   | Post       | C
+2240     | P1    | Pole Deflection | C
+2240     | P1    | Steel Pole | C
+2240     | U4p   | Post       | C
+2240     | P1    | Pole Deflection | C
+2350     | P1    | Steel Pole | B
+2350     | U1p   | Post       | B
+2350     | P1    | Pole Deflection | B
+2350     | P1    | Steel Pole | B
+2350     | U1p   | Post       | B
+2350     | P1    | Pole Deflection | B
+2350     | P1    | Steel Pole | C
+2350     | U1p   | Post       | C
+2350     | P1    | Pole Deflection | C
+2350     | P1    | Steel Pole | C
+2350     | U1p   | Post       | C
+2350     | P1    | Pole Deflection | C
+2350     | P1    | Steel Pole | C
+2350     | U1p   | Post       | C
+2350     | P1    | Pole Deflection | C
+2350     | P1    | Steel Pole | C
+2350     | U1p   | Post       | C
+2350     | P1    | Pole Deflection | C
+2350     | P1    | Steel Pole | C
+2350     | U1p   | Post       | C
+2350     | P1    | Pole Deflection | C
+2350     | P1    | Steel Pole | C
+2350     | U1p   | Post       | C
+2350     | P1    | Pole Deflection | C
+2350     | P1    | Steel Pole | B
+2350     | U1p   | Post       | B
+2350     | P1    | Pole Deflection | B
+2350     | P1    | Steel Pole | B
+2350     | U1p   | Post       | B
+2350     | P1    | Pole Deflection | B
+2420     | P1    | Steel Pole | B
+2420     | F1-U1p | Post       | B
+2420     | P1    | Pole Deflection | B
+2420     | P1    | Steel Pole | B
+2420     | F1-U1p | Post       | B
+2420     | P1    | Pole Deflection | B
+2420     | P1    | Steel Pole | C
+2420     | F1-U1p | Post       | C
+2420     | P1    | Pole Deflection | C
+2420     | P1    | Steel Pole | C
+2420     | F1-U1p | Post       | C
+2420     | P1    | Pole Deflection | C
+2420     | P1    | Steel Pole | C
+2420     | F1-U1p | Post       | C
+2420     | P1    | Pole Deflection | C
+2420     | P1    | Steel Pole | C
+2420     | F1-U1p | Post       | C
+2420     | P1    | Pole Deflection | C
+2460     | P1    | Steel Pole | B
+2460     | U4p   | Post       | B
+2460     | P1    | Pole Deflection | B
+2460     | P1    | Steel Pole | B
+2460     | U4p   | Post       | B
+2460     | P1    | Pole Deflection | B
+2460     | P1    | Steel Pole | C
+2460     | U4p   | Post       | C
+2460     | P1    | Pole Deflection | C
+2460     | P1    | Steel Pole | C
+2460     | U4p   | Post       | C
+2460     | P1    | Pole Deflection | C
+2460     | P1    | Steel Pole | C
+2460     | U4p   | Post       | C
+2460     | P1    | Pole Deflection | C
+2460     | P1    | Steel Pole | C
+2460     | U4p   | Post       | C
+2460     | P1    | Pole Deflection | C
+2470     | PG11  | Guy        | B
+2470     | C1-c1 | Clamp      | B
+2470     | P1    | Pole Deflection | B
+2470     | PG11  | Guy        | B
+2470     | C1-c1 | Clamp      | B
+2470     | P1    | Pole Deflection | B
+2470     | PG11  | Guy        | C
+2470     | C1-c1 | Clamp      | C
+2470     | P1    | Pole Deflection | C
+2470     | PG11  | Guy        | C
+2470     | C1-c1 | Clamp      | C
+2470     | P1    | Pole Deflection | C
+2470     | PG11  | Guy        | C
+2470     | C1-c1 | Clamp      | C
+2470     | P1    | Pole Deflection | C
+2470     | PG11  | Guy        | C
+2470     | C1-c1 | Clamp      | C
+2470     | P1    | Pole Deflection | C
+2470     | P1    | Steel Pole | C
+2470     | C1-c1 | Clamp      | C
+2470     | P1    | Pole Deflection | C
+2470     | P1    | Steel Pole | C
+2470     | C1-c1 | Clamp      | C
+2470     | P1    | Pole Deflection | C
+2470     | P1    | Steel Pole | B
+2470     | C1-c1 | Clamp      | B
+2470     | P1    | Pole Deflection | B
+2470     | P1    | Steel Pole | B
+2470     | C1-c1 | Clamp      | B
+2470     | P1    | Pole Deflection | B
+2670     | NG12  | Guy        | B
+2670     | U1-1A | Strain     | B
+2670     | P1    | Pole Deflection | B
+2670     | NG12  | Guy        | B
+2670     | U1-1A | Strain     | B
+2670     | P1    | Pole Deflection | B
+2670     | NG12  | Guy        | B
+2670     | c1    | Clamp      | B
+2670     | P1    | Pole Deflection | B
+2670     | PG32  | Guy        | B
+2670     | c1    | Clamp      | B
+2670     | P1    | Pole Deflection | B
+2670     | PG22  | Guy        | B
+2670     | c1    | Clamp      | B
+2670     | P1    | Pole Deflection | B
+2670     | PG22  | Guy        | B
+2670     | c1    | Clamp      | B
+2670     | P1    | Pole Deflection | B
+2670     | NG12  | Guy        | C
+2670     | U1-1A | Strain     | C
+2670     | P1    | Pole Deflection | C
+2670     | NG12  | Guy        | C
+2670     | U1-1A | Strain     | C
+2670     | P1    | Pole Deflection | C
+2670     | NG12  | Guy        | C
+2670     | U1-1A | Strain     | C
+2670     | P1    | Pole Deflection | C
+2670     | NG12  | Guy        | C
+2670     | U1-1A | Strain     | C
+2670     | P1    | Pole Deflection | C
+2670     | NG12  | Guy        | C
+2670     | c1    | Clamp      | C
+2670     | P1    | Pole Deflection | C
+2670     | PG32  | Guy        | C
+2670     | c1    | Clamp      | C
+2670     | P1    | Pole Deflection | C
+2670     | PG22  | Guy        | C
+2670     | c1    | Clamp      | C
+2670     | P1    | Pole Deflection | C
+2670     | PG22  | Guy        | C
+2670     | c1    | Clamp      | C
+2670     | P1    | Pole Deflection | C
+2670     | PG21  | Guy        | C
+2670     | U1-1A | Strain     | C
+2670     | P1    | Pole Deflection | C
+2670     | PG21  | Guy        | C
+2670     | U1-1A | Strain     | C
+2670     | P1    | Pole Deflection | C
+2670     | PG21  | Guy        | B
+2670     | U1-1A | Strain     | B
+2670     | P1    | Pole Deflection | B
+2670     | PG21  | Guy        | B
+2670     | U1-1A | Strain     | B
+2670     | P1    | Pole Deflection | B
+2690     | P1    | Steel Pole | B
+2690     | U1p   | Post       | B
+2690     | P1    | Pole Deflection | B
+2690     | P1    | Steel Pole | B
+2690     | U1p   | Post       | B
+2690     | P1    | Pole Deflection | B
+2690     | P1    | Steel Pole | C
+2690     | U1p   | Post       | C
+2690     | P1    | Pole Deflection | C
+2690     | P1    | Steel Pole | C
+2690     | U1p   | Post       | C
+2690     | P1    | Pole Deflection | C
+2690     | P1    | Steel Pole | C
+2690     | U1p   | Post       | C
+2690     | P1    | Pole Deflection | C
+2690     | P1    | Steel Pole | C
+2690     | U1p   | Post       | C
+2690     | P1    | Pole Deflection | C
+2700     | SE11  | Guy        | B
+2700     | UN2B  | Strain     | B
+2700     | P1    | Pole Deflection | B
+2700     | P1    | Steel Pole | B
+2700     | U1p   | Post       | B
+2700     | P1    | Pole Deflection | B
+2700     | SE11  | Guy        | C
+2700     | UN2B  | Strain     | C
+2700     | P1    | Pole Deflection | C
+2700     | P1    | Steel Pole | C
+2700     | UN2B  | Strain     | C
+2700     | P1    | Pole Deflection | C
+2700     | SE11  | Guy        | C
+2700     | UN2B  | Strain     | C
+2700     | P1    | Pole Deflection | C
+2700     | P1    | Steel Pole | C
+2700     | UN2B  | Strain     | C
+2700     | P1    | Pole Deflection | C
+2710     | P1    | Steel Pole | B
+2710     | U1p   | Post       | B
+2710     | P1    | Pole Deflection | B
+2710     | P1    | Steel Pole | B
+2710     | U1p   | Post       | B
+2710     | P1    | Pole Deflection | B
+2710     | P1    | Steel Pole | C
+2710     | U1p   | Post       | C
+2710     | P1    | Pole Deflection | C
+2710     | P1    | Steel Pole | C
+2710     | C1-c1 | Clamp      | C
+2710     | P1    | Pole Deflection | C
+2710     | P1    | Steel Pole | C
+2710     | U1p   | Post       | C
+2710     | P1    | Pole Deflection | C
+2710     | P1    | Steel Pole | C
+2710     | C1-c1 | Clamp      | C
+2710     | P1    | Pole Deflection | C
+2720     | P1    | Steel Pole | B
+2720     | U1p   | Post       | B
+2720     | P1    | Pole Deflection | B
+2720     | P1    | Steel Pole | B
+2720     | U1p   | Post       | B
+2720     | P1    | Pole Deflection | B
+2720     | P1    | Steel Pole | C
+2720     | U1p   | Post       | C
+2720     | P1    | Pole Deflection | C
+2720     | P1    | Steel Pole | C
+2720     | U1p   | Post       | C
+2720     | P1    | Pole Deflection | C
+2720     | P1    | Steel Pole | C
+2720     | U1p   | Post       | C
+2720     | P1    | Pole Deflection | C
+2720     | P1    | Steel Pole | C
+2720     | U1p   | Post       | C
+2720     | P1    | Pole Deflection | C
+2730 & 2735 | PG12  | Guy        | B
+2730 & 2735 | U1A   | Post       | B
+2730 & 2735 | P1    | Pole Deflection | B
+2730 & 2735 | PG13  | Guy        | B
+2730 & 2735 | C1-c1 | Clamp      | B
+2730 & 2735 | P2    | Pole Deflection | B
+2730 & 2735 | PG13  | Guy        | C
+2730 & 2735 | U1A   | Post       | C
+2730 & 2735 | P1    | Pole Deflection | C
+2730 & 2735 | PG13  | Guy        | C
+2730 & 2735 | C1-c1 | Clamp      | C
+2730 & 2735 | P2    | Pole Deflection | C
+2730 & 2735 | PG13  | Guy        | C
+2730 & 2735 | U1A   | Post       | C
+2730 & 2735 | P1    | Pole Deflection | C
+2730 & 2735 | PG13  | Guy        | C
+2730 & 2735 | C1-c1 | Clamp      | C
+2730 & 2735 | P2    | Pole Deflection | C
+2730 & 2735 | P1    | Steel Pole | C
+2730 & 2735 | U1A   | Post       | C
+2730 & 2735 | P1    | Pole Deflection | C
+2730 & 2735 | PG13  | Guy        | C
+2730 & 2735 | C1-c1 | Clamp      | C
+2730 & 2735 | P2    | Pole Deflection | C
+2730 & 2735 | P1    | Steel Pole | B
+2730 & 2735 | U1A   | Post       | B
+2730 & 2735 | P1    | Pole Deflection | B
+2730 & 2735 | PG13  | Guy        | B
+2730 & 2735 | C1-c1 | Clamp      | B
+2730 & 2735 | P2    | Pole Deflection | B
+2760     | P1    | Steel Pole | B
+2760     | S1-SP | Clamp      | B
+2760     | P1    | Pole Deflection | B
+2760     | P1    | Steel Pole | B
+2760     | S1-SP | Clamp      | B
+2760     | P1    | Pole Deflection | B
+2760     | P1    | Steel Pole | C
+2760     | Sp-SP | Clamp      | C
+2760     | P1    | Pole Deflection | C
+2760     | P1    | Steel Pole | C
+2760     | Sp-SP | Clamp      | C
+2760     | P1    | Pole Deflection | C
+2760     | P1    | Steel Pole | C
+2760     | S1-SP | Clamp      | C
+2760     | P1    | Pole Deflection | C
+2760     | P1    | Steel Pole | C
+2760     | S1-SP | Clamp      | C
+2760     | P1    | Pole Deflection | C
+2760     | P1    | Steel Pole | C
+2760     | Sp-SP | Clamp      | C
+2760     | P1    | Pole Deflection | C
+2760     | P1    | Steel Pole | C
+2760     | Sp-SP | Clamp      | C
+2760     | P1    | Pole Deflection | C
+2760     | P1    | Steel Pole | B
+2760     | S1-SP | Clamp      | B
+2760     | P1    | Pole Deflection | B
+2760     | P1    | Steel Pole | B
+2760     | S1-SP | Clamp      | B
+2760     | P1    | Pole Deflection | B
+2790     | CM13  | Guy        | B
+2790     | U2A   | Strain     | B
+2790     | P1    | Pole Deflection | B
+2790     | CM13  | Guy        | B
+2790     | U2A   | Strain     | B
+2790     | P1    | Pole Deflection | B
+2790     | CM13  | Guy        | C
+2790     | U2A   | Strain     | C
+2790     | P1    | Pole Deflection | C
+2790     | CM13  | Guy        | C
+2790     | U2A   | Strain     | C
+2790     | P1    | Pole Deflection | C
+2790     | CM13  | Guy        | C
+2790     | U2A   | Strain     | C
+2790     | P1    | Pole Deflection | C
+2790     | CM13  | Guy        | C
+2790     | U2A   | Strain     | C
+2790     | P1    | Pole Deflection | C
+2790     | P1    | Steel Pole | C
+2790     | U1-1B | Strain     | C
+2790     | P1    | Pole Deflection | C
+2790     | P1    | Steel Pole | C
+2790     | U1-1B | Strain     | C
+2790     | P1    | Pole Deflection | C
+2790     | P1    | Steel Pole | B
+2790     | U1-1B | Strain     | B
+2790     | P1    | Pole Deflection | B
+2790     | P1    | Steel Pole | B
+2790     | U1-1B | Strain     | B
+2790     | P1    | Pole Deflection | B
+2830     | P1    | Steel Pole | B
+2830     | U1p   | Post       | B
+2830     | P1    | Pole Deflection | B
+2830     | P1    | Steel Pole | B
+2830     | U1p   | Post       | B
+2830     | P1    | Pole Deflection | B
+2830     | P1    | Steel Pole | C
+2830     | U1p   | Post       | C
+2830     | P1    | Pole Deflection | C
+2830     | P1    | Steel Pole | C
+2830     | U1p   | Post       | C
+2830     | P1    | Pole Deflection | C
+2830     | P1    | Steel Pole | C
+2830     | U1p   | Post       | C
+2830     | P1    | Pole Deflection | C
+2830     | P1    | Steel Pole | C
+2830     | U1p   | Post       | C
+2830     | P1    | Pole Deflection | C
+2840     | NG12  | Guy        | B
+2840     | U1A   | Post       | B
+2840     | P1    | Pole Deflection | B
+2840     | NG12  | Guy        | B
+2840     | U1A   | Post       | B
+2840     | P1    | Pole Deflection | B
+2840     | NG12  | Guy        | C
+2840     | U1A   | Post       | C
+2840     | P1    | Pole Deflection | C
+2840     | NG12  | Guy        | C
+2840     | U1A   | Post       | C
+2840     | P1    | Pole Deflection | C
+2840     | NG12  | Guy        | C
+2840     | U1A   | Post       | C
+2840     | P1    | Pole Deflection | C
+2840     | NG12  | Guy        | C
+2840     | U1A   | Post       | C
+2840     | P1    | Pole Deflection | C
+2840     | NG12  | Guy        | C
+2840     | U1A   | Post       | C
+2840     | P1    | Pole Deflection | C
+2840     | P1    | Steel Pole | C
+2840     | U1A   | Post       | C
+2840     | P1    | Pole Deflection | C
+2840     | NG12  | Guy        | B
+2840     | U1A   | Post       | B
+2840     | P1    | Pole Deflection | B
+2840     | P1    | Steel Pole | B
+2840     | U1A   | Post       | B
+2840     | P1    | Pole Deflection | B
+2860     | P1    | Steel Pole | B
+2860     | U1p   | Post       | B
+2860     | P1    | Pole Deflection | B
+2860     | P1    | Steel Pole | B
+2860     | U1p   | Post       | B
+2860     | P1    | Pole Deflection | B
+2860     | P1    | Steel Pole | C
+2860     | U1p   | Post       | C
+2860     | P1    | Pole Deflection | C
+2860     | P1    | Steel Pole | C
+2860     | U1p   | Post       | C
+2860     | P1    | Pole Deflection | C
+2860     | P1    | Steel Pole | C
+2860     | U1p   | Post       | C
+2860     | P1    | Pole Deflection | C
+2860     | P1    | Steel Pole | C
+2860     | U1p   | Post       | C
+2860     | P1    | Pole Deflection | C
+2870     | CM12  | Guy        | B
+2870     | U1p   | Post       | B
+2870     | P1    | Pole Deflection | B
+2870     | PG11  | Guy        | B
+2870     | U1p   | Post       | B
+2870     | P1    | Pole Deflection | B
+2870     | CM12  | Guy        | C
+2870     | U1p   | Post       | C
+2870     | P1    | Pole Deflection | C
+2870     | PG11  | Guy        | C
+2870     | U1p   | Post       | C
+2870     | P1    | Pole Deflection | C
+2870     | CM12  | Guy        | C
+2870     | U1p   | Post       | C
+2870     | P1    | Pole Deflection | C
+2870     | PG11  | Guy        | C
+2870     | U1p   | Post       | C
+2870     | P1    | Pole Deflection | C
+2880 & 2885 | PG12  | Guy        | B
+2880 & 2885 | c1    | Clamp      | B
+2880 & 2885 | P1    | Pole Deflection | B
+2880 & 2885 | PG12  | Guy        | B
+2880 & 2885 | c1    | Clamp      | B
+2880 & 2885 | P1    | Pole Deflection | B
+2880 & 2885 | P1    | Steel Pole | B
+2880 & 2885 | C2-c1 | Clamp      | B
+2880 & 2885 | P1    | Pole Deflection | B
+2880 & 2885 | P1    | Steel Pole | B
+2880 & 2885 | C2-c1 | Clamp      | B
+2880 & 2885 | P1    | Pole Deflection | B
+2880 & 2885 | PG12  | Guy        | B
+2880 & 2885 | c1    | Clamp      | B
+2880 & 2885 | P1    | Pole Deflection | B
+2880 & 2885 | PG12  | Guy        | B
+2880 & 2885 | c1    | Clamp      | B
+2880 & 2885 | P1    | Pole Deflection | B
+2880 & 2885 | PG12  | Guy        | C
+2880 & 2885 | c1    | Clamp      | C
+2880 & 2885 | P1    | Pole Deflection | C
+2880 & 2885 | PG12  | Guy        | C
+2880 & 2885 | c1    | Clamp      | C
+2880 & 2885 | P1    | Pole Deflection | C
+2880 & 2885 | PG12  | Guy        | C
+2880 & 2885 | c1    | Clamp      | C
+2880 & 2885 | P1    | Pole Deflection | C
+2880 & 2885 | PG12  | Guy        | C
+2880 & 2885 | c1    | Clamp      | C
+2880 & 2885 | P1    | Pole Deflection | C
+2880 & 2885 | P1    | Steel Pole | C
+2880 & 2885 | C2-c1 | Clamp      | C
+2880 & 2885 | P1    | Pole Deflection | C
+2880 & 2885 | P1    | Steel Pole | C
+2880 & 2885 | C2-c1 | Clamp      | C
+2880 & 2885 | P1    | Pole Deflection | C
+2880 & 2885 | PG12  | Guy        | C
+2880 & 2885 | c1    | Clamp      | C
+2880 & 2885 | P1    | Pole Deflection | C
+2880 & 2885 | PG12  | Guy        | C
+2880 & 2885 | c1    | Clamp      | C
+2880 & 2885 | P1    | Pole Deflection | C
+2030     | NG12  | Guy        | B
+2030     | C1-c1 | Clamp      | B
+2030     | P1    | Pole Deflection | B
+2030     | NG12  | Guy        | B
+2030     | C1-c1 | Clamp      | B
+2030     | P1    | Pole Deflection | B
+2030     | NG12  | Guy        | B
+2030     | C1-c1 | Clamp      | B
+2030     | P1    | Pole Deflection | B
+2030     | NG12  | Guy        | B
+2030     | C1-c1 | Clamp      | B
+2030     | P1    | Pole Deflection | B
+2030     | P1    | Steel Pole | B
+2030     | UN2B  | Strain     | B
+2030     | P1    | Pole Deflection | B
+2030     | P1    | Steel Pole | B
+2030     | UN2B  | Strain     | B
+2030     | P1    | Pole Deflection | B
+2030     | NG12  | Guy        | C
+2030     | C1-c1 | Clamp      | C
+2030     | P1    | Pole Deflection | C
+2030     | NG12  | Guy        | C
+2030     | C1-c1 | Clamp      | C
+2030     | P1    | Pole Deflection | C
+2030     | NG12  | Guy        | C
+2030     | C1-c1 | Clamp      | C
+2030     | P1    | Pole Deflection | C
+2030     | NG12  | Guy        | C
+2030     | C1-c1 | Clamp      | C
+2030     | P1    | Pole Deflection | C
+2030     | NG12  | Guy        | C
+2030     | C1-c1 | Clamp      | C
+2030     | P1    | Pole Deflection | C
+2030     | NG12  | Guy        | C
+2030     | C1-c1 | Clamp      | C
+2030     | P1    | Pole Deflection | C
+2030     | P1    | Steel Pole | C
+2030     | UN2B  | Strain     | C
+2030     | P1    | Pole Deflection | C
+2030     | P1    | Steel Pole | C
+2030     | UN2B  | Strain     | C
+2030     | P1    | Pole Deflection | C
+2040     | PG11  | Guy        | B
+2040     | c1    | Clamp      | B
+2040     | P1    | Pole Deflection | B
+2040     | PG11  | Guy        | B
+2040     | c1    | Clamp      | B
+2040     | P1    | Pole Deflection | B
+2040     | P1    | Steel Pole | B
+2040     | P1    | Pole Deflection | B
+2040     | P1    | Steel Pole | B
+2040     | P1    | Pole Deflection | B
+2040     | PG11  | Guy        | B
+2040     | c1    | Clamp      | B
+2040     | P1    | Pole Deflection | B
+2040     | PG11  | Guy        | B
+2040     | c1    | Clamp      | B
+2040     | P1    | Pole Deflection | B
+2040     | PG11  | Guy        | C
+2040     | c1    | Clamp      | C
+2040     | P1    | Pole Deflection | C
+2040     | PG11  | Guy        | C
+2040     | c1    | Clamp      | C
+2040     | P1    | Pole Deflection | C
+2040     | PG11  | Guy        | C
+2040     | c1    | Clamp      | C
+2040     | P1    | Pole Deflection | C
+2040     | PG11  | Guy        | C
+2040     | c1    | Clamp      | C
+2040     | P1    | Pole Deflection | C
+2040     | P1    | Steel Pole | C
+2040     | P1    | Pole Deflection | C
+2040     | P1    | Steel Pole | C
+2040     | P1    | Pole Deflection | C
+2040     | PG11  | Guy        | C
+2040     | c1    | Clamp      | C
+2040     | P1    | Pole Deflection | C
+2040     | PG11  | Guy        | C
+2040     | c1    | Clamp      | C
+2040     | P1    | Pole Deflection | C
+2090     | PG11  | Guy        | B
+2090     | c1    | Clamp      | B
+2090     | P1    | Pole Deflection | B
+2090     | PG11  | Guy        | B
+2090     | c1    | Clamp      | B
+2090     | P1    | Pole Deflection | B
+2090     | PG11  | Guy        | B
+2090     | c1    | Clamp      | B
+2090     | P1    | Pole Deflection | B
+2090     | PG11  | Guy        | B
+2090     | c1    | Clamp      | B
+2090     | P1    | Pole Deflection | B
+2090     | P1    | Steel Pole | B
+2090     | P1    | Pole Deflection | B
+2090     | P1    | Steel Pole | B
+2090     | P1    | Pole Deflection | B
+2090     | PG11  | Guy        | C
+2090     | c1    | Clamp      | C
+2090     | P1    | Pole Deflection | C
+2090     | PG11  | Guy        | C
+2090     | c1    | Clamp      | C
+2090     | P1    | Pole Deflection | C
+2090     | PG11  | Guy        | C
+2090     | c1    | Clamp      | C
+2090     | P1    | Pole Deflection | C
+2090     | PG11  | Guy        | C
+2090     | c1    | Clamp      | C
+2090     | P1    | Pole Deflection | C
+2090     | PG11  | Guy        | C
+2090     | c1    | Clamp      | C
+2090     | P1    | Pole Deflection | C
+2090     | PG11  | Guy        | C
+2090     | c1    | Clamp      | C
+2090     | P1    | Pole Deflection | C
+2090     | P1    | Steel Pole | C
+2090     | P1    | Pole Deflection | C
+2090     | P1    | Steel Pole | C
+2090     | P1    | Pole Deflection | C
+2110     | PG11  | Guy        | B
+2110     | c1    | Clamp      | B
+2110     | P1    | Pole Deflection | B
+2110     | PG11  | Guy        | B
+2110     | c1    | Clamp      | B
+2110     | P1    | Pole Deflection | B
+2110     | PG11  | Guy        | B
+2110     | c1    | Clamp      | B
+2110     | P1    | Pole Deflection | B
+2110     | PG11  | Guy        | B
+2110     | c1    | Clamp      | B
+2110     | P1    | Pole Deflection | B
+2110     | P1    | Steel Pole | B
+2110     | P1    | Pole Deflection | B
+2110     | P1    | Steel Pole | B
+2110     | P1    | Pole Deflection | B
+2110     | PG11  | Guy        | C
+2110     | c1    | Clamp      | C
+2110     | P1    | Pole Deflection | C
+2110     | PG11  | Guy        | C
+2110     | c1    | Clamp      | C
+2110     | P1    | Pole Deflection | C
+2110     | PG11  | Guy        | C
+2110     | c1    | Clamp      | C
+2110     | P1    | Pole Deflection | C
+2110     | PG11  | Guy        | C
+2110     | c1    | Clamp      | C
+2110     | P1    | Pole Deflection | C
+2110     | PG11  | Guy        | C
+2110     | c1    | Clamp      | C
+2110     | P1    | Pole Deflection | C
+2110     | PG11  | Guy        | C
+2110     | c1    | Clamp      | C
+2110     | P1    | Pole Deflection | C
+2110     | P1    | Steel Pole | C
+2110     | P1    | Pole Deflection | C
+2110     | P1    | Steel Pole | C
+2110     | P1    | Pole Deflection | C
+2100     | P1    | Steel Pole | B
+2100     | U1p   | Post       | B
+2100     | P1    | Pole Deflection | B
+2100     | P1    | Steel Pole | B
+2100     | U1p   | Post       | B
+2100     | P1    | Pole Deflection | B
+2100     | P1    | Steel Pole | C
+2100     | U1p   | Post       | C
+2100     | P1    | Pole Deflection | C
+2100     | P1    | Steel Pole | C
+2100     | U1p   | Post       | C
+2100     | P1    | Pole Deflection | C
+2100     | P1    | Steel Pole | C
+2100     | U1p   | Post       | C
+2100     | P1    | Pole Deflection | C
+2100     | P1    | Steel Pole | C
+2100     | U1p   | Post       | C
+2100     | P1    | Pole Deflection | C
+2140     | PG11  | Guy        | B
+2140     | C1-c1 | Clamp      | B
+2140     | P1    | Pole Deflection | B
+2140     | PG11  | Guy        | B
+2140     | C1-c1 | Clamp      | B
+2140     | P1    | Pole Deflection | B
+2140     | PG11  | Guy        | B
+2140     | C1-c1 | Clamp      | B
+2140     | P1    | Pole Deflection | B
+2140     | PG11  | Guy        | B
+2140     | C1-c1 | Clamp      | B
+2140     | P1    | Pole Deflection | B
+2140     | P1    | Steel Pole | B
+2140     | UN2B  | Post       | B
+2140     | P1    | Pole Deflection | B
+2140     | P1    | Steel Pole | B
+2140     | UN2B  | Post       | B
+2140     | P1    | Pole Deflection | B
+2140     | PG11  | Guy        | C
+2140     | C1-c1 | Clamp      | C
+2140     | P1    | Pole Deflection | C
+2140     | PG11  | Guy        | C
+2140     | C1-c1 | Clamp      | C
+2140     | P1    | Pole Deflection | C
+2140     | PG11  | Guy        | C
+2140     | C1-c1 | Clamp      | C
+2140     | P1    | Pole Deflection | C
+2140     | PG11  | Guy        | C
+2140     | C1-c1 | Clamp      | C
+2140     | P1    | Pole Deflection | C
+2140     | PG11  | Guy        | C
+2140     | C1-c1 | Clamp      | C
+2140     | P1    | Pole Deflection | C
+2140     | PG11  | Guy        | C
+2140     | C1-c1 | Clamp      | C
+2140     | P1    | Pole Deflection | C
+2140     | P1    | Steel Pole | C
+2140     | UN2B  | Post       | C
+2140     | P1    | Pole Deflection | C
+2140     | P1    | Steel Pole | C
+2140     | UN2B  | Post       | C
+2140     | P1    | Pole Deflection | C
+2150     | P1    | Steel Pole | B
+2150     | F1-U1p | Post       | B
+2150     | P1    | Pole Deflection | B
+2150     | P1    | Steel Pole | B
+2150     | F1-U1p | Post       | B
+2150     | P1    | Pole Deflection | B
+2150     | P1    | Steel Pole | C
+2150     | F1-U1p | Post       | C
+2150     | P1    | Pole Deflection | C
+2150     | P1    | Steel Pole | C
+2150     | F1-U1p | Post       | C
+2150     | P1    | Pole Deflection | C
+2150     | P1    | Steel Pole | C
+2150     | F1-U1p | Post       | C
+2150     | P1    | Pole Deflection | C
+2150     | P1    | Steel Pole | C
+2150     | F1-U1p | Post       | C
+2150     | P1    | Pole Deflection | C
+2160     | P1    | Steel Pole | B
+2160     | U1p   | Post       | B
+2160     | P1    | Pole Deflection | B
+2160     | P1    | Steel Pole | B
+2160     | U1p   | Post       | B
+2160     | P1    | Pole Deflection | B
+2160     | P1    | Steel Pole | C
+2160     | UN2A  | Strain     | C
+2160     | P1    | Pole Deflection | C
+2160     | P1    | Steel Pole | C
+2160     | U1p   | Post       | C
+2160     | P1    | Pole Deflection | C
+2160     | P1    | Steel Pole | C
+2160     | UN2A  | Strain     | C
+2160     | P1    | Pole Deflection | C
+2160     | P1    | Steel Pole | C
+2160     | U1p   | Post       | C
+2160     | P1    | Pole Deflection | C
+2170     | PG11  | Guy        | B
+2170     | C1-c1 | Clamp      | B
+2170     | P1    | Pole Deflection | B
+2170     | P1    | Steel Pole | B
+2170     | C1-c1 | Clamp      | B
+2170     | P1    | Pole Deflection | B
+2170     | P1    | Steel Pole | B
+2170     | c1    | Clamp      | B
+2170     | P1    | Pole Deflection | B
+2170     | P1    | Steel Pole | B
+2170     | c1    | Clamp      | B
+2170     | P1    | Pole Deflection | B
+2170     | PG11  | Guy        | B
+2170     | C1-c1 | Clamp      | B
+2170     | P1    | Pole Deflection | B
+2170     | PG11  | Guy        | B
+2170     | C1-c1 | Clamp      | B
+2170     | P1    | Pole Deflection | B
+2170     | PG11  | Guy        | C
+2170     | C1-c1 | Clamp      | C
+2170     | P1    | Pole Deflection | C
+2170     | P1    | Steel Pole | C
+2170     | C1-c1 | Clamp      | C
+2170     | P1    | Pole Deflection | C
+2170     | PG11  | Guy        | C
+2170     | C1-c1 | Clamp      | C
+2170     | P1    | Pole Deflection | C
+2170     | P1    | Steel Pole | C
+2170     | C1-c1 | Clamp      | C
+2170     | P1    | Pole Deflection | C
+2170     | P1    | Steel Pole | C
+2170     | c1    | Clamp      | C
+2170     | P1    | Pole Deflection | C
+2170     | P1    | Steel Pole | C
+2170     | c1    | Clamp      | C
+2170     | P1    | Pole Deflection | C
+2170     | PG11  | Guy        | C
+2170     | C1-c1 | Clamp      | C
+2170     | P1    | Pole Deflection | C
+2170     | PG11  | Guy        | C
+2170     | C1-c1 | Clamp      | C
+2170     | P1    | Pole Deflection | C
+2180     | PG11  | Guy        | B
+2180     | c1    | Clamp      | B
+2180     | P1    | Pole Deflection | B
+2180     | PG11  | Guy        | B
+2180     | c1    | Clamp      | B
+2180     | P1    | Pole Deflection | B
+2180     | PG11  | Guy        | B
+2180     | c1    | Clamp      | B
+2180     | P1    | Pole Deflection | B
+2180     | PG11  | Guy        | B
+2180     | c1    | Clamp      | B
+2180     | P1    | Pole Deflection | B
+2180     | P1    | Steel Pole | B
+2180     | Neut Slack | Post       | B
+2180     | P1    | Pole Deflection | B
+2180     | P1    | Steel Pole | B
+2180     | Neut Slack | Post       | B
+2180     | P1    | Pole Deflection | B
+2180     | PG11  | Guy        | C
+2180     | c1    | Clamp      | C
+2180     | P1    | Pole Deflection | C
+2180     | PG11  | Guy        | C
+2180     | c1    | Clamp      | C
+2180     | P1    | Pole Deflection | C
+2180     | PG11  | Guy        | C
+2180     | c1    | Clamp      | C
+2180     | P1    | Pole Deflection | C
+2180     | PG11  | Guy        | C
+2180     | c1    | Clamp      | C
+2180     | P1    | Pole Deflection | C
+2180     | PG11  | Guy        | C
+2180     | c1    | Clamp      | C
+2180     | P1    | Pole Deflection | C
+2180     | PG11  | Guy        | C
+2180     | c1    | Clamp      | C
+2180     | P1    | Pole Deflection | C
+2180     | P1    | Steel Pole | C
+2180     | Neut Slack | Post       | C
+2180     | P1    | Pole Deflection | C
+2180     | P1    | Steel Pole | C
+2180     | Neut Slack | Post       | C
+2180     | P1    | Pole Deflection | C
+2190     | PG11  | Guy        | B
+2190     | c1    | Clamp      | B
+2190     | P1    | Pole Deflection | B
+2190     | PG11  | Guy        | B
+2190     | c1    | Clamp      | B
+2190     | P1    | Pole Deflection | B
+2190     | P1    | Steel Pole | B
+2190     | P1    | Pole Deflection | B
+2190     | P1    | Steel Pole | B
+2190     | P1    | Pole Deflection | B
+2190     | PG11  | Guy        | B
+2190     | c1    | Clamp      | B
+2190     | P1    | Pole Deflection | B
+2190     | PG11  | Guy        | B
+2190     | c1    | Clamp      | B
+2190     | P1    | Pole Deflection | B
+2190     | PG11  | Guy        | C
+2190     | c1    | Clamp      | C
+2190     | P1    | Pole Deflection | C
+2190     | PG11  | Guy        | C
+2190     | c1    | Clamp      | C
+2190     | P1    | Pole Deflection | C
+2190     | PG11  | Guy        | C
+2190     | c1    | Clamp      | C
+2190     | P1    | Pole Deflection | C
+2190     | PG11  | Guy        | C
+2190     | c1    | Clamp      | C
+2190     | P1    | Pole Deflection | C
+2190     | P1    | Steel Pole | C
+2190     | P1    | Pole Deflection | C
+2190     | P1    | Steel Pole | C
+2190     | P1    | Pole Deflection | C
+2190     | PG11  | Guy        | C
+2190     | c1    | Clamp      | C
+2190     | P1    | Pole Deflection | C
+2190     | PG11  | Guy        | C
+2190     | c1    | Clamp      | C
+2190     | P1    | Pole Deflection | C
+2220     | P1    | Steel Pole | B
+2220     | C1-c1 | Clamp      | B
+2220     | P1    | Pole Deflection | B
+2220     | PG11  | Guy        | B
+2220     | C1-c1 | Clamp      | B
+2220     | P1    | Pole Deflection | B
+2220     | PG11  | Guy        | B
+2220     | C1-c1 | Clamp      | B
+2220     | P1    | Pole Deflection | B
+2220     | PG11  | Guy        | B
+2220     | C1-c1 | Clamp      | B
+2220     | P1    | Pole Deflection | B
+2220     | P1    | Steel Pole | B
+2220     | c1    | Clamp      | B
+2220     | P1    | Pole Deflection | B
+2220     | P1    | Steel Pole | B
+2220     | c1    | Clamp      | B
+2220     | P1    | Pole Deflection | B
+2220     | P1    | Steel Pole | C
+2220     | C1-c1 | Clamp      | C
+2220     | P1    | Pole Deflection | C
+2220     | PG11  | Guy        | C
+2220     | C1-c1 | Clamp      | C
+2220     | P1    | Pole Deflection | C
+2220     | P1    | Steel Pole | C
+2220     | C1-c1 | Clamp      | C
+2220     | P1    | Pole Deflection | C
+2220     | PG11  | Guy        | C
+2220     | C1-c1 | Clamp      | C
+2220     | P1    | Pole Deflection | C
+2220     | PG11  | Guy        | C
+2220     | C1-c1 | Clamp      | C
+2220     | P1    | Pole Deflection | C
+2220     | PG11  | Guy        | C
+2220     | C1-c1 | Clamp      | C
+2220     | P1    | Pole Deflection | C
+2220     | P1    | Steel Pole | C
+2220     | c1    | Clamp      | C
+2220     | P1    | Pole Deflection | C
+2220     | P1    | Steel Pole | C
+2220     | c1    | Clamp      | C
+2220     | P1    | Pole Deflection | C
+2230     | PG11  | Guy        | B
+2230     | c1    | Clamp      | B
+2230     | P1    | Pole Deflection | B
+2230     | PG11  | Guy        | B
+2230     | c1    | Clamp      | B
+2230     | P1    | Pole Deflection | B
+2230     | P1    | Steel Pole | B
+2230     | P1    | Pole Deflection | B
+2230     | P1    | Steel Pole | B
+2230     | P1    | Pole Deflection | B
+2230     | PG11  | Guy        | B
+2230     | c1    | Clamp      | B
+2230     | P1    | Pole Deflection | B
+2230     | PG11  | Guy        | B
+2230     | c1    | Clamp      | B
+2230     | P1    | Pole Deflection | B
+2230     | PG11  | Guy        | C
+2230     | c1    | Clamp      | C
+2230     | P1    | Pole Deflection | C
+2230     | PG11  | Guy        | C
+2230     | c1    | Clamp      | C
+2230     | P1    | Pole Deflection | C
+2230     | PG11  | Guy        | C
+2230     | c1    | Clamp      | C
+2230     | P1    | Pole Deflection | C
+2230     | PG11  | Guy        | C
+2230     | c1    | Clamp      | C
+2230     | P1    | Pole Deflection | C
+2230     | P1    | Steel Pole | C
+2230     | P1    | Pole Deflection | C
+2230     | P1    | Steel Pole | C
+2230     | P1    | Pole Deflection | C
+2230     | PG11  | Guy        | C
+2230     | c1    | Clamp      | C
+2230     | P1    | Pole Deflection | C
+2230     | PG11  | Guy        | C
+2230     | c1    | Clamp      | C
+2230     | P1    | Pole Deflection | C
+2280     | PG11  | Guy        | C
+2280     | c1    | Clamp      | C
+2280     | P1    | Pole Deflection | C
+2280     | PG11  | Guy        | C
+2280     | c1    | Clamp      | C
+2280     | P1    | Pole Deflection | C
+2280     | PG11  | Guy        | C
+2280     | c1    | Clamp      | C
+2280     | P1    | Pole Deflection | C
+2280     | PG11  | Guy        | C
+2280     | c1    | Clamp      | C
+2280     | P1    | Pole Deflection | C
+2280     | PG11  | Guy        | C
+2280     | U1-1B | Strain     | C
+2280     | P1    | Pole Deflection | C
+2280     | PG11  | Guy        | C
+2280     | U1-1B | Strain     | C
+2280     | P1    | Pole Deflection | C
+2280     | P1    | Steel Pole | C
+2280     | c1    | Clamp      | C
+2280     | P1    | Pole Deflection | C
+2280     | SE21  | Guy        | C
+2280     | c1    | Clamp      | C
+2280     | P1    | Pole Deflection | C
+2270     | P1    | Steel Pole | C
+2270     | U1p   | Post       | C
+2270     | P1    | Pole Deflection | C
+2270     | P1    | Steel Pole | C
+2270     | U1p   | Post       | C
+2270     | P1    | Pole Deflection | C
+2270     | P1    | Steel Pole | C
+2270     | U1p   | Post       | C
+2270     | P1    | Pole Deflection | C
+2270     | P1    | Steel Pole | C
+2270     | U1p   | Post       | C
+2270     | P1    | Pole Deflection | C
+2260     | P1    | Steel Pole | C
+2260     | U1p   | Post       | C
+2260     | P1    | Pole Deflection | C
+2260     | P1    | Steel Pole | C
+2260     | U1p   | Post       | C
+2260     | P1    | Pole Deflection | C
+2260     | P1    | Steel Pole | C
+2260     | U1p   | Post       | C
+2260     | P1    | Pole Deflection | C
+2260     | P1    | Steel Pole | C
+2260     | U1p   | Post       | C
+2260     | P1    | Pole Deflection | C
+2250     | PG11  | Guy        | C
+2250     | U1-1B | Strain     | C
+2250     | P1    | Pole Deflection | C
+2250     | P1    | Steel Pole | C
+2250     | U1-1B | Strain     | C
+2250     | P1    | Pole Deflection | C
+2250     | PG11  | Guy        | C
+2250     | U1-1B | Strain     | C
+2250     | P1    | Pole Deflection | C
+2250     | P1    | Steel Pole | C
+2250     | U1-1B | Strain     | C
+2250     | P1    | Pole Deflection | C
+2250     | P1    | Steel Pole | C
+2250     | U1-1A | Strain     | C
+2250     | P1    | Pole Deflection | C
+2250     | P1    | Steel Pole | C
+2250     | U1-1A | Strain     | C
+2250     | P1    | Pole Deflection | C
+2250     | PG11  | Guy        | C
+2250     | U1-1B | Strain     | C
+2250     | P1    | Pole Deflection | C
+2250     | PG11  | Guy        | C
+2250     | U1-1B | Strain     | C
+2250     | P1    | Pole Deflection | C
+2300     | PG11  | Guy        | C
+2300     | U1-1B | Strain     | C
+2300     | P1    | Pole Deflection | C
+2300     | PG11  | Guy        | C
+2300     | U1-1B | Strain     | C
+2300     | P1    | Pole Deflection | C
+2300     | PG11  | Guy        | C
+2300     | U1-1B | Strain     | C
+2300     | P1    | Pole Deflection | C
+2300     | PG11  | Guy        | C
+2300     | U1-1B | Strain     | C
+2300     | P1    | Pole Deflection | C
+2300     | PG11  | Guy        | C
+2300     | U1-1B | Strain     | C
+2300     | P1    | Pole Deflection | C
+2300     | PG11  | Guy        | C
+2300     | U1-1B | Strain     | C
+2300     | P1    | Pole Deflection | C
+2300     | P1    | Steel Pole | C
+2300     | P1    | Pole Deflection | C
+2300     | P1    | Steel Pole | C
+2300     | P1    | Pole Deflection | C
+2290     | PG21  | Guy        | C
+2290     | U1-1A | Strain     | C
+2290     | P1    | Pole Deflection | C
+2290     | PG21  | Guy        | C
+2290     | U1-1A | Strain     | C
+2290     | P1    | Pole Deflection | C
+2290     | PG21  | Guy        | C
+2290     | U1-1A | Strain     | C
+2290     | P1    | Pole Deflection | C
+2290     | PG21  | Guy        | C
+2290     | U1-1A | Strain     | C
+2290     | P1    | Pole Deflection | C
+2290     | PG11  | Guy        | C
+2290     | U1-1A | Strain     | C
+2290     | P1    | Pole Deflection | C
+2290     | PG11  | Guy        | C
+2290     | U1-1A | Strain     | C
+2290     | P1    | Pole Deflection | C
+2290     | NG22  | Guy        | C
+2290     | F3-U1-1B | Strain     | C
+2290     | P1    | Pole Deflection | C
+2290     | PG21  | Guy        | C
+2290     | F3-U1-1B | Strain     | C
+2290     | P1    | Pole Deflection | C
+2285     | SE12  | Guy        | C
+2285     | SP    | Clamp      | C
+2285     | P1    | Pole Deflection | C
+2285     | SE12  | Guy        | C
+2285     | SP    | Clamp      | C
+2285     | P1    | Pole Deflection | C
+2285     | SE12  | Guy        | C
+2285     | SP    | Clamp      | C
+2285     | P1    | Pole Deflection | C
+2285     | SE12  | Guy        | C
+2285     | SP    | Clamp      | C
+2285     | P1    | Pole Deflection | C
+2285     | SE12  | Guy        | C
+2285     | SP    | Clamp      | C
+2285     | P1    | Pole Deflection | C
+2285     | SE12  | Guy        | C
+2285     | SP    | Clamp      | C
+2285     | P1    | Pole Deflection | C
+2285     | P1    | Steel Pole | C
+2285     | P1    | Pole Deflection | C
+2285     | P1    | Steel Pole | C
+2285     | P1    | Pole Deflection | C
+2320     | PG11  | Guy        | C
+2320     | U2A   | Strain     | C
+2320     | P1    | Pole Deflection | C
+2320     | PG11  | Guy        | C
+2320     | U1A   | Post       | C
+2320     | P1    | Pole Deflection | C
+2320     | PG11  | Guy        | C
+2320     | U2A   | Strain     | C
+2320     | P1    | Pole Deflection | C
+2320     | PG11  | Guy        | C
+2320     | U1A   | Post       | C
+2320     | P1    | Pole Deflection | C
+2320     | P1    | Steel Pole | C
+2320     | U1A   | Post       | C
+2320     | P1    | Pole Deflection | C
+2320     | P1    | Steel Pole | C
+2320     | U1A   | Post       | C
+2320     | P1    | Pole Deflection | C
+2310     | NG12  | Guy        | C
+2310     | U1-1B | Strain     | C
+2310     | P1    | Pole Deflection | C
+2310     | NG12  | Guy        | C
+2310     | U1-1B | Strain     | C
+2310     | P1    | Pole Deflection | C
+2310     | NG12  | Guy        | C
+2310     | U1-1B | Strain     | C
+2310     | P1    | Pole Deflection | C
+2310     | NG12  | Guy        | C
+2310     | U1-1B | Strain     | C
+2310     | P1    | Pole Deflection | C
+2310     | P1    | Steel Pole | C
+2310     | U1-1A | Strain     | C
+2310     | P1    | Pole Deflection | C
+2310     | P1    | Steel Pole | C
+2310     | U1-1A | Strain     | C
+2310     | P1    | Pole Deflection | C
+2310     | NG12  | Guy        | C
+2310     | U1-1B | Strain     | C
+2310     | P1    | Pole Deflection | C
+2310     | NG12  | Guy        | C
+2310     | U1-1B | Strain     | C
+2310     | P1    | Pole Deflection | C
+2410     | PG11  | Guy        | B
+2410     | c1    | Clamp      | B
+2410     | P1    | Pole Deflection | B
+2410     | PG11  | Guy        | B
+2410     | c1    | Clamp      | B
+2410     | P1    | Pole Deflection | B
+2410     | PG11  | Guy        | B
+2410     | c1    | Clamp      | B
+2410     | P1    | Pole Deflection | B
+2410     | PG11  | Guy        | B
+2410     | c1    | Clamp      | B
+2410     | P1    | Pole Deflection | B
+2410     | P1    | Steel Pole | B
+2410     | P1    | Pole Deflection | B
+2410     | P1    | Steel Pole | B
+2410     | P1    | Pole Deflection | B
+2410     | PG11  | Guy        | C
+2410     | c1    | Clamp      | C
+2410     | P1    | Pole Deflection | C
+2410     | PG11  | Guy        | C
+2410     | c1    | Clamp      | C
+2410     | P1    | Pole Deflection | C
+2410     | PG11  | Guy        | C
+2410     | c1    | Clamp      | C
+2410     | P1    | Pole Deflection | C
+2410     | PG11  | Guy        | C
+2410     | c1    | Clamp      | C
+2410     | P1    | Pole Deflection | C
+2410     | PG11  | Guy        | C
+2410     | c1    | Clamp      | C
+2410     | P1    | Pole Deflection | C
+2410     | PG11  | Guy        | C
+2410     | c1    | Clamp      | C
+2410     | P1    | Pole Deflection | C
+2410     | P1    | Steel Pole | C
+2410     | P1    | Pole Deflection | C
+2410     | P1    | Steel Pole | C
+2410     | P1    | Pole Deflection | C
+2400     | P1    | Steel Pole | B
+2400     | U1p   | Post       | B
+2400     | P1    | Pole Deflection | B
+2400     | P1    | Steel Pole | B
+2400     | U1p   | Post       | B
+2400     | P1    | Pole Deflection | B
+2400     | P1    | Steel Pole | C
+2400     | U1p   | Post       | C
+2400     | P1    | Pole Deflection | C
+2400     | P1    | Steel Pole | C
+2400     | U1p   | Post       | C
+2400     | P1    | Pole Deflection | C
+2400     | P1    | Steel Pole | C
+2400     | U1p   | Post       | C
+2400     | P1    | Pole Deflection | C
+2400     | P1    | Steel Pole | C
+2400     | U1p   | Post       | C
+2400     | P1    | Pole Deflection | C
+2390     | NG12  | Guy        | B
+2390     | C1-c1 | Clamp      | B
+2390     | P1    | Pole Deflection | B
+2390     | NG12  | Guy        | B
+2390     | C1-c1 | Clamp      | B
+2390     | P1    | Pole Deflection | B
+2390     | P1    | Steel Pole | B
+2390     | UN1B  | Post       | B
+2390     | P1    | Pole Deflection | B
+2390     | P1    | Steel Pole | B
+2390     | UN1B  | Post       | B
+2390     | P1    | Pole Deflection | B
+2390     | NG12  | Guy        | B
+2390     | C1-c1 | Clamp      | B
+2390     | P1    | Pole Deflection | B
+2390     | NG12  | Guy        | B
+2390     | C1-c1 | Clamp      | B
+2390     | P1    | Pole Deflection | B
+2390     | NG12  | Guy        | C
+2390     | C1-c1 | Clamp      | C
+2390     | P1    | Pole Deflection | C
+2390     | NG12  | Guy        | C
+2390     | C1-c1 | Clamp      | C
+2390     | P1    | Pole Deflection | C
+2390     | NG12  | Guy        | C
+2390     | C1-c1 | Clamp      | C
+2390     | P1    | Pole Deflection | C
+2390     | NG12  | Guy        | C
+2390     | C1-c1 | Clamp      | C
+2390     | P1    | Pole Deflection | C
+2390     | P1    | Steel Pole | C
+2390     | UN1B  | Post       | C
+2390     | P1    | Pole Deflection | C
+2390     | P1    | Steel Pole | C
+2390     | UN1B  | Post       | C
+2390     | P1    | Pole Deflection | C
+2390     | NG12  | Guy        | C
+2390     | C1-c1 | Clamp      | C
+2390     | P1    | Pole Deflection | C
+2390     | NG12  | Guy        | C
+2390     | C1-c1 | Clamp      | C
+2390     | P1    | Pole Deflection | C
+2360     | NG12  | Guy        | B
+2360     | Co-c1 | Clamp      | B
+2360     | P1    | Pole Deflection | B
+2360     | P1    | Steel Pole | B
+2360     | Co-c1 | Clamp      | B
+2360     | P1    | Pole Deflection | B
+2360     | NG12  | Guy        | B
+2360     | Co-c1 | Clamp      | B
+2360     | P1    | Pole Deflection | B
+2360     | NG12  | Guy        | B
+2360     | Co-c1 | Clamp      | B
+2360     | P1    | Pole Deflection | B
+2360     | P1    | Steel Pole | B
+2360     | Neut Slack | Post       | B
+2360     | P1    | Pole Deflection | B
+2360     | P1    | Steel Pole | B
+2360     | Neut Slack | Post       | B
+2360     | P1    | Pole Deflection | B
+2360     | NG12  | Guy        | C
+2360     | Co-c1 | Clamp      | C
+2360     | P1    | Pole Deflection | C
+2360     | P1    | Steel Pole | C
+2360     | Co-c1 | Clamp      | C
+2360     | P1    | Pole Deflection | C
+2360     | NG12  | Guy        | C
+2360     | Co-c1 | Clamp      | C
+2360     | P1    | Pole Deflection | C
+2360     | P1    | Steel Pole | C
+2360     | Co-c1 | Clamp      | C
+2360     | P1    | Pole Deflection | C
+2360     | NG12  | Guy        | C
+2360     | Co-c1 | Clamp      | C
+2360     | P1    | Pole Deflection | C
+2360     | NG12  | Guy        | C
+2360     | Co-c1 | Clamp      | C
+2360     | P1    | Pole Deflection | C
+2360     | P1    | Steel Pole | C
+2360     | Neut Slack | Post       | C
+2360     | P1    | Pole Deflection | C
+2360     | P1    | Steel Pole | C
+2360     | Neut Slack | Post       | C
+2360     | P1    | Pole Deflection | C
+2370     | CM11  | Guy        | B
+2370     | U1p   | Post       | B
+2370     | P1    | Pole Deflection | B
+2370     | CM11  | Guy        | B
+2370     | U1p   | Post       | B
+2370     | P1    | Pole Deflection | B
+2370     | CM11  | Guy        | C
+2370     | C1-c1 | Clamp      | C
+2370     | P1    | Pole Deflection | C
+2370     | CM11  | Guy        | C
+2370     | C1-c1 | Clamp      | C
+2370     | P1    | Pole Deflection | C
+2370     | CM11  | Guy        | C
+2370     | C1-c1 | Clamp      | C
+2370     | P1    | Pole Deflection | C
+2370     | CM11  | Guy        | C
+2370     | C1-c1 | Clamp      | C
+2370     | P1    | Pole Deflection | C
+2380     | PG11  | Guy        | C
+2380     | U1-1B | Strain     | C
+2380     | P1    | Pole Deflection | C
+2380     | PG11  | Guy        | C
+2380     | U1-1B | Strain     | C
+2380     | P1    | Pole Deflection | C
+2380     | PG11  | Guy        | C
+2380     | U1-1B | Strain     | C
+2380     | P1    | Pole Deflection | C
+2380     | PG11  | Guy        | C
+2380     | U1-1B | Strain     | C
+2380     | P1    | Pole Deflection | C
+2380     | P1    | Steel Pole | C
+2380     | P1    | Pole Deflection | C
+2380     | P1    | Steel Pole | C
+2380     | P1    | Pole Deflection | C
+2380     | PG11  | Guy        | C
+2380     | U1-1B | Strain     | C
+2380     | P1    | Pole Deflection | C
+2380     | PG11  | Guy        | C
+2380     | U1-1B | Strain     | C
+2380     | P1    | Pole Deflection | C
+2430     | PG11  | Guy        | B
+2430     | C1-c1 | Clamp      | B
+2430     | P1    | Pole Deflection | B
+2430     | P1    | Steel Pole | B
+2430     | C1-c1 | Clamp      | B
+2430     | P1    | Pole Deflection | B
+2430     | PG11  | Guy        | B
+2430     | C1-c1 | Clamp      | B
+2430     | P1    | Pole Deflection | B
+2430     | PG11  | Guy        | B
+2430     | C1-c1 | Clamp      | B
+2430     | P1    | Pole Deflection | B
+2430     | P1    | Steel Pole | B
+2430     | C2-c1 | Clamp      | B
+2430     | P1    | Pole Deflection | B
+2430     | P1    | Steel Pole | B
+2430     | U1p   | Post       | B
+2430     | P1    | Pole Deflection | B
+2430     | PG11  | Guy        | C
+2430     | C1-c1 | Clamp      | C
+2430     | P1    | Pole Deflection | C
+2430     | P1    | Steel Pole | C
+2430     | C1-c1 | Clamp      | C
+2430     | P1    | Pole Deflection | C
+2430     | PG11  | Guy        | C
+2430     | C1-c1 | Clamp      | C
+2430     | P1    | Pole Deflection | C
+2430     | P1    | Steel Pole | C
+2430     | C1-c1 | Clamp      | C
+2430     | P1    | Pole Deflection | C
+2430     | PG11  | Guy        | C
+2430     | C1-c1 | Clamp      | C
+2430     | P1    | Pole Deflection | C
+2430     | PG11  | Guy        | C
+2430     | C1-c1 | Clamp      | C
+2430     | P1    | Pole Deflection | C
+2430     | P1    | Steel Pole | C
+2430     | U1p   | Post       | C
+2430     | P1    | Pole Deflection | C
+2430     | P1    | Steel Pole | C
+2430     | U1p   | Post       | C
+2430     | P1    | Pole Deflection | C
+2440     | PG11  | Guy        | B
+2440     | c1    | Clamp      | B
+2440     | P1    | Pole Deflection | B
+2440     | PG11  | Guy        | B
+2440     | c1    | Clamp      | B
+2440     | P1    | Pole Deflection | B
+2440     | PG11  | Guy        | B
+2440     | U1-1A | Strain     | B
+2440     | P1    | Pole Deflection | B
+2440     | PG11  | Guy        | B
+2440     | U1-1A | Strain     | B
+2440     | P1    | Pole Deflection | B
+2440     | PG21  | Guy        | B
+2440     | c1    | Clamp      | B
+2440     | P1    | Pole Deflection | B
+2440     | PG21  | Guy        | B
+2440     | c1    | Clamp      | B
+2440     | P1    | Pole Deflection | B
+2440     | PG11  | Guy        | C
+2440     | c1    | Clamp      | C
+2440     | P1    | Pole Deflection | C
+2440     | PG11  | Guy        | C
+2440     | c1    | Clamp      | C
+2440     | P1    | Pole Deflection | C
+2440     | PG11  | Guy        | C
+2440     | c1    | Clamp      | C
+2440     | P1    | Pole Deflection | C
+2440     | PG11  | Guy        | C
+2440     | c1    | Clamp      | C
+2440     | P1    | Pole Deflection | C
+2440     | PG11  | Guy        | C
+2440     | U1-1A | Strain     | C
+2440     | P1    | Pole Deflection | C
+2440     | PG11  | Guy        | C
+2440     | U1-1A | Strain     | C
+2440     | P1    | Pole Deflection | C
+2440     | PG21  | Guy        | C
+2440     | c1    | Clamp      | C
+2440     | P1    | Pole Deflection | C
+2440     | PG21  | Guy        | C
+2440     | c1    | Clamp      | C
+2440     | P1    | Pole Deflection | C
+2450     | PG11  | Guy        | C
+2450     | U1-1B | Strain     | C
+2450     | P1    | Pole Deflection | C
+2450     | PG11  | Guy        | C
+2450     | U1-1B | Strain     | C
+2450     | P1    | Pole Deflection | C
+2450     | PG11  | Guy        | C
+2450     | U1-1B | Strain     | C
+2450     | P1    | Pole Deflection | C
+2450     | PG11  | Guy        | C
+2450     | U1-1B | Strain     | C
+2450     | P1    | Pole Deflection | C
+2450     | P1    | Steel Pole | C
+2450     | U1p   | Post       | C
+2450     | P1    | Pole Deflection | C
+2450     | P1    | Steel Pole | C
+2450     | U1p   | Post       | C
+2450     | P1    | Pole Deflection | C
+2450     | PG11  | Guy        | C
+2450     | U1-1B | Strain     | C
+2450     | P1    | Pole Deflection | C
+2450     | PG11  | Guy        | C
+2450     | U1-1B | Strain     | C
+2450     | P1    | Pole Deflection | C
+2530     | PG11  | Guy        | B
+2530     | c1    | Clamp      | B
+2530     | P1    | Pole Deflection | B
+2530     | PG11  | Guy        | B
+2530     | c1    | Clamp      | B
+2530     | P1    | Pole Deflection | B
+2530     | PG11  | Guy        | C
+2530     | c1    | Clamp      | C
+2530     | P1    | Pole Deflection | C
+2530     | PG11  | Guy        | C
+2530     | c1    | Clamp      | C
+2530     | P1    | Pole Deflection | C
+2530     | PG11  | Guy        | C
+2530     | c1    | Clamp      | C
+2530     | P1    | Pole Deflection | C
+2530     | PG11  | Guy        | C
+2530     | c1    | Clamp      | C
+2530     | P1    | Pole Deflection | C
+2520     | P1    | Steel Pole | B
+2520     | U1p   | Post       | B
+2520     | P1    | Pole Deflection | B
+2520     | P1    | Steel Pole | B
+2520     | U1p   | Post       | B
+2520     | P1    | Pole Deflection | B
+2520     | P1    | Steel Pole | C
+2520     | U1p   | Post       | C
+2520     | P1    | Pole Deflection | C
+2520     | P1    | Steel Pole | C
+2520     | U1p   | Post       | C
+2520     | P1    | Pole Deflection | C
+2520     | P1    | Steel Pole | C
+2520     | U1p   | Post       | C
+2520     | P1    | Pole Deflection | C
+2520     | P1    | Steel Pole | C
+2520     | U1p   | Post       | C
+2520     | P1    | Pole Deflection | C
+2510     | P1    | Steel Pole | B
+2510     | U1p   | Post       | B
+2510     | P1    | Pole Deflection | B
+2510     | P1    | Steel Pole | B
+2510     | U1p   | Post       | B
+2510     | P1    | Pole Deflection | B
+2510     | P1    | Steel Pole | C
+2510     | U1p   | Post       | C
+2510     | P1    | Pole Deflection | C
+2510     | P1    | Steel Pole | C
+2510     | U1p   | Post       | C
+2510     | P1    | Pole Deflection | C
+2510     | P1    | Steel Pole | C
+2510     | U1p   | Post       | C
+2510     | P1    | Pole Deflection | C
+2510     | P1    | Steel Pole | C
+2510     | U1p   | Post       | C
+2510     | P1    | Pole Deflection | C
+2490     | P1    | Steel Pole | B
+2490     | U1A   | Post       | B
+2490     | P1    | Pole Deflection | B
+2490     | CM11  | Guy        | B
+2490     | U1A   | Post       | B
+2490     | P1    | Pole Deflection | B
+2490     | P1    | Steel Pole | C
+2490     | U1A   | Post       | C
+2490     | P1    | Pole Deflection | C
+2490     | CM11  | Guy        | C
+2490     | U1A   | Post       | C
+2490     | P1    | Pole Deflection | C
+2490     | P1    | Steel Pole | C
+2490     | U1A   | Post       | C
+2490     | P1    | Pole Deflection | C
+2490     | CM11  | Guy        | C
+2490     | U1A   | Post       | C
+2490     | P1    | Pole Deflection | C
+2480     | CM12  | Guy        | B
+2480     | U1p   | Post       | B
+2480     | P1    | Pole Deflection | B
+2480     | P1    | Steel Pole | B
+2480     | U1p   | Post       | B
+2480     | P1    | Pole Deflection | B
+2480     | CM12  | Guy        | C
+2480     | U1p   | Post       | C
+2480     | P1    | Pole Deflection | C
+2480     | P1    | Steel Pole | C
+2480     | UN1   | Post       | C
+2480     | P1    | Pole Deflection | C
+2480     | CM12  | Guy        | C
+2480     | U1p   | Post       | C
+2480     | P1    | Pole Deflection | C
+2480     | P1    | Steel Pole | C
+2480     | U1p   | Post       | C
+2480     | P1    | Pole Deflection | C
+2540     | PG11  | Guy        | B
+2540     | U1-1A | Strain     | B
+2540     | P1    | Pole Deflection | B
+2540     | PG11  | Guy        | B
+2540     | U1-1A | Strain     | B
+2540     | P1    | Pole Deflection | B
+2540     | PG11  | Guy        | B
+2540     | U1-1A | Strain     | B
+2540     | P1    | Pole Deflection | B
+2540     | PG11  | Guy        | B
+2540     | U1-1A | Strain     | B
+2540     | P1    | Pole Deflection | B
+2540     | P1    | Steel Pole | B
+2540     | UN1A  | Post       | B
+2540     | P1    | Pole Deflection | B
+2540     | P1    | Steel Pole | B
+2540     | UN1A  | Post       | B
+2540     | P1    | Pole Deflection | B
+2540     | PG11  | Guy        | C
+2540     | U1-1A | Strain     | C
+2540     | P1    | Pole Deflection | C
+2540     | PG11  | Guy        | C
+2540     | U1-1A | Strain     | C
+2540     | P1    | Pole Deflection | C
+2540     | PG11  | Guy        | C
+2540     | U1-1A | Strain     | C
+2540     | P1    | Pole Deflection | C
+2540     | PG11  | Guy        | C
+2540     | U1-1A | Strain     | C
+2540     | P1    | Pole Deflection | C
+2540     | PG11  | Guy        | C
+2540     | U1-1A | Strain     | C
+2540     | P1    | Pole Deflection | C
+2540     | PG11  | Guy        | C
+2540     | U1-1A | Strain     | C
+2540     | P1    | Pole Deflection | C
+2540     | P1    | Steel Pole | C
+2540     | UN1A  | Post       | C
+2540     | P1    | Pole Deflection | C
+2540     | P1    | Steel Pole | C
+2540     | UN1A  | Post       | C
+2540     | P1    | Pole Deflection | C
+2550     | P1    | Steel Pole | C
+2550     | U1p   | Post       | C
+2550     | P1    | Pole Deflection | C
+2550     | P1    | Steel Pole | C
+2550     | U1p   | Post       | C
+2550     | P1    | Pole Deflection | C
+2550     | P1    | Steel Pole | C
+2550     | U1p   | Post       | C
+2550     | P1    | Pole Deflection | C
+2550     | P1    | Steel Pole | C
+2550     | U1p   | Post       | C
+2550     | P1    | Pole Deflection | C
+2560     | P1    | Steel Pole | C
+2560     | U1p   | Post       | C
+2560     | P1    | Pole Deflection | C
+2560     | P1    | Steel Pole | C
+2560     | U1p   | Post       | C
+2560     | P1    | Pole Deflection | C
+2560     | P1    | Steel Pole | C
+2560     | U1p   | Post       | C
+2560     | P1    | Pole Deflection | C
+2560     | P1    | Steel Pole | C
+2560     | U1p   | Post       | C
+2560     | P1    | Pole Deflection | C
+2570     | P1    | Steel Pole | C
+2570     | U1p   | Post       | C
+2570     | P1    | Pole Deflection | C
+2570     | P1    | Steel Pole | C
+2570     | U1p   | Post       | C
+2570     | P1    | Pole Deflection | C
+2570     | P1    | Steel Pole | C
+2570     | U1p   | Post       | C
+2570     | P1    | Pole Deflection | C
+2570     | P1    | Steel Pole | C
+2570     | U1p   | Post       | C
+2570     | P1    | Pole Deflection | C
+2580     | P1    | Steel Pole | C
+2580     | U1A   | Post       | C
+2580     | P1    | Pole Deflection | C
+2580     | P1    | Steel Pole | C
+2580     | U1A   | Post       | C
+2580     | P1    | Pole Deflection | C
+2580     | P1    | Steel Pole | C
+2580     | U1A   | Post       | C
+2580     | P1    | Pole Deflection | C
+2580     | P1    | Steel Pole | C
+2580     | U1A   | Post       | C
+2580     | P1    | Pole Deflection | C
+2610     | P1    | Steel Pole | C
+2610     | U1p   | Post       | C
+2610     | P1    | Pole Deflection | C
+2610     | P1    | Steel Pole | C
+2610     | U1p   | Post       | C
+2610     | P1    | Pole Deflection | C
+2610     | P1    | Steel Pole | C
+2610     | U1p   | Post       | C
+2610     | P1    | Pole Deflection | C
+2610     | P1    | Steel Pole | C
+2610     | U1p   | Post       | C
+2610     | P1    | Pole Deflection | C
+2630     | NG12  | Guy        | C
+2630     | U1-1B | Strain     | C
+2630     | P1    | Pole Deflection | C
+2630     | NG12  | Guy        | C
+2630     | U1-1B | Strain     | C
+2630     | P1    | Pole Deflection | C
+2630     | NG12  | Guy        | C
+2630     | U1-1B | Strain     | C
+2630     | P1    | Pole Deflection | C
+2630     | NG12  | Guy        | C
+2630     | U1-1B | Strain     | C
+2630     | P1    | Pole Deflection | C
+2630     | PG21  | Guy        | C
+2630     | U1-1A | Strain     | C
+2630     | P1    | Pole Deflection | C
+2630     | PG21  | Guy        | C
+2630     | U1-1A | Strain     | C
+2630     | P1    | Pole Deflection | C
+2630     | NG12  | Guy        | C
+2630     | U1-1B | Strain     | C
+2630     | P1    | Pole Deflection | C
+2630     | NG12  | Guy        | C
+2630     | U1-1B | Strain     | C
+2630     | P1    | Pole Deflection | C
+2640     | P1    | Steel Pole | C
+2640     | S1-SP | Clamp      | C
+2640     | P1    | Pole Deflection | C
+2640     | P1    | Steel Pole | C
+2640     | S1-SP | Clamp      | C
+2640     | P1    | Pole Deflection | C
+2640     | P1    | Steel Pole | C
+2640     | SP    | Clamp      | C
+2640     | P1    | Pole Deflection | C
+2640     | P1    | Steel Pole | C
+2640     | SP    | Clamp      | C
+2640     | P1    | Pole Deflection | C
+2640     | P1    | Steel Pole | C
+2640     | S1-SP | Clamp      | C
+2640     | P1    | Pole Deflection | C
+2640     | P1    | Steel Pole | C
+2640     | S1-SP | Clamp      | C
+2640     | P1    | Pole Deflection | C
+2660     | PG11  | Guy        | C
+2660     | U1-1B | Strain     | C
+2660     | P1    | Pole Deflection | C
+2660     | PG11  | Guy        | C
+2660     | U1-1B | Strain     | C
+2660     | P1    | Pole Deflection | C
+2660     | PG11  | Guy        | C
+2660     | U1-1B | Strain     | C
+2660     | P1    | Pole Deflection | C
+2660     | PG11  | Guy        | C
+2660     | U1-1B | Strain     | C
+2660     | P1    | Pole Deflection | C
+2660     | P1    | Steel Pole | C
+2660     | P1    | Pole Deflection | C
+2660     | P1    | Steel Pole | C
+2660     | P1    | Pole Deflection | C
+2660     | PG11  | Guy        | C
+2660     | U1-1B | Strain     | C
+2660     | P1    | Pole Deflection | C
+2660     | PG11  | Guy        | C
+2660     | U1-1B | Strain     | C
+2660     | P1    | Pole Deflection | C
+2600     | PG11  | Guy        | C
+2600     | U1-1B | Strain     | C
+2600     | P1    | Pole Deflection | C
+2600     | PG11  | Guy        | C
+2600     | U1-1B | Strain     | C
+2600     | P1    | Pole Deflection | C
+2600     | PG11  | Guy        | C
+2600     | U1-1B | Strain     | C
+2600     | P1    | Pole Deflection | C
+2600     | PG11  | Guy        | C
+2600     | U1-1B | Strain     | C
+2600     | P1    | Pole Deflection | C
+2600     | PG11  | Guy        | C
+2600     | U1-1B | Strain     | C
+2600     | P1    | Pole Deflection | C
+2600     | PG11  | Guy        | C
+2600     | U1-1B | Strain     | C
+2600     | P1    | Pole Deflection | C
+2600     | P1    | Steel Pole | C
+2600     | P1    | Pole Deflection | C
+2600     | P1    | Steel Pole | C
+2600     | P1    | Pole Deflection | C
+2590     | PG11  | Guy        | C
+2590     | U1-1B | Strain     | C
+2590     | P1    | Pole Deflection | C
+2590     | PG11  | Guy        | C
+2590     | U1-1B | Strain     | C
+2590     | P1    | Pole Deflection | C
+2590     | PG11  | Guy        | C
+2590     | U1-1B | Strain     | C
+2590     | P1    | Pole Deflection | C
+2590     | PG11  | Guy        | C
+2590     | U1-1B | Strain     | C
+2590     | P1    | Pole Deflection | C
+2590     | P1    | Steel Pole | C
+2590     | Neut Slack | Post       | C
+2590     | P1    | Pole Deflection | C
+2590     | P1    | Steel Pole | C
+2590     | Neut Slack | Post       | C
+2590     | P1    | Pole Deflection | C
+2590     | PG11  | Guy        | C
+2590     | U1-1B | Strain     | C
+2590     | P1    | Pole Deflection | C
+2590     | PG11  | Guy        | C
+2590     | U1-1B | Strain     | C
+2590     | P1    | Pole Deflection | C
+2645     | NG12  | Guy        | C
+2645     | S1-SP | Clamp      | C
+2645     | P1    | Pole Deflection | C
+2645     | NG12  | Guy        | C
+2645     | S1-SP | Clamp      | C
+2645     | P1    | Pole Deflection | C
+2645     | NG12  | Guy        | C
+2645     | SP    | Clamp      | C
+2645     | P1    | Pole Deflection | C
+2645     | NG12  | Guy        | C
+2645     | SP    | Clamp      | C
+2645     | P1    | Pole Deflection | C
+2645     | P1    | Steel Pole | C
+2645     | P1    | Pole Deflection | C
+2645     | P1    | Steel Pole | C
+2645     | P1    | Pole Deflection | C
+2645     | NG12  | Guy        | C
+2645     | S1-SP | Clamp      | C
+2645     | P1    | Pole Deflection | C
+2645     | NG12  | Guy        | C
+2645     | S1-SP | Clamp      | C
+2645     | P1    | Pole Deflection | C
+2650     | PG11  | Guy        | C
+2650     | U1-1B | Strain     | C
+2650     | P1    | Pole Deflection | C
+2650     | PG11  | Guy        | C
+2650     | U1-1B | Strain     | C
+2650     | P1    | Pole Deflection | C
+2650     | PG11  | Guy        | C
+2650     | U1-1B | Strain     | C
+2650     | P1    | Pole Deflection | C
+2650     | PG11  | Guy        | C
+2650     | U1-1B | Strain     | C
+2650     | P1    | Pole Deflection | C
+2650     | PG11  | Guy        | C
+2650     | U1-1B | Strain     | C
+2650     | P1    | Pole Deflection | C
+2650     | PG11  | Guy        | C
+2650     | U1-1B | Strain     | C
+2650     | P1    | Pole Deflection | C
+2650     | P1    | Steel Pole | C
+2650     | P1    | Pole Deflection | C
+2650     | P1    | Steel Pole | C
+2650     | P1    | Pole Deflection | C
+2500     | P1    | Steel Pole | C
+2500     | U1-1B | Strain     | C
+2500     | P1    | Pole Deflection | C
+2500     | P1    | Steel Pole | C
+2500     | U1-1B | Strain     | C
+2500     | P1    | Pole Deflection | C
+2500     | P1    | Steel Pole | C
+2500     | U1-1B | Strain     | C
+2500     | P1    | Pole Deflection | C
+2500     | P1    | Steel Pole | C
+2500     | U1-1B | Strain     | C
+2500     | P1    | Pole Deflection | C
+2500     | P1    | Steel Pole | C
+2500     | P1    | Pole Deflection | C
+2500     | P1    | Steel Pole | C
+2500     | P1    | Pole Deflection | C
+2500     | P1    | Steel Pole | C
+2500     | U1-1B | Strain     | C
+2500     | P1    | Pole Deflection | C
+2500     | P1    | Steel Pole | C
+2500     | U1-1B | Strain     | C
+2500     | P1    | Pole Deflection | C
+2680     | NG12  | Guy        | B
+2680     | U1-1B | Strain     | B
+2680     | P1    | Pole Deflection | B
+2680     | NG12  | Guy        | B
+2680     | U1-1B | Strain     | B
+2680     | P1    | Pole Deflection | B
+2680     | P1    | Steel Pole | B
+2680     | P1    | Pole Deflection | B
+2680     | P1    | Steel Pole | B
+2680     | P1    | Pole Deflection | B
+2680     | NG12  | Guy        | B
+2680     | U1-1B | Strain     | B
+2680     | P1    | Pole Deflection | B
+2680     | NG12  | Guy        | B
+2680     | U1-1B | Strain     | B
+2680     | P1    | Pole Deflection | B
+2680     | NG12  | Guy        | C
+2680     | U1-1B | Strain     | C
+2680     | P1    | Pole Deflection | C
+2680     | NG12  | Guy        | C
+2680     | U1-1B | Strain     | C
+2680     | P1    | Pole Deflection | C
+2680     | NG12  | Guy        | C
+2680     | U1-1B | Strain     | C
+2680     | P1    | Pole Deflection | C
+2680     | NG12  | Guy        | C
+2680     | U1-1B | Strain     | C
+2680     | P1    | Pole Deflection | C
+2680     | P1    | Steel Pole | C
+2680     | P1    | Pole Deflection | C
+2680     | P1    | Steel Pole | C
+2680     | P1    | Pole Deflection | C
+2680     | NG12  | Guy        | C
+2680     | U1-1B | Strain     | C
+2680     | P1    | Pole Deflection | C
+2680     | NG12  | Guy        | C
+2680     | U1-1B | Strain     | C
+2680     | P1    | Pole Deflection | C
+2765     | CM13  | Guy        | B
+2765     | S1-SP | Clamp      | B
+2765     | P1    | Pole Deflection | B
+2765     | CM13  | Guy        | B
+2765     | S1-SP | Clamp      | B
+2765     | P1    | Pole Deflection | B
+2765     | P1    | Steel Pole | B
+2765     | P1    | Pole Deflection | B
+2765     | P1    | Steel Pole | B
+2765     | P1    | Pole Deflection | B
+2765     | CM13  | Guy        | B
+2765     | S1-SP | Clamp      | B
+2765     | P1    | Pole Deflection | B
+2765     | CM13  | Guy        | B
+2765     | S1-SP | Clamp      | B
+2765     | P1    | Pole Deflection | B
+2765     | CM13  | Guy        | C
+2765     | S2-SP | Clamp      | C
+2765     | P1    | Pole Deflection | C
+2765     | CM13  | Guy        | C
+2765     | S2-SP | Clamp      | C
+2765     | P1    | Pole Deflection | C
+2765     | CM13  | Guy        | C
+2765     | S1-SP | Clamp      | C
+2765     | P1    | Pole Deflection | C
+2765     | CM13  | Guy        | C
+2765     | S1-SP | Clamp      | C
+2765     | P1    | Pole Deflection | C
+2765     | P1    | Steel Pole | C
+2765     | P1    | Pole Deflection | C
+2765     | P1    | Steel Pole | C
+2765     | P1    | Pole Deflection | C
+2765     | CM13  | Guy        | C
+2765     | S2-SP | Clamp      | C
+2765     | P1    | Pole Deflection | C
+2765     | CM13  | Guy        | C
+2765     | S2-SP | Clamp      | C
+2765     | P1    | Pole Deflection | C
+2770     | PG11  | Guy        | B
+2770     | C1-c1 | Clamp      | B
+2770     | P1    | Pole Deflection | B
+2770     | NG12  | Guy        | B
+2770     | C1-c1 | Clamp      | B
+2770     | P1    | Pole Deflection | B
+2770     | PG11  | Guy        | B
+2770     | C1-c1 | Clamp      | B
+2770     | P1    | Pole Deflection | B
+2770     | NG12  | Guy        | B
+2770     | C1-c1 | Clamp      | B
+2770     | P1    | Pole Deflection | B
+2770     | P1    | Steel Pole | B
+2770     | c1    | Clamp      | B
+2770     | P1    | Pole Deflection | B
+2770     | P1    | Steel Pole | B
+2770     | c1    | Clamp      | B
+2770     | P1    | Pole Deflection | B
+2770     | PG11  | Guy        | C
+2770     | C1-c1 | Clamp      | C
+2770     | P1    | Pole Deflection | C
+2770     | NG12  | Guy        | C
+2770     | C1-c1 | Clamp      | C
+2770     | P1    | Pole Deflection | C
+2770     | PG11  | Guy        | C
+2770     | C1-c1 | Clamp      | C
+2770     | P1    | Pole Deflection | C
+2770     | NG12  | Guy        | C
+2770     | C1-c1 | Clamp      | C
+2770     | P1    | Pole Deflection | C
+2770     | PG11  | Guy        | C
+2770     | C1-c1 | Clamp      | C
+2770     | P1    | Pole Deflection | C
+2770     | NG12  | Guy        | C
+2770     | C1-c1 | Clamp      | C
+2770     | P1    | Pole Deflection | C
+2770     | P1    | Steel Pole | C
+2770     | c1    | Clamp      | C
+2770     | P1    | Pole Deflection | C
+2770     | P1    | Steel Pole | C
+2770     | c1    | Clamp      | C
+2770     | P1    | Pole Deflection | C
+2780     | NG12  | Guy        | B
+2780     | c1    | Clamp      | B
+2780     | P1    | Pole Deflection | B
+2780     | NG12  | Guy        | B
+2780     | c1    | Clamp      | B
+2780     | P1    | Pole Deflection | B
+2780     | P1    | Steel Pole | B
+2780     | P1    | Pole Deflection | B
+2780     | P1    | Steel Pole | B
+2780     | P1    | Pole Deflection | B
+2780     | NG12  | Guy        | B
+2780     | c1    | Clamp      | B
+2780     | P1    | Pole Deflection | B
+2780     | NG12  | Guy        | B
+2780     | c1    | Clamp      | B
+2780     | P1    | Pole Deflection | B
+2780     | NG12  | Guy        | C
+2780     | c1    | Clamp      | C
+2780     | P1    | Pole Deflection | C
+2780     | NG12  | Guy        | C
+2780     | c1    | Clamp      | C
+2780     | P1    | Pole Deflection | C
+2780     | NG12  | Guy        | C
+2780     | c1    | Clamp      | C
+2780     | P1    | Pole Deflection | C
+2780     | NG12  | Guy        | C
+2780     | c1    | Clamp      | C
+2780     | P1    | Pole Deflection | C
+2780     | P1    | Steel Pole | C
+2780     | P1    | Pole Deflection | C
+2780     | P1    | Steel Pole | C
+2780     | P1    | Pole Deflection | C
+2780     | NG12  | Guy        | C
+2780     | c1    | Clamp      | C
+2780     | P1    | Pole Deflection | C
+2780     | NG12  | Guy        | C
+2780     | c1    | Clamp      | C
+2780     | P1    | Pole Deflection | C
+2800     | P1    | Steel Pole | C
+2800     | U1p   | Post       | C
+2800     | P1    | Pole Deflection | C
+2800     | P1    | Steel Pole | C
+2800     | U1p   | Post       | C
+2800     | P1    | Pole Deflection | C
+2800     | P1    | Steel Pole | C
+2800     | U1p   | Post       | C
+2800     | P1    | Pole Deflection | C
+2800     | P1    | Steel Pole | C
+2800     | U1p   | Post       | C
+2800     | P1    | Pole Deflection | C
+2810     | NG12  | Guy        | C
+2810     | U1-1A | Strain     | C
+2810     | P1    | Pole Deflection | C
+2810     | NG12  | Guy        | C
+2810     | U1-1A | Strain     | C
+2810     | P1    | Pole Deflection | C
+2810     | NG12  | Guy        | C
+2810     | U1-1A | Strain     | C
+2810     | P1    | Pole Deflection | C
+2810     | NG12  | Guy        | C
+2810     | U1-1A | Strain     | C
+2810     | P1    | Pole Deflection | C
+2820     | PG11  | Guy        | C
+2820     | U1-1B | Strain     | C
+2820     | P1    | Pole Deflection | C
+2820     | PG11  | Guy        | C
+2820     | U1-1B | Strain     | C
+2820     | P1    | Pole Deflection | C
+2820     | PG11  | Guy        | C
+2820     | U1-1B | Strain     | C
+2820     | P1    | Pole Deflection | C
+2820     | PG11  | Guy        | C
+2820     | U1-1B | Strain     | C
+2820     | P1    | Pole Deflection | C
+2820     | P1    | Steel Pole | C
+2820     | P1    | Pole Deflection | C
+2820     | P1    | Steel Pole | C
+2820     | P1    | Pole Deflection | C
+2820     | PG11  | Guy        | C
+2820     | U1-1B | Strain     | C
+2820     | P1    | Pole Deflection | C
+2820     | PG11  | Guy        | C
+2820     | U1-1B | Strain     | C
+2820     | P1    | Pole Deflection | C
+2850     | NG12  | Guy        | B
+2850     | U1-1B | Strain     | B
+2850     | P1    | Pole Deflection | B
+2850     | NG12  | Guy        | B
+2850     | U1-1B | Strain     | B
+2850     | P1    | Pole Deflection | B
+2850     | NG12  | Guy        | B
+2850     | U1-1B | Strain     | B
+2850     | P1    | Pole Deflection | B
+2850     | NG12  | Guy        | B
+2850     | U1-1B | Strain     | B
+2850     | P1    | Pole Deflection | B
+2850     | P1    | Steel Pole | B
+2850     | P1    | Pole Deflection | B
+2850     | P1    | Steel Pole | B
+2850     | P1    | Pole Deflection | B
+2850     | NG12  | Guy        | C
+2850     | U1-1B | Strain     | C
+2850     | P1    | Pole Deflection | C
+2850     | NG12  | Guy        | C
+2850     | U1-1B | Strain     | C
+2850     | P1    | Pole Deflection | C
+2850     | NG12  | Guy        | C
+2850     | U1-1B | Strain     | C
+2850     | P1    | Pole Deflection | C
+2850     | NG12  | Guy        | C
+2850     | U1-1B | Strain     | C
+2850     | P1    | Pole Deflection | C
+2850     | NG12  | Guy        | C
+2850     | U1-1B | Strain     | C
+2850     | P1    | Pole Deflection | C
+2850     | NG12  | Guy        | C
+2850     | U1-1B | Strain     | C
+2850     | P1    | Pole Deflection | C
+2850     | P1    | Steel Pole | C
+2850     | P1    | Pole Deflection | C
+2850     | P1    | Steel Pole | C
+2850     | P1    | Pole Deflection | C
+2890     | NG12  | Guy        | B
+2890     | c1    | Clamp      | B
+2890     | P1    | Pole Deflection | B
+2890     | NG12  | Guy        | B
+2890     | c1    | Clamp      | B
+2890     | P1    | Pole Deflection | B
+2890     | NG12  | Guy        | B
+2890     | c1    | Clamp      | B
+2890     | P1    | Pole Deflection | B
+2890     | NG12  | Guy        | B
+2890     | c1    | Clamp      | B
+2890     | P1    | Pole Deflection | B
+2890     | P1    | Steel Pole | B
+2890     | Neut Slack | Post       | B
+2890     | P1    | Pole Deflection | B
+2890     | P1    | Steel Pole | B
+2890     | Neut Slack | Post       | B
+2890     | P1    | Pole Deflection | B
+2890     | NG12  | Guy        | C
+2890     | c1    | Clamp      | C
+2890     | P1    | Pole Deflection | C
+2890     | NG12  | Guy        | C
+2890     | c1    | Clamp      | C
+2890     | P1    | Pole Deflection | C
+2890     | NG12  | Guy        | C
+2890     | c1    | Clamp      | C
+2890     | P1    | Pole Deflection | C
+2890     | NG12  | Guy        | C
+2890     | c1    | Clamp      | C
+2890     | P1    | Pole Deflection | C
+2890     | NG12  | Guy        | C
+2890     | c1    | Clamp      | C
+2890     | P1    | Pole Deflection | C
+2890     | NG12  | Guy        | C
+2890     | c1    | Clamp      | C
+2890     | P1    | Pole Deflection | C
+2890     | P1    | Steel Pole | C
+2890     | Neut Slack | Post       | C
+2890     | P1    | Pole Deflection | C
+2890     | P1    | Steel Pole | C
+2890     | Neut Slack | Post       | C
+2890     | P1    | Pole Deflection | C
+2900     | CM11  | Guy        | B
+2900     | C1-c1 | Clamp      | B
+2900     | P1    | Pole Deflection | B
+2900     | P1    | Steel Pole | B
+2900     | U1p   | Post       | B
+2900     | P1    | Pole Deflection | B
+2900     | CM11  | Guy        | C
+2900     | C1-c1 | Clamp      | C
+2900     | P1    | Pole Deflection | C
+2900     | P1    | Steel Pole | C
+2900     | U1p   | Post       | C
+2900     | P1    | Pole Deflection | C
+2900     | CM11  | Guy        | C
+2900     | C1-c1 | Clamp      | C
+2900     | P1    | Pole Deflection | C
+2900     | P1    | Steel Pole | C
+2900     | U1p   | Post       | C
+2900     | P1    | Pole Deflection | C
+2910     | P1    | Steel Pole | B
+2910     | U1-1A | Strain     | B
+2910     | P1    | Pole Deflection | B
+2910     | P1    | Steel Pole | B
+2910     | U1-1A | Strain     | B
+2910     | P1    | Pole Deflection | B
+2910     | P1    | Steel Pole | C
+2910     | U1-1A | Strain     | C
+2910     | P1    | Pole Deflection | C
+2910     | P1    | Steel Pole | C
+2910     | U1-1A | Strain     | C
+2910     | P1    | Pole Deflection | C
+2910     | P1    | Steel Pole | C
+2910     | U1-1A | Strain     | C
+2910     | P1    | Pole Deflection | C
+2910     | P1    | Steel Pole | C
+2910     | U1-1A | Strain     | C
+2910     | P1    | Pole Deflection | C
+2920     | P1    | Steel Pole | B
+2920     | U1p   | Post       | B
+2920     | P1    | Pole Deflection | B
+2920     | P1    | Steel Pole | B
+2920     | U1p   | Post       | B
+2920     | P1    | Pole Deflection | B
+2920     | P1    | Steel Pole | C
+2920     | UN1   | Post       | C
+2920     | P1    | Pole Deflection | C
+2920     | P1    | Steel Pole | C
+2920     | U1p   | Post       | C
+2920     | P1    | Pole Deflection | C
+2920     | P1    | Steel Pole | C
+2920     | U1p   | Post       | C
+2920     | P1    | Pole Deflection | C
+2920     | P1    | Steel Pole | C
+2920     | U1p   | Post       | C
+2920     | P1    | Pole Deflection | C
+2930     | PG11  | Guy        | B
+2930     | C1-c1 | Clamp      | B
+2930     | P1    | Pole Deflection | B
+2930     | PG11  | Guy        | B
+2930     | C1-c1 | Clamp      | B
+2930     | P1    | Pole Deflection | B
+2930     | P1    | Steel Pole | B
+2930     | c1    | Clamp      | B
+2930     | P1    | Pole Deflection | B
+2930     | P1    | Steel Pole | B
+2930     | c1    | Clamp      | B
+2930     | P1    | Pole Deflection | B
+2930     | PG11  | Guy        | B
+2930     | C1-c1 | Clamp      | B
+2930     | P1    | Pole Deflection | B
+2930     | PG11  | Guy        | B
+2930     | C1-c1 | Clamp      | B
+2930     | P1    | Pole Deflection | B
+2930     | PG11  | Guy        | C
+2930     | C1-c1 | Clamp      | C
+2930     | P1    | Pole Deflection | C
+2930     | PG11  | Guy        | C
+2930     | C1-c1 | Clamp      | C
+2930     | P1    | Pole Deflection | C
+2930     | PG11  | Guy        | C
+2930     | C1-c1 | Clamp      | C
+2930     | P1    | Pole Deflection | C
+2930     | PG11  | Guy        | C
+2930     | C1-c1 | Clamp      | C
+2930     | P1    | Pole Deflection | C
+2930     | P1    | Steel Pole | C
+2930     | c1    | Clamp      | C
+2930     | P1    | Pole Deflection | C
+2930     | P1    | Steel Pole | C
+2930     | c1    | Clamp      | C
+2930     | P1    | Pole Deflection | C
+2930     | PG11  | Guy        | C
+2930     | C1-c1 | Clamp      | C
+2930     | P1    | Pole Deflection | C
+2930     | PG11  | Guy        | C
+2930     | C1-c1 | Clamp      | C
+2930     | P1    | Pole Deflection | C
+2940     | PG11  | Guy        | B
+2940     | c1    | Clamp      | B
+2940     | P1    | Pole Deflection | B
+2940     | PG11  | Guy        | B
+2940     | c1    | Clamp      | B
+2940     | P1    | Pole Deflection | B
+2940     | PG11  | Guy        | B
+2940     | c1    | Clamp      | B
+2940     | P1    | Pole Deflection | B
+2940     | PG11  | Guy        | B
+2940     | c1    | Clamp      | B
+2940     | P1    | Pole Deflection | B
+2940     | P1    | Steel Pole | B
+2940     | C1-c1 | Clamp      | B
+2940     | P1    | Pole Deflection | B
+2940     | P1    | Steel Pole | B
+2940     | C1-c1 | Clamp      | B
+2940     | P1    | Pole Deflection | B
+2940     | PG11  | Guy        | C
+2940     | c1    | Clamp      | C
+2940     | P1    | Pole Deflection | C
+2940     | PG11  | Guy        | C
+2940     | c1    | Clamp      | C
+2940     | P1    | Pole Deflection | C
+2940     | PG11  | Guy        | C
+2940     | c1    | Clamp      | C
+2940     | P1    | Pole Deflection | C
+2940     | PG11  | Guy        | C
+2940     | c1    | Clamp      | C
+2940     | P1    | Pole Deflection | C
+2940     | PG11  | Guy        | C
+2940     | c1    | Clamp      | C
+2940     | P1    | Pole Deflection | C
+2940     | PG11  | Guy        | C
+2940     | c1    | Clamp      | C
+2940     | P1    | Pole Deflection | C
+2940     | P1    | Steel Pole | C
+2940     | C1-c1 | Clamp      | C
+2940     | P1    | Pole Deflection | C
+2940     | P1    | Steel Pole | C
+2940     | C1-c1 | Clamp      | C
+2940     | P1    | Pole Deflection | C
+2950     | P1    | Steel Pole | B
+2950     | U1p   | Post       | B
+2950     | P1    | Pole Deflection | B
+2950     | P1    | Steel Pole | B
+2950     | U1p   | Post       | B
+2950     | P1    | Pole Deflection | B
+2950     | P1    | Steel Pole | C
+2950     | UN1   | Post       | C
+2950     | P1    | Pole Deflection | C
+2950     | P1    | Steel Pole | C
+2950     | U1p   | Post       | C
+2950     | P1    | Pole Deflection | C
+2950     | P1    | Steel Pole | C
+2950     | U1p   | Post       | C
+2950     | P1    | Pole Deflection | C
+2950     | P1    | Steel Pole | C
+2950     | U1p   | Post       | C
+2950     | P1    | Pole Deflection | C
+2960     | NG12  | Guy        | B
+2960     | c1    | Clamp      | B
+2960     | P1    | Pole Deflection | B
+2960     | NG12  | Guy        | B
+2960     | c1    | Clamp      | B
+2960     | P1    | Pole Deflection | B
+2960     | P1    | Steel Pole | B
+2960     | U1p   | Post       | B
+2960     | P1    | Pole Deflection | B
+2960     | P1    | Steel Pole | B
+2960     | U1p   | Post       | B
+2960     | P1    | Pole Deflection | B
+2960     | NG12  | Guy        | B
+2960     | c1    | Clamp      | B
+2960     | P1    | Pole Deflection | B
+2960     | NG12  | Guy        | B
+2960     | c1    | Clamp      | B
+2960     | P1    | Pole Deflection | B
+2960     | NG12  | Guy        | C
+2960     | c1    | Clamp      | C
+2960     | P1    | Pole Deflection | C
+2960     | NG12  | Guy        | C
+2960     | c1    | Clamp      | C
+2960     | P1    | Pole Deflection | C
+2960     | NG12  | Guy        | C
+2960     | c1    | Clamp      | C
+2960     | P1    | Pole Deflection | C
+2960     | NG12  | Guy        | C
+2960     | c1    | Clamp      | C
+2960     | P1    | Pole Deflection | C
+2960     | P1    | Steel Pole | C
+2960     | U1p   | Post       | C
+2960     | P1    | Pole Deflection | C
+2960     | P1    | Steel Pole | C
+2960     | U1p   | Post       | C
+2960     | P1    | Pole Deflection | C
+2960     | NG12  | Guy        | C
+2960     | c1    | Clamp      | C
+2960     | P1    | Pole Deflection | C
+2960     | NG12  | Guy        | C
+2960     | c1    | Clamp      | C
+2960     | P1    | Pole Deflection | C
+2330     | PG11  | Guy        | C
+2330     | U1-1B | Strain     | C
+2330     | P1    | Pole Deflection | C
+2330     | PG11  | Guy        | C
+2330     | U1-1B | Strain     | C
+2330     | P1    | Pole Deflection | C
+2330     | PG11  | Guy        | C
+2330     | U1-1B | Strain     | C
+2330     | P1    | Pole Deflection | C
+2330     | PG11  | Guy        | C
+2330     | U1-1B | Strain     | C
+2330     | P1    | Pole Deflection | C
+2330     | PG11  | Guy        | C
+2330     | U1-1B | Strain     | C
+2330     | P1    | Pole Deflection | C
+2330     | PG11  | Guy        | C
+2330     | U1-1B | Strain     | C
+2330     | P1    | Pole Deflection | C
+2330     | P1    | Steel Pole | C
+2330     | P1    | Pole Deflection | C
+2330     | P1    | Steel Pole | C
+2330     | P1    | Pole Deflection | C
+2340     | PG11  | Guy        | C
+2340     | U1-1B | Strain     | C
+2340     | P1    | Pole Deflection | C
+2340     | PG11  | Guy        | C
+2340     | U1-1B | Strain     | C
+2340     | P1    | Pole Deflection | C
+2340     | PG11  | Guy        | C
+2340     | U1-1B | Strain     | C
+2340     | P1    | Pole Deflection | C
+2340     | PG11  | Guy        | C
+2340     | U1-1B | Strain     | C
+2340     | P1    | Pole Deflection | C
+2340     | P1    | Steel Pole | C
+2340     | U1p   | Post       | C
+2340     | P1    | Pole Deflection | C
+2340     | P1    | Steel Pole | C
+2340     | U1p   | Post       | C
+2340     | P1    | Pole Deflection | C
+2340     | PG11  | Guy        | C
+2340     | U1-1B | Strain     | C
+2340     | P1    | Pole Deflection | C
+2340     | PG11  | Guy        | C
+2340     | U1-1B | Strain     | C
+2340     | P1    | Pole Deflection | C
+2740     | P1    | Steel Pole | B
+2740     | U1p   | Post       | B
+2740     | P1    | Pole Deflection | B
+2740     | P1    | Steel Pole | B
+2740     | U1p   | Post       | B
+2740     | P1    | Pole Deflection | B
+2740     | P1    | Steel Pole | C
+2740     | U1p   | Post       | C
+2740     | P1    | Pole Deflection | C
+2740     | P1    | Steel Pole | C
+2740     | U1p   | Post       | C
+2740     | P1    | Pole Deflection | C
+2740     | P1    | Steel Pole | C
+2740     | U1p   | Post       | C
+2740     | P1    | Pole Deflection | C
+2740     | P1    | Steel Pole | C
+2740     | U1p   | Post       | C
+2740     | P1    | Pole Deflection | C
+2750     | PG11  | Guy        | B
+2750     | c1    | Clamp      | B
+2750     | P1    | Pole Deflection | B
+2750     | PG11  | Guy        | B
+2750     | c1    | Clamp      | B
+2750     | P1    | Pole Deflection | B
+2750     | P1    | Steel Pole | B
+2750     | P1    | Pole Deflection | B
+2750     | P1    | Steel Pole | B
+2750     | P1    | Pole Deflection | B
+2750     | PG11  | Guy        | B
+2750     | c1    | Clamp      | B
+2750     | P1    | Pole Deflection | B
+2750     | PG11  | Guy        | B
+2750     | c1    | Clamp      | B
+2750     | P1    | Pole Deflection | B
+2750     | PG11  | Guy        | C
+2750     | c1    | Clamp      | C
+2750     | P1    | Pole Deflection | C
+2750     | PG11  | Guy        | C
+2750     | c1    | Clamp      | C
+2750     | P1    | Pole Deflection | C
+2750     | PG11  | Guy        | C
+2750     | c1    | Clamp      | C
+2750     | P1    | Pole Deflection | C
+2750     | PG11  | Guy        | C
+2750     | c1    | Clamp      | C
+2750     | P1    | Pole Deflection | C
+2750     | P1    | Steel Pole | C
+2750     | P1    | Pole Deflection | C
+2750     | P1    | Steel Pole | C
+2750     | P1    | Pole Deflection | C
+2750     | PG11  | Guy        | C
+2750     | c1    | Clamp      | C
+2750     | P1    | Pole Deflection | C
+2750     | PG11  | Guy        | C
+2750     | c1    | Clamp      | C
+2750     | P1    | Pole Deflection | C

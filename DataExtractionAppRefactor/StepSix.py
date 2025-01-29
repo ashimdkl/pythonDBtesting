@@ -36,7 +36,7 @@ class StepSix(StepBase):
         try:
             tree = ET.parse(self.file_path)
             root = tree.getroot()
-            self.output_data = []
+            data = {}
 
             # Extract data from XML for guy wire and cable elements
             for report in root.findall('.//summary_of_maximum_element_usages_for_structure_range'):
@@ -44,14 +44,25 @@ class StepSix(StepBase):
                 element_label = report.find('element_label').text
                 element_type = report.find('element_type').text
                 max_usage = report.find('maximum_usage').text
-                
+
                 if element_type == "Guy" or element_type == "Cable":
-                    self.output_data.append((
-                        seq_no, 
-                        element_label, 
-                        element_type, 
-                        max_usage
-                    ))
+                    if seq_no not in data:
+                        data[seq_no] = []
+                    data[seq_no].append({
+                        'element_label': element_label,
+                        'element_type': element_type,
+                        'max_usage': max_usage
+                    })
+
+            # Sort data for each sequence by element_label (e.g., PG11, PG12, etc.)
+            for seq_no in data:
+                data[seq_no].sort(key=lambda x: x['element_label'])
+
+            # Flatten sorted data into a list
+            self.output_data = [
+                (seq_no, item['element_label'], item['element_type'], item['max_usage'])
+                for seq_no, items in data.items() for item in items
+            ]
 
             return True
 

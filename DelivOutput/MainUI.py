@@ -1,14 +1,19 @@
 import customtkinter as ctk
 import os
+import tkinter as tk
 from tkinter import filedialog, messagebox
 from openpyxl import load_workbook
 
 # Import your generators
+from ReportGenerator import DataExtractionApp
 from LocateSheet import LocateSheetGenerator
 from NewFraming import NewFramingGenerator
 from SteelPole import SteelPoleGenerator
 from LongLeadIS import LongLeadGenerator
 from PullingSectionTracker import PullingSectionTracker
+
+# Import mergeXML application
+from mergeXML import XMLTagExtractorApp  # Ensure mergeXML.py is in the same directory or update the import path
 
 class ModernApp:
     def __init__(self):
@@ -109,6 +114,35 @@ class ModernApp:
                 corner_radius=8
             )
             btn.pack(pady=10, padx=40, fill="x")
+
+        self.launch_data_extraction_app_button = ctk.CTkButton(
+            self.sidebar,
+            text="Launch Data Extraction Tool",
+            command=self.launch_data_extraction_app
+        )
+        self.launch_data_extraction_app_button.pack(pady=10, padx=20)
+
+        # Add the new button for testing large XML
+        self.test_large_xml_button = ctk.CTkButton(
+            self.sidebar,
+            text="Testing Large XML",
+            command=self.launch_merge_xml_app
+        )
+        self.test_large_xml_button.pack(pady=10, padx=20)
+
+    def launch_merge_xml_app(self):
+        """Launches the Merge XML Tool in a new window."""
+        new_window = tk.Toplevel(self.app)
+        new_window.title("Large XML Testing")
+        new_window.geometry("800x600")
+        XMLTagExtractorApp(new_window)  # Initialize and launch the XML extractor app
+
+    def launch_data_extraction_app(self):
+        """Launches the Data Extraction Report App in a new window."""
+        new_window = tk.Toplevel(self.app)
+        new_window.title("Data Extraction Report Generator")
+        new_window.geometry("1920x1080")
+        DataExtractionApp(new_window)
 
     def create_dialog(self, title, message):
         """Create a modern custom dialog"""

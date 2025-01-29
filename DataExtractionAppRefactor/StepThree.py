@@ -56,24 +56,33 @@ class StepThree(StepBase):
                     pole_type = report.find('pole_property_label').text or ''
                     self.pole_types[sequence] = pole_type
 
-                # Process framing description
-                framing_parts = framing.split(" ", 2)
-                if len(framing_parts) > 2:
-                    framing = framing_parts[-1]
-                    framing = " ".join(framing.split()[:-1])
+                # Process **primary framing**: Extract and duplicate the framing code
+                if framing:
+                    primary_framing_code = framing.split()[0]  # Extract base framing code (e.g., EJ300)
+                    primary_framing = f"{primary_framing_code} {primary_framing_code}"  # Duplicate it (EJ300 EJ300)
+                else:
+                    primary_framing = ''
 
+                # Process **secondary framing**: Extract the framing without pole type
+                if framing:
+                    secondary_framing = framing.split()[0]  # Extract only the base framing (e.g., EH131)
+                else:
+                    secondary_framing = ''
+
+                # Save data
                 if sequence not in self.data:
                     self.data[sequence] = []
 
                 self.data[sequence].append({
-                    'framing': framing,
+                    'primary_framing': primary_framing,
+                    'secondary_framing': secondary_framing,
                     'latitude': latitude,
                     'longitude': longitude,
                     'x_easting': x_easting,
                     'y_northing': y_northing,
                     'stake_description': stake_description
                 })
-            
+
             return True
 
         except Exception as e:
@@ -107,7 +116,7 @@ class StepThree(StepBase):
                             if guy_type in point['stake_description']:
                                 x_next = float(point['x_easting'])
                                 y_next = float(point['y_northing'])
-                                
+
                                 # Calculate lead length and direction
                                 lead_length = math.sqrt(
                                     (x_next - x_origin) ** 2 + 
@@ -118,7 +127,7 @@ class StepThree(StepBase):
                                     x_next - x_origin
                                 ))
                                 direction = self._get_cardinal_direction(theta)
-                                
+
                                 descriptions = point['stake_description'].split(',')
                                 for description in descriptions:
                                     if description.strip() not in stake_description_set:
@@ -126,9 +135,10 @@ class StepThree(StepBase):
                                         anchor_data.append({
                                             'sequence': sequence,
                                             'type': f"P1 to {description.strip()}",
+                                            'primary_framing': point['primary_framing'],
+                                            'secondary_framing': point['secondary_framing'],
                                             'latitude': point['latitude'],
                                             'longitude': point['longitude'],
-                                            'framing': point['framing'],
                                             'anchor_direction': direction,
                                             'lead_length': lead_length
                                         })
@@ -137,12 +147,12 @@ class StepThree(StepBase):
 
             # Save anchor data to file
             self._save_anchor_data(anchor_data)
-            
+
             # Save pole type data
             self._save_pole_type_data()
 
             messagebox.showinfo("Success", f"Data from Step {self.step} saved successfully.")
-            
+
         except Exception as e:
             messagebox.showerror("Error", f"Failed to save data: {e}")
 
@@ -152,21 +162,23 @@ class StepThree(StepBase):
             max_lengths = {
                 'sequence': max(len(item['sequence']) for item in anchor_data),
                 'type': max(len(item['type']) for item in anchor_data),
+                'primary_framing': max(len(item['primary_framing']) for item in anchor_data),
+                'secondary_framing': max(len(item['secondary_framing']) for item in anchor_data),
                 'latitude': max(len(str(item['latitude'])) for item in anchor_data),
                 'longitude': max(len(str(item['longitude'])) for item in anchor_data),
-                'framing': max(len(item['framing']) for item in anchor_data),
                 'anchor_direction': max(len(item['anchor_direction']) for item in anchor_data),
-                'lead_length': max(len(f"{item['lead_length']:.2f}") for item in anchor_data)
+                'lead_length': max(len(f"{item['lead_length']:.2f}") for item in anchor_data),
             }
 
             headers = [
                 ("Sequence", max_lengths['sequence']),
                 ("Type", max_lengths['type']),
+                ("Primary Framing", max_lengths['primary_framing']),
+                ("Secondary Framing", max_lengths['secondary_framing']),
                 ("Latitude", max_lengths['latitude']),
                 ("Longitude", max_lengths['longitude']),
-                ("Framing", max_lengths['framing']),
                 ("Anchor Direction", max_lengths['anchor_direction']),
-                ("Lead Length", max_lengths['lead_length'])
+                ("Lead Length", max_lengths['lead_length']),
             ]
 
             # Write headers
@@ -174,16 +186,26 @@ class StepThree(StepBase):
             file.write(header_row + "\n")
             file.write("-" * len(header_row) + "\n")
 
+            # Track last sequence for clearing latitude/longitude
+            last_sequence = None
+
             # Write data rows
             for item in anchor_data:
+                if item['sequence'] == last_sequence:
+                    item['latitude'] = ''
+                    item['longitude'] = ''
+                else:
+                    last_sequence = item['sequence']
+
                 row = [
                     f"{item['sequence']:<{max_lengths['sequence']}}",
                     f"{item['type']:<{max_lengths['type']}}",
+                    f"{item['primary_framing']:<{max_lengths['primary_framing']}}",
+                    f"{item['secondary_framing']:<{max_lengths['secondary_framing']}}",
                     f"{item['latitude']:<{max_lengths['latitude']}}",
                     f"{item['longitude']:<{max_lengths['longitude']}}",
-                    f"{item['framing']:<{max_lengths['framing']}}",
                     f"{item['anchor_direction']:<{max_lengths['anchor_direction']}}",
-                    f"{item['lead_length']:<{max_lengths['lead_length']}.2f}"
+                    f"{item['lead_length']:<{max_lengths['lead_length']}.2f}",
                 ]
                 file.write(" | ".join(row) + "\n")
 

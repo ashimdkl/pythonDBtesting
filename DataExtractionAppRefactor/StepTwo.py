@@ -59,4 +59,4 @@ class StepTwo(StepBase):
             messagebox.showinfo("Success", f"Data from Step {self.step} saved successfully.")
             
         except Exception as e:
-            messagebox.showerror("Error", f"Failed to parse pasted data: {e}")
+            messagebox.showerror("Error", f"Failed to parse pasted data: {e}")  
