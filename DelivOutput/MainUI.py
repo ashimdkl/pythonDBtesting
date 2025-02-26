@@ -135,14 +135,46 @@ class ModernApp:
         new_window = tk.Toplevel(self.app)
         new_window.title("Large XML Testing")
         new_window.geometry("800x600")
-        XMLTagExtractorApp(new_window)  # Initialize and launch the XML extractor app
+        
+        # Make window modal
+        new_window.transient(self.app)
+        new_window.grab_set()
+        
+        # Center the window relative to parent
+        x = self.app.winfo_x() + (self.app.winfo_width() // 2) - 400
+        y = self.app.winfo_y() + (self.app.winfo_height() // 2) - 300
+        new_window.geometry(f"+{x}+{y}")
+        
+        # Initialize the XML extractor app
+        xml_app = XMLTagExtractorApp(new_window)
+        
+        # Wait for this window to be closed before allowing interaction with parent
+        self.app.wait_window(new_window)
 
     def launch_data_extraction_app(self):
         """Launches the Data Extraction Report App in a new window."""
         new_window = tk.Toplevel(self.app)
         new_window.title("Data Extraction Report Generator")
-        new_window.geometry("1920x1080")
-        DataExtractionApp(new_window)
+        new_window.geometry("1100x700")  # More reasonable initial size
+        
+        # Make window modal
+        new_window.transient(self.app)
+        new_window.grab_set()
+        
+        # Center the window relative to parent
+        x = self.app.winfo_x() + (self.app.winfo_width() // 2) - 550
+        y = self.app.winfo_y() + (self.app.winfo_height() // 2) - 350
+        new_window.geometry(f"+{x}+{y}")
+        
+        # Initialize the data extraction app
+        data_app = DataExtractionApp(new_window)
+        
+        # Ensure this window stays on top of parent
+        new_window.lift()
+        new_window.focus_force()
+        
+        # Wait for this window to be closed before allowing interaction with parent
+        self.app.wait_window(new_window)
 
     def create_dialog(self, title, message):
         """Create a modern custom dialog"""

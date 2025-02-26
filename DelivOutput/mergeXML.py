@@ -4,6 +4,7 @@ from tkinter import ttk
 import xml.etree.ElementTree as ET
 import math
 import re
+from collections import defaultdict
 
 
 class XMLTagExtractorApp:
@@ -50,17 +51,20 @@ class XMLTagExtractorApp:
             # Extract Step 3 tags
             self.extract_step3(root)
 
+            # Extract additional steps as needed
+            self.extract_step4_span_guy(root)
+
+            # Extract Step 5 tags
+            self.extract_step5_primary(root)
+
             # Extract Step 6 tags
             self.extract_step6(root)
 
-            # Extract Step 7 tags
+             # Extract Step 7 tags
             self.extract_step7(root)
 
             # Extract grades and write to grade.txt
             self.extract_loading_grades(root)
-
-            # Extract additional steps as needed
-            self.extract_step4_span_guy(root)
 
             messagebox.showinfo(
                 "Success",
@@ -263,6 +267,159 @@ class XMLTagExtractorApp:
         
         return framing.strip()
 
+    def _get_wire_attachment_heights(self, root):
+        """Get wire attachment heights from wire loads table."""
+        heights = {}
+        for load in root.findall(".//wire_loads_in_structure_coordinate_system_for_structure_range"):
+            try:
+                str_no = load.find('str_no').text.strip()
+                
+                # Handle sequences with '&'
+                if '&' in str_no:
+                    str_no = str_no.split('&')[0].strip()
+                str_no = str_no.replace('SEQ', '').strip()
+                
+                # Skip if not a 4-digit number
+                if not str_no.isdigit() or len(str_no) != 4:
+                    continue
+
+                set_no = load.find('set_no').text
+                height = float(load.find('structure_attach_height').text or 0)
+                
+                # Only store the first occurrence of each str_no/set_no combination
+                if (str_no, set_no) not in heights:
+                    heights[(str_no, set_no)] = height
+            except Exception:
+                continue
+        return heights
+
+    def extract_step5_primary(self, root):
+        """Extract primary conductor data from XML."""
+        output_file = "XMLextractStringingChartPrimary_section_struct_circuitType_spanLength_total.txt"
+        
+        # First, get wire attachment heights
+        wire_heights = self._get_wire_attachment_heights(root)
+        
+        # Process stringing chart summary
+        section_data = defaultdict(lambda: {
+            'spans': [],  # Will now store dictionaries with span details
+            'sequences': set(),
+            'circuit_type': '',
+            'structures': []
+        })
+
+        # Track processed spans to avoid duplicates from temperature variations
+        processed_spans = set()
+
+        # Find stringing chart summary table
+        for entry in root.findall(".//stringing_chart_summary"):
+            try:
+                sec_no = entry.find('sec_no').text
+                circuit = entry.find('circuit').text
+                span_from = entry.find('span_from_str').text.replace('SEQ ', '').strip()
+                span_to = entry.find('span_to_str').text.replace('SEQ ', '').strip()
+                span_length = float(entry.find('span_length').text or 0)
+                from_set = entry.find('span_from_set').text
+                temp = float(entry.find('temp').text or 0)
+                
+                # Skip if not 4-digit numbers
+                if not span_from.isdigit() or len(span_from) != 4 or not span_to.isdigit() or len(span_to) != 4:
+                    continue
+                
+                # Create a unique key for this span
+                span_key = f"{sec_no}-{span_from}-{span_to}"
+                
+                # Skip if any required field is missing
+                if not all([sec_no, circuit, span_from, span_to, span_length]):
+                    continue
+                
+                # Skip if not a primary conductor
+                if 'PH' not in circuit:
+                    continue
+
+                # Only process each span once (skip temperature variations)
+                if span_key in processed_spans:
+                    continue
+                processed_spans.add(span_key)
+
+                # Handle sequences with '&'
+                if '&' in span_from:
+                    span_from = span_from.split('&')[0].strip()
+                if '&' in span_to:
+                    span_to = span_to.split('&')[0].strip()
+
+                # Additional validation for sequence numbers after handling '&'
+                if not span_from.isdigit() or len(span_from) != 4 or not span_to.isdigit() or len(span_to) != 4:
+                    continue
+
+                section_data[sec_no]['circuit_type'] = circuit
+                section_data[sec_no]['sequences'].update([span_from, span_to])
+                
+                # Store span details as a dictionary
+                span_details = {
+                    'from': span_from,
+                    'to': span_to,
+                    'length': span_length,
+                    'from_height': wire_heights.get((span_from, from_set), 0.0),
+                    'set_no': from_set
+                }
+                section_data[sec_no]['spans'].append(span_details)
+                section_data[sec_no]['structures'].append(span_details)
+                    
+            except Exception as e:
+                print(f"Error processing entry: {e}")
+                continue
+
+        # Write to output file
+        with open(output_file, "w") as file:
+            # Write headers
+            headers = ["Section #", "Structure -> Structure", "Circuit Type", 
+                      "Circuit Value", "Span Lengths", "Total Length", "Sequences", "Heights", "Set Numbers"]
+            header_row = " | ".join(headers)
+            file.write(header_row + "\n")
+            file.write("-" * len(header_row) + "\n")
+
+            # Sort sections numerically
+            for sec_no in sorted(section_data.keys(), key=int):
+                data = section_data[sec_no]
+                
+                # Calculate total span length and format individual spans
+                span_lengths = []
+                total_span = 0
+                for span in data['spans']:
+                    span_lengths.append(f"{span['from']}->{span['to']}={span['length']:.2f}")
+                    total_span += span['length']
+                
+                circuit_value = int(re.search(r'(\d+)PH', data['circuit_type']).group(1))
+                result = total_span * circuit_value
+                sequences = ", ".join(sorted(data['sequences'], key=lambda x: int(x)))
+                
+                # Format structure path
+                structures = " -> ".join([s['from'] for s in data['structures']] + 
+                                       [data['structures'][-1]['to']])
+                
+                # Format heights and set numbers
+                heights = ", ".join(f"{s['from_height']:.1f}" for s in data['structures'])
+                set_numbers = ", ".join(s['set_no'] for s in data['structures'])
+                
+                # Format span lengths
+                span_lengths_str = " + ".join(span_lengths)
+                
+                # Write the data row
+                row = [
+                    sec_no,
+                    structures,
+                    data['circuit_type'],
+                    str(circuit_value),
+                    span_lengths_str,
+                    f"{total_span:.2f}",
+                    sequences,
+                    heights,
+                    set_numbers
+                ]
+                file.write(" | ".join(row) + "\n")
+
+
     def extract_step6(self, root):
         step6_file = "XMLextractGuyUsage_seq_elementType_usage.txt"
         with open(step6_file, "w") as file:
@@ -270,8 +427,9 @@ class XMLTagExtractorApp:
             file.write("Sequence # | Element Label      | Element Type    | Maximum Usage\n")
             file.write("-" * 70 + "\n")
 
-            # Collect filtered data first
-            output_data = []
+            # Dictionary to track maximum values
+            max_values = {}  # Key: (sequence, element_label), Value: (element_type, max_usage)
+            
             for report in root.findall(".//summary_of_maximum_usages_by_load_case_for_structure_range"):
                 try:
                     seq_no = report.find("str_no").text or "N/A"
@@ -281,15 +439,26 @@ class XMLTagExtractorApp:
 
                     # Only include Guy and Cable elements
                     if element_type in ["Guy", "Cable"]:
-                        output_data.append({
-                            'sequence': seq_no,
-                            'element_label': element_label,
-                            'element_type': element_type,
-                            'max_usage': max_usage
-                        })
+                        # Convert max_usage to float for comparison
+                        usage_value = float(max_usage)
+                        key = (seq_no, element_label)
+                        
+                        # Update if this is the first occurrence or if the usage is higher
+                        if key not in max_values or usage_value > float(max_values[key][1]):
+                            max_values[key] = (element_type, max_usage)
 
                 except Exception as e:
                     print(f"Skipping an entry due to error: {e}")
+
+            # Convert to list for sorting
+            output_data = []
+            for (seq_no, element_label), (element_type, max_usage) in max_values.items():
+                output_data.append({
+                    'sequence': seq_no,
+                    'element_label': element_label,
+                    'element_type': element_type,
+                    'max_usage': max_usage
+                })
 
             # Sort by sequence number
             output_data.sort(key=lambda x: int(re.findall(r'\d+', x['sequence'])[0]))

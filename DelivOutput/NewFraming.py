@@ -27,20 +27,65 @@ class NewFramingGenerator:
             'TF200': 'TF200 - TRANSMISSION TANGENT'
         }
 
-    def get_standard_code(self, standard):
-        """Extract standard code from the full standard string"""
-        if not standard:
+    def get_standard_name(self, code_str):
+        """Get full standard name from code, preserving any prefixes like (2)"""
+        if not code_str:
             return ''
-        match = re.search(r'(EH|EJ|TF)\d{3}', str(standard))
-        return match.group() if match else ''
+            
+        # Extract the base standard code
+        match = re.search(r'(EH|EJ|TF)\d{3}', code_str)
+        if not match:
+            return code_str
+            
+        code = match.group()
+        prefix = code_str[:match.start()].strip()
+        standard_name = self.standards.get(code, code)
+        
+        # Combine prefix with standard name if prefix exists
+        return f"{prefix} {standard_name}".strip()
 
-    def get_new_framing(self, primary, secondary):
-        """Determine new framing based on primary and secondary standards"""
-        if not primary:
-            return ''
-        if 'TF200' in str(primary):
-            return 'TF200/EJ909'
-        return primary
+    def parse_framing(self, framing_str):
+        """
+        Parse framing string into primary and secondary components
+        
+        Args:
+            framing_str (str): Complete framing string
+            
+        Returns:
+            tuple: (primary_framing, secondary_framing, transmission_framing)
+        """
+        if not framing_str or not isinstance(framing_str, str):
+            return '', '', ''
+
+        # Check for TF200 first
+        transmission_framing = ''
+        if 'TF200' in framing_str:
+            transmission_framing = 'TF200 - TRANSMISSION TANGENT'
+            framing_str = framing_str.replace('TF200', 'EJ909')
+            
+        # Split on '+' to separate primary and secondary
+        parts = framing_str.strip().split('+')
+        
+        # Primary is everything before first '+'
+        primary = parts[0].strip()
+        
+        # Secondary is everything after first '+'
+        secondary = ''
+        if len(parts) > 1:
+            secondary_parts = []
+            for part in parts[1:]:
+                # Find and convert each standard code in the secondary part
+                codes = re.finditer(r'(?:\(\d+\)\s*)?(EH|EJ|TF)\d{3}', part)
+                for code_match in codes:
+                    code_str = code_match.group()
+                    standard_name = self.get_standard_name(code_str)
+                    secondary_parts.append(standard_name)
+            secondary = ' + '.join(secondary_parts)
+        
+        # Convert primary framing to standard name
+        primary = self.get_standard_name(primary)
+        
+        return primary, secondary, transmission_framing
 
     def setup_header_cell(self, cell, value):
         """Apply formatting to header cells"""
@@ -111,32 +156,19 @@ class NewFramingGenerator:
 
                 # Extract data from row
                 facility_id = row[1]
-                primary_standard = row[9] if len(row) > 9 else None
-                secondary_standard = row[10] if len(row) > 10 else None
+                raw_framing = row[9] if len(row) > 9 else ''  # Assuming framing is in column J
 
-                # Handle transmission framing
-                transmission_framing = ''
-                if primary_standard and 'TF200' in str(primary_standard):
-                    transmission_framing = 'TF200 - TRANSMISSION TANGENT'
-                    primary_standard = 'EJ909 - 3PH TAN UNDERBUILD'
-
-                # Get and format standards
-                primary_code = self.get_standard_code(primary_standard) if primary_standard else ''
-                secondary_code = self.get_standard_code(secondary_standard) if secondary_standard else ''
-                primary_formatted = self.standards.get(primary_code, primary_standard)
-                secondary_formatted = self.standards.get(secondary_code, secondary_standard)
-
-                # Get new framing
-                new_framing = self.get_new_framing(primary_standard, secondary_standard)
+                # Parse framing into components
+                primary_standard, secondary_standard, transmission_framing = self.parse_framing(raw_framing)
 
                 # Prepare row data
                 row_data = [
                     sequence,
                     facility_id,
-                    new_framing,
+                    raw_framing,  # Keep original framing data
                     transmission_framing,
-                    primary_formatted,
-                    secondary_formatted
+                    primary_standard,
+                    secondary_standard
                 ]
                 
                 # Write row data

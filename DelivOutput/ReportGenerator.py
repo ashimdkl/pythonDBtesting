@@ -11,6 +11,7 @@ import math
 import mergeXML
 import shutil
 import os
+import customtkinter as ctk
 from mergeXML import XMLTagExtractorApp  # Adjust import path as needed
 
 
@@ -34,57 +35,170 @@ class DataExtractionApp:
         self.setup_gui()
 
     def setup_gui(self):
-        # Configure a custom style
+        # Import customtkinter if used
+        try:
+            use_ctk = True
+            # Set the appearance mode and default color theme
+            ctk.set_appearance_mode("light")
+            ctk.set_default_color_theme("blue")
+        except ImportError:
+            use_ctk = False
+    
+        # Configure basic ttk style for fallback
         style = ttk.Style()
-        style.configure('TFrame', background='#ffffff')  # Light background for the frame
-        style.configure('TLabel', background='#ffffff', font=('Helvetica', 12), foreground='#000000')  # Dark text on light background
-        style.configure('TButton', font=('Helvetica', 10, 'bold'), borderwidth=1)
+        style.configure('TFrame', background='#ffffff')
+        style.configure('TLabel', background='#ffffff', font=('Helvetica', 12), foreground='#333333')
+        style.configure('TButton', font=('Helvetica', 10), borderwidth=1)
         style.map('TButton', background=[('active', '#e1e1e1')], foreground=[('active', '#000000')])
 
-        # Main frame setup, skipping the intro frame setup since the button is removed
-        self.main_frame = ttk.Frame(self.root, style='TFrame')
-        self.main_frame.pack(expand=True, fill="both", padx=20, pady=20)
-
-        # Step label with improved styling
+        # Create header frame
+        header_frame = ttk.Frame(self.root, style='TFrame')
+        header_frame.pack(fill="x", padx=20, pady=(20, 0))
+        
+        # App title and logo
+        app_title = ttk.Label(
+            header_frame, 
+            text="Part 1: Data Extraction Tool",
+            font=("Helvetica", 20, "bold"),
+            foreground="#0066cc"
+        )
+        app_title.pack(side="left")
+        
+        # Main container with two panels
+        container = ttk.Frame(self.root, style='TFrame')
+        container.pack(fill="both", expand=True, padx=20, pady=20)
+        
+        # Left sidebar for step navigation
+        self.sidebar = ttk.Frame(container, style='TFrame', width=250)
+        self.sidebar.pack(side="left", fill="y", padx=(0, 20))
+        self.sidebar.pack_propagate(False)  # Maintain width
+        
+        # Step indicators in sidebar
+        steps_label = ttk.Label(
+            self.sidebar,
+            text="Process Steps",
+            font=("Helvetica", 14, "bold"),
+            foreground="#444444"
+        )
+        steps_label.pack(anchor="w", pady=(0, 15))
+        
+        # Create step buttons
+        self.step_buttons = []
+        steps = [
+            "1. Upload HIS Excel",
+            "2. Fusing Coordination",
+            "3. XML File Parsing",
+            "4. Soil Class Data"
+        ]
+        
+        for i, step_text in enumerate(steps, 1):
+            step_frame = ttk.Frame(self.sidebar, style='TFrame')
+            step_frame.pack(fill="x", pady=5)
+            
+            # Circle indicator
+            indicator = tk.Canvas(step_frame, width=30, height=30, bg="#ffffff", highlightthickness=0)
+            indicator.pack(side="left", padx=(0, 10))
+            
+            # Draw circle
+            if i == self.step:
+                # Active step
+                indicator.create_oval(5, 5, 25, 25, fill="#0066cc", outline="#0066cc")
+                indicator.create_text(15, 15, text=str(i), fill="white", font=("Helvetica", 10, "bold"))
+                text_color = "#0066cc" 
+            else:
+                # Inactive step
+                indicator.create_oval(5, 5, 25, 25, fill="#ffffff", outline="#aaaaaa")
+                indicator.create_text(15, 15, text=str(i), fill="#aaaaaa", font=("Helvetica", 10))
+                text_color = "#666666"
+            
+            # Step text
+            step_label = ttk.Label(
+                step_frame,
+                text=step_text,
+                font=("Helvetica", 12),
+                foreground=text_color
+            )
+            step_label.pack(side="left", anchor="w")
+            
+            self.step_buttons.append((indicator, step_label))
+        
+        # Main content area
+        self.main_frame = ttk.Frame(container, style='TFrame')
+        self.main_frame.pack(side="left", fill="both", expand=True)
+        
+        # Step indicator in the main frame
         self.step_label = ttk.Label(
             self.main_frame,
             text="Step 1: Upload your Hendrix Input Sheet (HIS)",
-            font=("Helvetica", 14, "bold")
+            font=("Helvetica", 16, "bold"),
+            foreground="#333333"
         )
-        self.step_label.pack(pady=(0,15), anchor='w')
-
-        # Upload button with icon-like styling
-        self.upload_btn = ttk.Button(
+        self.step_label.pack(anchor="w", pady=(0, 20))
+        
+        # Step description
+        step_description = ttk.Label(
             self.main_frame,
-            text="📄 Upload HIS Excel File",
-            command=self.upload_file,
-            style='TButton'
+            text="Select an Excel file containing the Hendrix Input Sheet data.\nThe required columns will be automatically selected.",
+            font=("Helvetica", 12),
+            wraplength=600
         )
-        self.upload_btn.pack(pady=10, anchor='w')
-
+        step_description.pack(anchor="w", pady=(0, 20))
+        
+        # Upload button with modern styling
+        upload_frame = ttk.Frame(self.main_frame, style='TFrame')
+        upload_frame.pack(anchor="w", pady=(0, 20))
+        
+        if use_ctk:
+            # If customtkinter is available, use it for buttons
+            self.upload_btn = ctk.CTkButton(
+                upload_frame,
+                text="📄 Upload HIS Excel File",
+                command=self.upload_file,
+                height=40,
+                corner_radius=8,
+                font=("Helvetica", 12),
+                fg_color="#0066cc",
+                hover_color="#004d99"
+            )
+        else:
+            # Fallback to ttk
+            self.upload_btn = ttk.Button(
+                upload_frame,
+                text="📄 Upload HIS Excel File",
+                command=self.upload_file,
+                style='TButton'
+            )
+        self.upload_btn.pack(side="left")
+        
         # Column selection label
         self.column_label = ttk.Label(
             self.main_frame,
-            text="Select Columns to Keep (including Sequence #)",
-            font=("Helvetica", 12)
+            text="Selected Columns:",
+            font=("Helvetica", 12, "bold")
         )
-        self.column_label.pack(pady=(15,5), anchor='w')
-
-        # Frame and scrollbar for the listbox with improved layout
-        self.listbox_frame = ttk.Frame(self.main_frame)
-        self.listbox_frame.pack(pady=10, fill='x')
-
+        self.column_label.pack(anchor="w", pady=(20, 5))
+        
+        # Listbox frame with shadow effect
+        self.listbox_container = ttk.Frame(self.main_frame, style='TFrame')
+        self.listbox_container.pack(fill="both", expand=True, pady=(0, 20))
+        
+        self.listbox_frame = ttk.Frame(self.listbox_container, style='TFrame')
+        self.listbox_frame.pack(fill="both", expand=True, padx=2, pady=2)
+        
+        # Create listbox with custom styling
         self.column_listbox = tk.Listbox(
             self.listbox_frame,
             selectmode=tk.MULTIPLE,
-            font=("Helvetica", 10),
-            width=50,
-            height=10,
+            font=("Helvetica", 11),
             borderwidth=1,
-            relief='solid'
+            relief="solid",
+            selectbackground="#0066cc",
+            highlightthickness=1,
+            highlightcolor="#cccccc"
         )
         self.column_listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-
+        
+        # Modern scrollbar
         self.scrollbar = ttk.Scrollbar(
             self.listbox_frame,
             orient=tk.VERTICAL,
@@ -92,48 +206,29 @@ class DataExtractionApp:
         )
         self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         self.column_listbox.config(yscrollcommand=self.scrollbar.set)
-
-        # Button frame for better organization
-        self.button_frame = ttk.Frame(self.main_frame)
-        self.button_frame.pack(pady=10, fill='x')
-
-        self.process_btn = ttk.Button(
-            self.button_frame,
-            text="Parse Data and Move to Next Step",
-            command=self.parse_and_next_step,
-            style='TButton'
-        )
-        self.process_btn.pack(side=tk.LEFT, padx=(0,10))
-
-        self.skip_btn = ttk.Button(
-            self.button_frame,
-            text="Skip This Step",
-            command=self.next_step,
-            style='TButton'
-        )
-        self.skip_btn.pack(side=tk.LEFT)
-
-        # Paste data section
+        
+        # Text area for pasting data
         self.paste_label = ttk.Label(
             self.main_frame,
-            text="Paste Fusing Coordination Data Here",
-            font=("Helvetica", 12)
+            text="Paste Data Here:",
+            font=("Helvetica", 12, "bold")
         )
-        self.paste_label.pack(pady=(15,5), anchor='w')
-
-        self.text_frame = ttk.Frame(self.main_frame)
-        self.text_frame.pack(pady=10, fill='x')
-
+        
+        self.text_frame = ttk.Frame(self.main_frame, style='TFrame')
+        
         self.paste_text = tk.Text(
             self.text_frame,
             wrap=tk.WORD,
             height=15,
-            font=("Helvetica", 10),
+            font=("Helvetica", 11),
             borderwidth=1,
-            relief='solid'
+            relief="solid",
+            padx=10,
+            pady=10,
+            bg="#f9f9f9"
         )
         self.paste_text.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-
+        
         self.text_scrollbar = ttk.Scrollbar(
             self.text_frame,
             orient=tk.VERTICAL,
@@ -141,23 +236,95 @@ class DataExtractionApp:
         )
         self.text_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         self.paste_text.config(yscrollcommand=self.text_scrollbar.set)
-
+        
         # Initially hide paste section
-        self.text_frame.pack_forget()
         self.paste_label.pack_forget()
-
-        # Generate report button
-        self.next_btn = ttk.Button(
-            self.main_frame,
-            text="Generate Report",
-            command=self.generate_report,
-            style='TButton'
-        )
-        self.next_btn.pack(pady=10)
+        self.text_frame.pack_forget()
+        
+        # Button container at the bottom
+        self.button_frame = ttk.Frame(self.main_frame, style='TFrame')
+        self.button_frame.pack(fill="x", pady=(20, 0))
+        
+        # Action buttons with modern styling
+        if use_ctk:
+            self.process_btn = ctk.CTkButton(
+                self.button_frame,
+                text="Process Data and Continue",
+                command=self.parse_and_next_step,
+                height=40,
+                corner_radius=8,
+                font=("Helvetica", 12),
+                fg_color="#0066cc",
+                hover_color="#004d99"
+            )
+            
+            self.skip_btn = ctk.CTkButton(
+                self.button_frame,
+                text="Skip This Step",
+                command=self.next_step,
+                height=40,
+                corner_radius=8,
+                font=("Helvetica", 12),
+                fg_color="#f0f0f0",
+                text_color="#444444",
+                hover_color="#e0e0e0",
+                border_width=1,
+                border_color="#dddddd"
+            )
+            
+            self.next_btn = ctk.CTkButton(
+                self.button_frame,
+                text="Generate Final Report",
+                command=self.generate_report,
+                height=48,
+                corner_radius=8,
+                font=("Helvetica", 14, "bold"),
+                fg_color="#28a745",
+                hover_color="#218838"
+            )
+        else:
+            self.process_btn = ttk.Button(
+                self.button_frame,
+                text="Process Data and Continue",
+                command=self.parse_and_next_step,
+                style='TButton'
+            )
+            
+            self.skip_btn = ttk.Button(
+                self.button_frame,
+                text="Skip This Step",
+                command=self.next_step,
+                style='TButton'
+            )
+            
+            self.next_btn = ttk.Button(
+                self.button_frame,
+                text="Generate Final Report",
+                command=self.generate_report,
+                style='TButton'
+            )
+        
+        self.process_btn.pack(side="left", padx=(0, 10))
+        self.skip_btn.pack(side="left")
+        
+        # Hide the generate report button initially
         self.next_btn.pack_forget()
-
+        
+        # Status frame for feedback
+        status_frame = ttk.Frame(self.root, style='TFrame')
+        status_frame.pack(fill="x", padx=20, pady=(0, 20))
+        
+        # Status label for user feedback
+        self.status_label = ttk.Label(
+            status_frame,
+            text="Ready to start processing",
+            font=("Helvetica", 10),
+            foreground="#666666"
+        )
+        self.status_label.pack(anchor="w")
+        
         # Output frame
-        self.output_frame = ttk.Frame(self.root)
+        self.output_frame = ttk.Frame(self.root, style='TFrame')
         self.output_frame.pack(expand=True, fill="both")
 
     def start_analysis(self):
@@ -166,21 +333,31 @@ class DataExtractionApp:
         self.main_frame.pack(expand=True, fill="both")
 
     def upload_file(self):
-        # File dialog to let the user upload a file based on the current step
-        filetypes = [("Excel files", "*.xlsx *.xls")] if self.step == 1 else [("XML files", "*.xml"), ("Text files", "*.txt")]
+        # Open file dialog to select file appropriate for current step
+        if self.step == 1:
+            filetypes = [("Excel files", "*.xlsx *.xls")]
+        else:
+            filetypes = [("XML files", "*.xml"), ("Text files", "*.txt")]
+            
         self.file_path = filedialog.askopenfilename(filetypes=filetypes)
-        if self.file_path:
-            # Call the appropriate function based on the step of the process
-            if self.step == 1:
-                self.load_columns_from_file()
-            elif self.step == 3:
-                # old way self.parse_step3_xml()
-                self.process_large_xml(self.file_path)
-            elif self.step == 4:
-                self.parse_span_guy_xml()
-            elif self.step == 6:
-                self.parse_step7_joint_support()
-            messagebox.showinfo("File Uploaded", "File uploaded successfully.")
+        
+        if not self.file_path:
+            return
+            
+        # Call the appropriate function based on the step of the process
+        if self.step == 1:
+            self.load_columns_from_file()
+            # Updated to handle step 1 file uploads
+            self.parse_data()
+            self.next_step()
+            self.status_label.configure(text=f"Processed Excel file: {os.path.basename(self.file_path)}")
+        elif self.step == 3:
+            # For step 3, we process the XML file differently
+            self.process_large_xml(self.file_path)
+        elif self.step == 4:
+            # For step 4's joint support XML
+            self.parse_step7_joint_support()
+            self.status_label.configure(text="Joint support data processed successfully")
 
     def process_large_xml(self, file_path):
         try:
@@ -226,8 +403,22 @@ class DataExtractionApp:
             sheet = workbook.active
             self.columns = [cell.value for cell in sheet[1]]
             self.column_listbox.delete(0, tk.END)
+            
+            # Add all columns to the listbox
             for column in self.columns:
                 self.column_listbox.insert(tk.END, column)
+            
+            # Auto-select the five specific columns we always need
+            columns_to_select = ["Sequence", "Facility ID", "Existing Transformers", "Primary Riser", "Secondary Riser"]
+            
+            # Find and select these columns in the listbox
+            for i, column in enumerate(self.columns):
+                if column in columns_to_select:
+                    self.column_listbox.selection_set(i)
+                    
+            # Optionally, you can show a message to let the user know columns were auto-selected
+            messagebox.showinfo("Columns Selected", "The required columns have been automatically selected.")
+                    
         except Exception as e:
             # Show an error if something goes wrong while reading the file
             messagebox.showerror("Error", f"Failed to read file: {e}")
@@ -266,78 +457,83 @@ class DataExtractionApp:
     def next_step(self):
         # Move to the next step in the process
         self.step += 1
+        self.update_step_buttons()  # Update step indicators
         self.file_path = None
         self.columns = []
         self.selected_columns = []
         self.column_listbox.delete(0, tk.END)
 
+        # Clear previous content
+        self.paste_label.pack_forget()
+        self.text_frame.pack_forget() 
+        self.upload_btn.pack_forget()
+        self.column_label.pack_forget()
+        self.listbox_container.pack_forget()
+        self.next_btn.pack_forget()
+
         # Adjust GUI elements based on the current step
         if self.step == 2:
             self.step_label.config(text="Step 2: Copy and Paste your Fusing Coordination Report")
-            self.upload_btn.pack_forget()
-            self.column_label.pack_forget()
-            self.listbox_frame.pack_forget()
-            self.process_btn.config(text="Parse Data and Move to Next Step", command=self.parse_and_next_step)
-            self.paste_label.config(text="Paste Fusing Coordination Data Here")
-            self.paste_label.pack(pady=10)
-            self.text_frame.pack(pady=10)
-            self.process_btn.pack(pady=10)
-            self.skip_btn.pack(pady=10)
+            self.paste_label.config(text="Paste Fusing Coordination Data Here:")
+            self.paste_label.pack(anchor="w", pady=(20, 5))
+            self.text_frame.pack(fill="both", expand=True, pady=(0, 20))
+            self.process_btn.configure(text="Process Data and Continue")
+            
         elif self.step == 3:
             self.step_label.config(text="Step 3: Upload your Large XML File for Parsing")
-            self.upload_btn.config(text="Upload Large XML File")
-            self.paste_label.pack_forget()
-            self.text_frame.pack_forget()
-            self.upload_btn.pack(pady=10)
-            self.column_label.pack_forget()
-            self.listbox_frame.pack_forget()
-            self.process_btn.config(text="Parse Data and Move to Next Step", command=self.parse_and_next_step)
-            self.process_btn.pack(pady=10)
-            self.skip_btn.pack(pady=10)
+            self.upload_btn.configure(text="Upload Large XML File")
+            self.upload_btn.pack(anchor="w", pady=(0, 20))
+            self.process_btn.configure(text="Parse Data and Continue")
+            
         elif self.step == 4:
-            self.step_label.config(text="Step 4: Copy and Paste your Stringing Chart - Neutral and Span Guy")
-            self.upload_btn.pack_forget()
-            self.paste_label.config(text="Paste Stringing Chart Data Here")
-            self.paste_label.pack(pady=10)
-            self.text_frame.pack(pady=10)
-            self.process_btn.config(text="Parse Data and Move to Next Step", command=self.parse_and_next_step)
-            self.process_btn.pack(pady=10)
-            self.skip_btn.pack(pady=10)
-        elif self.step == 5:
-            self.step_label.config(text="Step 5: Copy and Paste your Stringing Chart - Primary Conductor")
-            self.upload_btn.pack_forget()
-            self.paste_label.config(text="Paste Primary Conductor Stringing Chart Data Here")
-            self.paste_label.pack(pady=10)
-            self.text_frame.pack(pady=10)
-            self.process_btn.config(text="Parse Data and Move to Next Step", command=self.parse_and_next_step)
-            self.process_btn.pack(pady=10)
-            self.skip_btn.pack(pady=10)
-        elif self.step == 6:
-            self.step_label.config(text="Step 6: Copy and Paste Soil Class Data")
-            self.paste_label.config(text="Paste Soil Class Data Here")
-            self.paste_label.pack(pady=10)
-            self.text_frame.pack(pady=10)
-            self.upload_btn.config(text="Upload Joint Support XML and Parse")
-            self.upload_btn.pack(pady=10)
-            self.process_btn.config(text="Parse Soil Class Data", command=self.parse_soil_class_data)
-            self.process_btn.pack(pady=10)
-            self.next_btn.pack(pady=10)  # Show the Generate Report button
-            self.skip_btn.pack_forget()  # Remove the Skip button on the last step
+            self.step_label.config(text="Step 4: Soil Class Data & Joint Support")
+            
+            # Show paste area for soil class data
+            self.paste_label.config(text="Paste Soil Class Data Here:")
+            self.paste_label.pack(anchor="w", pady=(20, 5))
+            self.text_frame.pack(fill="both", expand=True, pady=(0, 20))
+            
+            # Show upload button for joint support XML
+            self.upload_btn.configure(text="Upload Joint Support XML")
+            self.upload_btn.pack(anchor="w", pady=(20, 10))
+            
+            # Change process button to parse soil data
+            self.process_btn.configure(text="Parse Soil Class Data", command=self.parse_soil_class_data)
+            
+            # Show generate report button 
+            self.next_btn.pack(pady=(20, 0))
+
+
+
+    def update_step_buttons(self):
+        """Update the step indicators when changing steps"""
+        for i, (indicator, label) in enumerate(self.step_buttons, 1):
+            indicator.delete("all")  # Clear existing canvas
+            
+            if i == self.step:
+                # Active step
+                indicator.create_oval(5, 5, 25, 25, fill="#0066cc", outline="#0066cc")
+                indicator.create_text(15, 15, text=str(i), fill="white", font=("Helvetica", 10, "bold"))
+                label.configure(foreground="#0066cc")
+            else:
+                # Inactive step
+                indicator.create_oval(5, 5, 25, 25, fill="#ffffff", outline="#aaaaaa")
+                indicator.create_text(15, 15, text=str(i), fill="#aaaaaa", font=("Helvetica", 10))
+                label.configure(foreground="#666666")
 
     def parse_and_next_step(self):
         # Parse the data and move to the next step based on the current step
         if self.step == 1:
             self.parse_data()
         elif self.step == 2:
-            self.parse_pasted_data()
+            self.parse_pasted_data() 
         elif self.step == 3:
-            self.parse_step3_xml()
+            self.process_large_xml(self.file_path)
+            return  # Don't call next_step() here as process_large_xml will do it
         elif self.step == 4:
-            self.parse_and_continue_stringing_chart()
-        elif self.step == 5:
-            self.parse_primary_conductor_data()
-        elif self.step == 6:
             self.parse_step7_joint_support()
+        
+        # Move to next step after processing  
         self.next_step()
 
     def parse_pasted_data(self):
@@ -861,8 +1057,8 @@ class DataExtractionApp:
 
     def save_stringing_report(self, file_path):
         # Save the stringing chart data (neutral and primary) to the Excel file
-        neutral_span_file = "extractStringingChartNeutralSpan_section_seq_totalSpanLength_circuitType.txt"
-        primary_span_file = "extractStringingChartPrimary_section_struct_circuitType_spanLength_total.txt"
+        neutral_span_file = "XMLextractStringingChartNeutralSpan_section_seq_totalSpanLength_circuitType.txt"
+        primary_span_file = "XMLextractStringingChartPrimary_section_struct_circuitType_spanLength_total.txt"  # Updated to use XML extract file
         
         neutral_data = self.parse_stringing_file(neutral_span_file, is_primary=False)
         primary_data = self.parse_stringing_file(primary_span_file, is_primary=True)
@@ -871,8 +1067,9 @@ class DataExtractionApp:
         primary_sheet = workbook.create_sheet(title="Primary Stringing Data")
         neutral_sheet = workbook.create_sheet(title="Neutral Span Stringing Data")
         
-        # Define headers for the data
-        primary_headers = ["Section #", "Structure -> Structure", "Circuit Type", "Circuit Value", "Span Length", "Result", "Sequences"]
+        # Define headers for the data (updated for XML extract format)
+        primary_headers = ["Section #", "Structure -> Structure", "Circuit Type", "Circuit Value", 
+                          "Span Lengths", "Total Length", "Sequences", "Heights", "Set Numbers"]
         neutral_headers = ["Section #", "Sequence #s", "Total Span Length", "Circuit Type"]
         
         primary_sheet.append(primary_headers)
@@ -910,17 +1107,93 @@ class DataExtractionApp:
         workbook.save(file_path)
         messagebox.showinfo("Success", f"Stringing report has been added to {file_path}")
 
+    def sequence_to_sequence_sheet(self, workbook):
+        """
+        Create a Sequence to Sequence sheet in the final Excel workbook
+        using data from the primary stringing chart XML extract.
+        """
+        # Create a new sheet
+        seq_to_seq_sheet = workbook.create_sheet(title="Sequence to Sequence")
+
+        # Define headers
+        headers = [
+            "From Seq", 
+            "To Seq", 
+            "Conductor Label", 
+            "Conductor Attachment Height"
+        ]
+        seq_to_seq_sheet.append(headers)
+
+        # Styling for the header
+        header_fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
+        header_font = Font(bold=True)
+        for cell in seq_to_seq_sheet["1:1"]:
+            cell.fill = header_fill
+            cell.font = header_font
+
+        # Placeholder data - you'll replace this with actual parsing later
+        try:
+            with open("XMLextractStringingChartPrimary_section_struct_circuitType_spanLength_total.txt", "r") as file:
+                # Skip the header lines
+                next(file)
+                next(file)
+
+                for line in file:
+                    parts = [part.strip() for part in line.split('|')]
+                    if len(parts) >= 3:
+                        # Extract sequences from the "Structure -> Structure" column
+                        sequences = parts[1].split('->')
+                        
+                        # Temporary placeholder for conductor label and height
+                        conductor_label = "5R234-1/0 ACSR"
+                        conductor_height = parts[7]  # Using the height column
+
+                        for i in range(len(sequences) - 1):
+                            seq_to_seq_sheet.append([
+                                sequences[i].strip(), 
+                                sequences[i+1].strip(), 
+                                conductor_label, 
+                                conductor_height.split(',')[i].strip()
+                            ])
+
+        except FileNotFoundError:
+            messagebox.showwarning("File Not Found", "Primary stringing chart file not found.")
+        except Exception as e:
+            messagebox.showerror("Error", f"Error processing sequence to sequence sheet: {str(e)}")
+
+        # Adjust column widths
+        for column in seq_to_seq_sheet.columns:
+            max_length = 0
+            column = list(column)
+            for cell in column:
+                try:
+                    if len(str(cell.value)) > max_length:
+                        max_length = len(cell.value)
+                except:
+                    pass
+            adjusted_width = (max_length + 2)
+            seq_to_seq_sheet.column_dimensions[column[0].column_letter].width = adjusted_width
+
     def parse_stringing_file(self, file_path, is_primary):
         # Parse stringing chart data from a file and return it as a list of rows
         data = []
-        with open(file_path, 'r') as file:
-            lines = file.readlines()[2:]  # Skip header and separator line
-            for line in lines:
-                parts = [part.strip() for part in line.split('|')]
-                if is_primary:
-                    data.append(parts)
-                else:
-                    data.append(parts)
+        try:
+            with open(file_path, 'r') as file:
+                lines = file.readlines()[2:]  # Skip header and separator line
+                for line in lines:
+                    parts = [part.strip() for part in line.split('|')]
+                    if is_primary and "XMLextract" in file_path:
+                        # Handle the new XML-extracted primary data format
+                        row_data = parts
+                        data.append(row_data)
+                    else:
+                        # Handle neutral data or original primary data format
+                        data.append(parts)
+        except FileNotFoundError:
+            messagebox.showwarning("File Not Found", f"Could not find {file_path}. That section will be skipped.")
+        except Exception as e:
+            messagebox.showerror("Error", f"Error parsing file {file_path}: {str(e)}")
+            
         return data
 
     def save_to_excel(self, data, file_path):
@@ -929,6 +1202,11 @@ class DataExtractionApp:
         sheet = workbook.active
         sheet.title = "Data Report"
 
+        # Add the framing sheet
+        framing_sheet = workbook.create_sheet(title="Framing Report")
+        self.create_framing_sheet(framing_sheet, data)
+        self.sequence_to_sequence_sheet(workbook)
+        
         # Define headers for the report
         headers = ['sequence', 'facility_id', 'existing_transformers', 'primary_riser', 'secondary_riser',
                    'existing_or_new_tap', 'type', 'latitude', 'longitude', 'framing', 'anchor_direction',
@@ -956,11 +1234,10 @@ class DataExtractionApp:
                 if seq != previous_seq:
                     row = [seq, info['facility_id'], info['existing_transformers'], info['primary_riser'],
                            info['secondary_riser']]
-                    # Alternate fill color when sequence changes
                     current_fill = light_blue if current_fill == light_green else light_green
                     previous_seq = seq
                 else:
-                    row = ['', '', '', '', '']  # Leave sequence and related fields blank
+                    row = ['', '', '', '', '']
 
                 row.append(info['existing_or_new_tap'][i] if i < len(info['existing_or_new_tap']) else '')
                 if i < len(info['construction']):
@@ -976,29 +1253,169 @@ class DataExtractionApp:
                 else:
                     row.extend([''] * 3)
                 row.append(info['max_force'] if i == 0 else '')
-                row.append(info.get('soil_class', ''))  # Add soil class
-                row.append(info.get('description', ''))  # Add soil class description
+                row.append(info.get('soil_class', ''))
+                row.append(info.get('description', ''))
                 sheet.append(row)
 
-                # Apply the current fill color to the row
                 for cell in sheet[sheet.max_row]:
                     cell.fill = current_fill
 
-        # Adjust column widths for better readability
-        for column in sheet.columns:
-            max_length = 0
-            column = list(column)
-            for cell in column:
-                try:
-                    if len(str(cell.value)) > max_length:
-                        max_length = len(cell.value)
-                except:
+        # Adjust column widths for both sheets
+        for worksheet in [sheet, framing_sheet]:
+            for column in worksheet.columns:
+                max_length = 0
+                column = list(column)
+                for cell in column:
+                    try:
+                        if len(str(cell.value)) > max_length:
+                            max_length = len(cell.value)
+                    except:
                         pass
-            adjusted_width = (max_length + 2)
-            sheet.column_dimensions[column[0].column_letter].width = adjusted_width
+                adjusted_width = (max_length + 2)
+                worksheet.column_dimensions[column[0].column_letter].width = adjusted_width
 
         workbook.save(file_path)
         messagebox.showinfo("Success", f"Data has been saved to {file_path}")
+
+    def create_framing_sheet(self, sheet, data):
+        """Creates a new sheet with raw framing data"""
+        # Define headers
+        headers = [
+            'Sequence',
+            'New Framing',
+            'Primary Framing',
+            'Secondary Framing'
+        ]
+        
+        # Write and style headers
+        for col, header in enumerate(headers, 1):
+            cell = sheet.cell(row=1, column=col)
+            cell.value = header
+            cell.font = Font(bold=True)
+            cell.fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
+        
+        # Process data
+        row_num = 2
+        for seq, info in sorted(data.items(), key=lambda x: int(re.findall(r'\d+', x[0])[0])):
+            if 'construction' not in info or not info['construction']:
+                continue
+                
+            # Get framing from construction data
+            framing = info['construction'][0].get('framing', '')
+            if not framing:
+                continue
+                
+            transmission_framing = ''
+            primary_framing = ''
+            secondary_framing = ''
+            
+            # Split on '+' for primary/secondary
+            parts = framing.strip().split('+')
+            
+            # Primary is everything before first '+'
+            primary_framing = parts[0].strip()
+            
+            # Secondary is everything after first '+'
+            if len(parts) > 1:
+                secondary_framing = ' + '.join(part.strip() for part in parts[1:])
+            
+            # Write row data
+            row_data = [
+                seq,
+                framing,
+                primary_framing,
+                secondary_framing
+            ]
+            
+            for col, value in enumerate(row_data, 1):
+                cell = sheet.cell(row=row_num, column=col)
+                cell.value = value
+            
+            row_num += 1
+
+
+            def save_to_excel(self, data, file_path):
+                # Save the combined data from all steps into an Excel file
+                workbook = Workbook()
+                sheet = workbook.active
+                sheet.title = "Data Report"
+
+                # Add the framing sheet
+                framing_sheet = workbook.create_sheet(title="Framing Report")
+                self.create_framing_sheet(framing_sheet, data)
+
+                # Add sequence to sequence sheet 
+                self.sequence_to_sequence_sheet(workbook)
+
+                # Define headers for the report
+                headers = ['sequence', 'facility_id', 'existing_transformers', 'primary_riser', 'secondary_riser',
+                           'existing_or_new_tap', 'type', 'latitude', 'longitude', 'framing', 'anchor_direction',
+                           'lead_length', 'pole_type', 'element_label', 'element_type', 'max_usage', 'max_force', 'soil_class', 'description']
+                sheet.append(headers)
+
+                # Styling for the header
+                header_fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
+                header_font = Font(bold=True)
+                for cell in sheet["1:1"]:
+                    cell.fill = header_fill
+                    cell.font = header_font
+
+                # Alternate row colors for better readability
+                light_green = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
+                light_blue = PatternFill(start_color="F5F5F5", end_color="F5F5F5", fill_type="solid")
+                current_fill = light_green
+                previous_seq = None
+
+                # Append data to the sheet, alternating row colors
+                for seq, info in sorted(data.items(), key=lambda x: int(re.findall(r'\d+', x[0])[0])):
+                    max_length = max(len(info['existing_or_new_tap']), len(info['construction']), len(info['guy_usage']), 1)
+                    for i in range(max_length):
+                        row = []
+                        if seq != previous_seq:
+                            row = [seq, info['facility_id'], info['existing_transformers'], info['primary_riser'],
+                                   info['secondary_riser']]
+                            current_fill = light_blue if current_fill == light_green else light_green
+                            previous_seq = seq
+                        else:
+                            row = ['', '', '', '', '']
+
+                        row.append(info['existing_or_new_tap'][i] if i < len(info['existing_or_new_tap']) else '')
+                        if i < len(info['construction']):
+                            const = info['construction'][i]
+                            row.extend([const['type'], const['latitude'], const['longitude'], const['framing'],
+                                        const['anchor_direction'], const['lead_length']])
+                        else:
+                            row.extend([''] * 6)
+                        row.append(info['pole_type'] if i == 0 else '')
+                        if i < len(info['guy_usage']):
+                            guy = info['guy_usage'][i]
+                            row.extend([guy['element_label'], guy['element_type'], guy['max_usage']])
+                        else:
+                            row.extend([''] * 3)
+                        row.append(info['max_force'] if i == 0 else '')
+                        row.append(info.get('soil_class', ''))
+                        row.append(info.get('description', ''))
+                        sheet.append(row)
+
+                        for cell in sheet[sheet.max_row]:
+                            cell.fill = current_fill
+
+                # Adjust column widths for both sheets
+                for worksheet in [sheet, framing_sheet]:
+                    for column in worksheet.columns:
+                        max_length = 0
+                        column = list(column)
+                        for cell in column:
+                            try:
+                                if len(str(cell.value)) > max_length:
+                                    max_length = len(cell.value)
+                            except:
+                                pass
+                        adjusted_width = (max_length + 2)
+                        worksheet.column_dimensions[column[0].column_letter].width = adjusted_width
+
+                workbook.save(file_path)
+                messagebox.showinfo("Success", f"Data has been saved to {file_path}")
 
     def parse_his_seq(self, lines):
         # Parse Hendrix Input Sheet (HIS) data from a file and return it as a dictionary
